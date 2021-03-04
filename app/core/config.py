@@ -17,8 +17,8 @@ class Settings(BaseSettings):
     DOTENV_FILE: Path = Path(os.environ.get("DOTENV_FILE"))
     CONFIG_FILE: Path = Path(os.environ.get("CONFIG_FILE"))
     DATABASE_URL: str = os.environ.get("DATABASE_URL")
-    SERVER_NAME: Optional[str] = "example.com"
-    SERVER_HOST: Optional[AnyHttpUrl] = "http://example.com"
+    SERVER_NAME: Optional[str] = "vig.aaronluna.dev"
+    SERVER_HOST: Optional[AnyHttpUrl] = "http://vig.aaronluna.dev"
     PROJECT_NAME: Optional[str] = "Vigorish API - MLB Data"
 
     class Config:
