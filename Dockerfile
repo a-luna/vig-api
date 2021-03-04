@@ -1,4 +1,4 @@
-FROM python:3.7 
+FROM tiangolo/uvicorn-gunicorn:python3.8-slim
 
 COPY requirements.txt ./
 
