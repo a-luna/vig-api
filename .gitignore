@@ -1,6 +1,84 @@
-venv
-.env
 .git
+.env
+.flaskenv
 .vscode
 .python-version
+tmp
+venv
+pfx
+*.rdb
+*.db
+*.DS_Store
+.prettierignore
+.prettierrc
+node_modules
+.mypy_cache
+backup
+json_storage
+html_storage
+coverage_html
+custom_scripts
+release2pypi.sh
+!tests/html_storage
+!tests/json_storage
+src/vigorish/nightmarejs/node_modules
+src/vigorish/nightmarejs/inbox/*.json
+src/vigorish/nightmarejs/outbox/**/*.html
+docs/svg/*.cast
 
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+.pytest_cache/
+
+# C extensions
+*.so
+
+# Distribution / packaging
+pip-wheel-metadata
+.Python
+env/
+bin/
+build/
+develop-eggs/
+dist/
+eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Unit test / coverage reports
+test-results
+htmlcov/
+.tox/
+.coverage*
+.cache
+nosetests.xml
+coverage.xml
+
+# Translations
+*.mo
+
+# Mr Developer
+.mr.developer.cfg
+.project
+.pydevproject
+
+# Rope
+.ropeproject
+
+# Django stuff:
+*.log
+*.pot
+
+# Sphinx documentation
+docs/_build/
