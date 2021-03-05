@@ -11,7 +11,7 @@ from app.schemas import PitchFxSchema
 router = APIRouter()
 
 
-@router.get("/data", response_model=List[PitchFxSchema])
+@router.get("/pitch_app", response_model=List[PitchFxSchema])
 def get_all_pfx_data_for_pitch_app(game_id: str, pitcher_id: int, app: Vigorish = Depends(get_vig_app)):
     game_data = crud.get_game_data(game_id, app)
     result = game_data.get_pfx_for_pitcher(pitcher_id)

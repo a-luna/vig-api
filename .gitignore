@@ -12,6 +12,7 @@ pfx
 .prettierignore
 .prettierrc
 node_modules
+vig.config.json
 .mypy_cache
 backup
 json_storage
