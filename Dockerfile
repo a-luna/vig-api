@@ -1,4 +1,4 @@
-FROM tiangolo/uvicorn-gunicorn:python3.8
+FROM tiangolo/uvicorn-gunicorn-fastapi:python3.8-slim
 
 RUN pip install -U pip setuptools wheel
 
@@ -8,6 +8,6 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 EXPOSE 80
 
-COPY ./ /app
+COPY ./app/ /app/app/
 
-CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "80"]
+CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "80"]
