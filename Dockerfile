@@ -10,4 +10,6 @@ EXPOSE 80
 
 COPY ./app/ /app/app/
 
+ENV DOTENV_FILE=/home/dokku/.env
+
 CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "80"]
