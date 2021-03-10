@@ -1,6 +1,6 @@
 from fastapi import APIRouter
 
-from app.api.api_v1.endpoints.team_data import pitch_stats
+from app.api.api_v1.endpoints.team import pitch_stats
 
 
 router = APIRouter()

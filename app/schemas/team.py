@@ -2,7 +2,6 @@ from pydantic import BaseModel
 
 
 class TeamSchema(BaseModel):
-    id: int
     year: int
     league: str
     team_id: str

@@ -4,8 +4,8 @@ aniso8601==7.0.0
 async-exit-stack==1.0.1
 async-generator==1.10
 blessed==1.18.0
-boto3==1.17.21
-botocore==1.20.21
+boto3==1.17.24
+botocore==1.20.24
 bullet==2.2.0
 certifi==2020.12.5
 chardet==4.0.0
@@ -35,7 +35,7 @@ log-symbols==0.0.14
 lxml==4.6.2
 MarkupSafe==1.1.1
 Naked==0.1.31
-orjson==3.5.0
+orjson==3.5.1
 packaging==20.9
 pip-upgrader==1.4.15
 promise==2.3
@@ -47,7 +47,7 @@ python-dateutil==2.8.1
 python-dotenv==0.15.0
 python-multipart==0.0.5
 PyYAML==5.4.1
-rapidfuzz==1.1.2
+rapidfuzz==1.2.1
 requests==2.25.1
 Rx==1.6.1
 s3transfer==0.3.4
@@ -59,12 +59,12 @@ starlette==0.13.6
 tabulate==0.8.9
 termcolor==1.1.0
 terminaltables==3.1.0
-tqdm==4.58.0
+tqdm==4.59.0
 ujson==4.0.2
 urllib3==1.26.3
 uvicorn==0.13.4
 uvloop==0.15.2
-vigorish==0.4.5
+vigorish==0.4.6
 w3lib==1.22.0
 wcwidth==0.2.5
 websockets==8.1

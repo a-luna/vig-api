@@ -6,13 +6,13 @@
 tmp
 venv
 pfx
+app/data/**/*.zip
 *.rdb
 *.db
 *.DS_Store
 .prettierignore
 .prettierrc
 node_modules
-vig.config.json
 .mypy_cache
 backup
 json_storage

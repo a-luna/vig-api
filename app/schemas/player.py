@@ -4,7 +4,6 @@ from pydantic import BaseModel
 
 
 class PlayerSchema(BaseModel):
-    id: int
     name_first: str
     name_last: str
     name_given: str
