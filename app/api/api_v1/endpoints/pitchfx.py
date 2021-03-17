@@ -23,7 +23,7 @@ def get_all_pfx_data_for_pitch_app(game_id: str, pitcher_id: int, app: Vigorish 
 
 
 @router.get("/at_bat", response_model=List[PitchFxSchema])
-def get_all_pfx_for_at_bat(at_bat_id: str, app: Vigorish = Depends(get_vig_app)):
+def get_all_pfx_data_for_at_bat(at_bat_id: str, app: Vigorish = Depends(get_vig_app)):
     result = validate_at_bat_id(at_bat_id)
     if result.failure:
         raise HTTPException(status_code=404, detail="No results found")

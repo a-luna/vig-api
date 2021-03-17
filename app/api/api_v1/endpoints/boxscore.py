@@ -23,25 +23,25 @@ def get_home_team_data(game_id: str, app: Vigorish = Depends(get_vig_app)):
     return game_data.team_data[game_data.home_team_id]
 
 
-@router.get("/away/bat_boxscore", response_model=BatBoxscoreSchema)
+@router.get("/away/batting", response_model=BatBoxscoreSchema)
 def get_away_team_bat_boxscore(game_id: str, app: Vigorish = Depends(get_vig_app)):
     game_data = crud.get_game_data(game_id, app)
     return game_data.bat_boxscore[game_data.away_team_id]
 
 
-@router.get("/home/bat_boxscore", response_model=BatBoxscoreSchema)
+@router.get("/home/batting", response_model=BatBoxscoreSchema)
 def get_home_team_bat_boxscore(game_id: str, app: Vigorish = Depends(get_vig_app)):
     game_data = crud.get_game_data(game_id, app)
     return game_data.bat_boxscore[game_data.home_team_id]
 
 
-@router.get("/away/pitch_boxscore", response_model=PitchBoxscoreSchema)
+@router.get("/away/pitching", response_model=PitchBoxscoreSchema)
 def get_away_team_pitch_boxscore(game_id: str, app: Vigorish = Depends(get_vig_app)):
     game_data = crud.get_game_data(game_id, app)
     return game_data.pitch_boxscore[game_data.away_team_id]
 
 
-@router.get("/home/pitch_boxscore", response_model=PitchBoxscoreSchema)
+@router.get("/home/pitching", response_model=PitchBoxscoreSchema)
 def get_home_team_pitch_boxscore(game_id: str, app: Vigorish = Depends(get_vig_app)):
     game_data = crud.get_game_data(game_id, app)
     return game_data.pitch_boxscore[game_data.home_team_id]

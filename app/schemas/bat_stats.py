@@ -21,6 +21,7 @@ class BatStatsSchema(BaseModel):
     iso: float
     bb_rate: float
     k_rate: float
+    contact_rate: float
     plate_appearances: int
     at_bats: int
     hits: int

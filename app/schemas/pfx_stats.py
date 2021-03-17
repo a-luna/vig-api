@@ -1,20 +1,21 @@
+from dataclasses import asdict
 from typing import Dict, List, Union
 
 from pydantic import BaseModel
 from vigorish.enums import PitchType
 
 
-class PfxStatsSchema(BaseModel):
-    pitcher_id_mlb: int
-    pitch_type: Union[PitchType, List[PitchType]]
-    total_pitches: int
-    total_pa: int
-    total_at_bats: int
-    total_outs: int
-    total_hits: int
-    total_bb: int
-    total_k: int
+class PfxPercentileSchema(BaseModel):
+    pitch_type: Union[str, PitchType]
     avg_speed: float
+    ops: float
+    whiff_rate: float
+    zone_rate: float
+    contact_rate: float
+
+
+class PfxStatsSchema(BaseModel):
+    mlb_id: int
     avg: float
     obp: float
     slg: float
@@ -27,10 +28,6 @@ class PfxStatsSchema(BaseModel):
     bb_rate: float
     k_rate: float
     hr_per_fb: float
-    avg_pfx_x: float
-    avg_pfx_z: float
-    avg_px: float
-    avg_pz: float
     zone_rate: float
     called_strike_rate: float
     swinging_strike_rate: float
@@ -42,8 +39,13 @@ class PfxStatsSchema(BaseModel):
     o_contact_rate: float
     z_contact_rate: float
     contact_rate: float
-    custom_score: float
-    money_pitch: bool
+    total_pitches: int
+    total_pa: int
+    total_at_bats: int
+    total_outs: int
+    total_hits: int
+    total_bb: int
+    total_k: int
     total_swings: int
     total_swings_made_contact: int
     total_called_strikes: int
@@ -68,9 +70,45 @@ class PfxStatsSchema(BaseModel):
     total_errors: int
     total_sac_hit: int
     total_sac_fly: int
-    pitch_type_int: int
+
+
+class PfxBattingStatsCollectionSchema(PfxStatsSchema):
+    pitch_types_filtered: List[int]
+    pitch_types_all: List[int]
+    total_pitches_filtered: int
+    total_pitches_all: int
+    total_pitches_excluded: int
+    pitch_type_metrics: Dict[Union[str, PitchType], PfxStatsSchema]
+
+
+class PfxPitchingStatsSchema(PfxStatsSchema):
+    pitch_type: PitchType
+    avg_speed: float
+    avg_pfx_x: float
+    avg_pfx_z: float
+    avg_px: float
+    avg_pz: float
     percent: float
+    money_pitch: bool
+    custom_score: float
 
 
-class PfxStatsCollectionSchema(PfxStatsSchema):
-    pitch_type_metrics: Dict[PitchType, PfxStatsSchema]
+class PfxPitchingStatsCollectionSchema(PfxStatsSchema):
+    pitch_types_filtered: List[int]
+    pitch_types_all: List[int]
+    total_pitches_filtered: int
+    total_pitches_all: int
+    total_pitches_excluded: int
+    pitch_type_metrics: Dict[Union[str, PitchType], PfxPitchingStatsSchema]
+
+
+def prepare_response_model(pfx_stats):
+    response = asdict(pfx_stats)
+    response["pitch_types_filtered"] = PitchType.deconstruct_pitch_types_from_int(response.pop("pitch_type"))
+    response["pitch_types_all"] = PitchType.deconstruct_pitch_types_from_int(response.pop("pitch_type_int"))
+    response["total_pitches_all"] = response["total_pitches"]
+    response["total_pitches_filtered"] = 0
+    for pitch_type_stats in response["pitch_type_metrics"].values():
+        response["total_pitches_filtered"] += pitch_type_stats["total_pitches"]
+    response["total_pitches_excluded"] = response["total_pitches_all"] - response["total_pitches_filtered"]
+    return response

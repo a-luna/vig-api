@@ -1,4 +1,5 @@
 from datetime import datetime
+from typing import Optional
 
 from pydantic import BaseModel
 
@@ -29,21 +30,6 @@ class PitchFxSchema(BaseModel):
     basic_type: str
     pdes: str
     mlbam_pitch_name: str
-    start_speed: float
-    spin: float
-    zone_location: int
-    sz_top: float
-    sz_bot: float
-    pfx_xdatafile: float
-    pfx_zdatafile: float
-    pfx_x: float
-    pfx_z: float
-    uncorrected_pfx_x: float
-    uncorrected_pfx_z: float
-    px: float
-    pz: float
-    pxold: float
-    pzold: float
     park_sv_id: str
     game_start_time_utc: datetime
     time_pitch_thrown_utc: datetime
@@ -87,6 +73,17 @@ class PitchFxSchema(BaseModel):
     is_patched: int
     is_invalid_ibb: int
     is_out_of_sequence: int
+    start_speed: Optional[float] = 0.0
+    spin: Optional[float] = 0.0
+    zone_location: Optional[int] = 0
+    sz_top: Optional[float] = 0.0
+    sz_bot: Optional[float] = 0.0
+    pfx_x: Optional[float] = 0.0
+    pfx_z: Optional[float] = 0.0
+    px: Optional[float] = 0.0
+    pz: Optional[float] = 0.0
+    pxold: Optional[float] = 0.0
+    pzold: Optional[float] = 0.0
 
     class Config:
         orm_mode = True
