@@ -7,7 +7,7 @@ from vigorish.database import PitchFx
 from app.api.dependencies import get_date_range, MLBSeason
 from app.core.database import get_vig_app
 from app.schemas import PfxBattingStatsCollectionSchema, PitchFxSchema
-from app.schemas.pfx_stats import prepare_response_model
+from app.schemas.pfx_stats import prepare_pfx_response_model
 
 
 router = APIRouter()
@@ -27,7 +27,7 @@ def get_pfx_metrics_for_career_for_batter(mlb_id: str, app: Vigorish = Depends(g
     pfx_stats = app.scraped_data.get_pfx_metrics_for_career_for_batter(mlb_id)
     if not pfx_stats:
         raise HTTPException(status_code=404, detail="No results found")
-    return prepare_response_model(pfx_stats)
+    return prepare_pfx_response_model(pfx_stats)
 
 
 @router.get("/vs_rhp_as_rhb", response_model=PfxBattingStatsCollectionSchema)
@@ -35,7 +35,7 @@ def get_pfx_metrics_vs_rhp_as_rhb_for_career_for_batter(mlb_id: str, app: Vigori
     pfx_stats = app.scraped_data.get_pfx_metrics_vs_rhp_as_rhb_for_career_for_batter(mlb_id)
     if not pfx_stats:
         raise HTTPException(status_code=404, detail="No results found")
-    return prepare_response_model(pfx_stats)
+    return prepare_pfx_response_model(pfx_stats)
 
 
 @router.get("/vs_rhp_as_lhb", response_model=PfxBattingStatsCollectionSchema)
@@ -43,7 +43,7 @@ def get_pfx_metrics_vs_rhp_as_lhb_for_career_for_batter(mlb_id: str, app: Vigori
     pfx_stats = app.scraped_data.get_pfx_metrics_vs_rhp_as_lhb_for_career_for_batter(mlb_id)
     if not pfx_stats:
         raise HTTPException(status_code=404, detail="No results found")
-    return prepare_response_model(pfx_stats)
+    return prepare_pfx_response_model(pfx_stats)
 
 
 @router.get("/vs_lhp_as_lhb", response_model=PfxBattingStatsCollectionSchema)
@@ -51,7 +51,7 @@ def get_pfx_metrics_vs_lhp_as_lhb_for_career_for_batter(mlb_id: str, app: Vigori
     pfx_stats = app.scraped_data.get_pfx_metrics_vs_lhp_as_lhb_for_career_for_batter(mlb_id)
     if not pfx_stats:
         raise HTTPException(status_code=404, detail="No results found")
-    return prepare_response_model(pfx_stats)
+    return prepare_pfx_response_model(pfx_stats)
 
 
 @router.get("/vs_lhp_as_rhb", response_model=PfxBattingStatsCollectionSchema)
@@ -59,7 +59,7 @@ def get_pfx_metrics_vs_lhp_as_rhb_for_career_for_batter(mlb_id: str, app: Vigori
     pfx_stats = app.scraped_data.get_pfx_metrics_vs_lhp_as_rhb_for_career_for_batter(mlb_id)
     if not pfx_stats:
         raise HTTPException(status_code=404, detail="No results found")
-    return prepare_response_model(pfx_stats)
+    return prepare_pfx_response_model(pfx_stats)
 
 
 @router.get("/for_year", response_model=PfxBattingStatsCollectionSchema)
@@ -69,7 +69,7 @@ def get_pfx_metrics_for_year_for_batter(
     pfx_stats = app.scraped_data.get_pfx_metrics_for_year_for_batter(mlb_id, season.year)
     if not pfx_stats:
         raise HTTPException(status_code=404, detail="No results found")
-    return prepare_response_model(pfx_stats)
+    return prepare_pfx_response_model(pfx_stats)
 
 
 @router.get("/for_game", response_model=PfxBattingStatsCollectionSchema)
@@ -77,7 +77,7 @@ def get_pfx_metrics_for_game_for_batter(mlb_id: str, game_id: str, app: Vigorish
     pfx_stats = app.scraped_data.get_pfx_metrics_for_game_for_batter(mlb_id, game_id)
     if not pfx_stats:
         raise HTTPException(status_code=404, detail="No results found")
-    return prepare_response_model(pfx_stats)
+    return prepare_pfx_response_model(pfx_stats)
 
 
 @router.get("/for_game/vs_rhp_as_rhb", response_model=PfxBattingStatsCollectionSchema)
@@ -85,7 +85,7 @@ def get_pfx_metrics_vs_rhp_as_rhb_for_game_for_batter(mlb_id: str, game_id: str,
     pfx_stats = app.scraped_data.get_pfx_metrics_vs_rhp_as_rhb_for_game_for_batter(mlb_id, game_id)
     if not pfx_stats:
         raise HTTPException(status_code=404, detail="No results found")
-    return prepare_response_model(pfx_stats)
+    return prepare_pfx_response_model(pfx_stats)
 
 
 @router.get("/for_game/vs_rhp_as_lhb", response_model=PfxBattingStatsCollectionSchema)
@@ -93,7 +93,7 @@ def get_pfx_metrics_vs_rhp_as_lhb_for_game_for_batter(mlb_id: str, game_id: str,
     pfx_stats = app.scraped_data.get_pfx_metrics_vs_rhp_as_lhb_for_game_for_batter(mlb_id, game_id)
     if not pfx_stats:
         raise HTTPException(status_code=404, detail="No results found")
-    return prepare_response_model(pfx_stats)
+    return prepare_pfx_response_model(pfx_stats)
 
 
 @router.get("/for_game/vs_lhp_as_lhb", response_model=PfxBattingStatsCollectionSchema)
@@ -101,7 +101,7 @@ def get_pfx_metrics_vs_lhp_as_lhb_for_game_for_batter(mlb_id: str, game_id: str,
     pfx_stats = app.scraped_data.get_pfx_metrics_vs_lhp_as_lhb_for_game_for_batter(mlb_id, game_id)
     if not pfx_stats:
         raise HTTPException(status_code=404, detail="No results found")
-    return prepare_response_model(pfx_stats)
+    return prepare_pfx_response_model(pfx_stats)
 
 
 @router.get("/for_game/vs_lhp_as_rhb", response_model=PfxBattingStatsCollectionSchema)
@@ -109,4 +109,4 @@ def get_pfx_metrics_vs_lhp_as_rhb_for_game_for_batter(mlb_id: str, game_id: str,
     pfx_stats = app.scraped_data.get_pfx_metrics_vs_lhp_as_rhb_for_game_for_batter(mlb_id, game_id)
     if not pfx_stats:
         raise HTTPException(status_code=404, detail="No results found")
-    return prepare_response_model(pfx_stats)
+    return prepare_pfx_response_model(pfx_stats)

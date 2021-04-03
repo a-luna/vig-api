@@ -1,5 +1,5 @@
 from dataclasses import asdict
-from typing import Dict, List, Union
+from typing import Dict, List, Tuple, Union
 
 from pydantic import BaseModel
 from vigorish.enums import PitchType
@@ -7,11 +7,12 @@ from vigorish.enums import PitchType
 
 class PfxPercentileSchema(BaseModel):
     pitch_type: Union[str, PitchType]
-    avg_speed: float
-    ops: float
-    whiff_rate: float
-    zone_rate: float
-    contact_rate: float
+    avg_speed: Tuple[float, float]
+    ops: Tuple[float, float]
+    whiff_rate: Tuple[float, float]
+    zone_rate: Tuple[float, float]
+    contact_rate: Tuple[float, float]
+    o_swing_rate: Tuple[float, float]
 
 
 class PfxStatsSchema(BaseModel):
@@ -73,8 +74,8 @@ class PfxStatsSchema(BaseModel):
 
 
 class PfxBattingStatsCollectionSchema(PfxStatsSchema):
-    pitch_types_filtered: List[int]
-    pitch_types_all: List[int]
+    pitch_types_filtered: List[Union[str, PitchType]]
+    pitch_types_all: List[Union[str, PitchType]]
     total_pitches_filtered: int
     total_pitches_all: int
     total_pitches_excluded: int
@@ -82,33 +83,35 @@ class PfxBattingStatsCollectionSchema(PfxStatsSchema):
 
 
 class PfxPitchingStatsSchema(PfxStatsSchema):
-    pitch_type: PitchType
+    pitch_type: Union[str, PitchType]
     avg_speed: float
     avg_pfx_x: float
     avg_pfx_z: float
     avg_px: float
     avg_pz: float
     percent: float
-    money_pitch: bool
-    custom_score: float
 
 
 class PfxPitchingStatsCollectionSchema(PfxStatsSchema):
-    pitch_types_filtered: List[int]
-    pitch_types_all: List[int]
+    pitch_types_filtered: List[Union[str, PitchType]]
+    pitch_types_all: List[Union[str, PitchType]]
     total_pitches_filtered: int
     total_pitches_all: int
     total_pitches_excluded: int
     pitch_type_metrics: Dict[Union[str, PitchType], PfxPitchingStatsSchema]
 
 
-def prepare_response_model(pfx_stats):
+def prepare_pfx_response_model(pfx_stats):
     response = asdict(pfx_stats)
-    response["pitch_types_filtered"] = PitchType.deconstruct_pitch_types_from_int(response.pop("pitch_type"))
-    response["pitch_types_all"] = PitchType.deconstruct_pitch_types_from_int(response.pop("pitch_type_int"))
+    response["pitch_types_filtered"] = deconstruct_pitch_types_from_int(response.pop("pitch_type"))
+    response["pitch_types_all"] = deconstruct_pitch_types_from_int(response.pop("pitch_type_int"))
     response["total_pitches_all"] = response["total_pitches"]
     response["total_pitches_filtered"] = 0
     for pitch_type_stats in response["pitch_type_metrics"].values():
         response["total_pitches_filtered"] += pitch_type_stats["total_pitches"]
     response["total_pitches_excluded"] = response["total_pitches_all"] - response["total_pitches_filtered"]
     return response
+
+
+def deconstruct_pitch_types_from_int(pitch_mix_int):
+    return [str(pitch_type) for pitch_type in PitchType if pitch_mix_int & pitch_type == pitch_type]
