@@ -1,3 +1,4 @@
+from typing import List
 from pydantic import BaseModel
 
 
@@ -31,6 +32,18 @@ class TeamSchema(BaseModel):
     batting_park_factor: int
     pitching_park_factor: int
     team_id_br: str
+    team_id_retro: str
 
     class Config:
         orm_mode = True
+
+
+class TeamDivMapSchema(BaseModel):
+    w: List[TeamSchema]
+    c: List[TeamSchema]
+    e: List[TeamSchema]
+
+
+class TeamLeagueStandings(BaseModel):
+    al: TeamDivMapSchema
+    nl: TeamDivMapSchema
