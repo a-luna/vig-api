@@ -4,7 +4,7 @@ from fastapi import APIRouter, Depends, HTTPException
 from vigorish.app import Vigorish
 from vigorish.database import PitchFx
 
-from app.api.dependencies import MLBDateRange, MLBSeason
+from app.api.dependencies import get_date_range, MLBSeason
 from app.core.database import get_vig_app
 from app.schemas import PfxBattingStatsCollectionSchema, PitchFxSchema
 from app.schemas.pfx_stats import prepare_response_model
@@ -15,10 +15,11 @@ router = APIRouter()
 
 @router.get("/in_date_range", response_model=List[PitchFxSchema])
 def get_all_pfx_within_date_range_for_player(
-    mlb_id: int, date_range: MLBDateRange = Depends(), app: Vigorish = Depends(get_vig_app)
+    mlb_id: int, date_range: tuple = Depends(get_date_range), app: Vigorish = Depends(get_vig_app)
 ):
+    start_date, end_date = date_range
     all_pfx = app.db_session.query(PitchFx).filter_by(batter_id_mlb=mlb_id).all()
-    return [pfx for pfx in all_pfx if pfx.game_date >= date_range.start_date and pfx.game_date <= date_range.end_date]
+    return [pfx for pfx in all_pfx if pfx.game_date >= start_date and pfx.game_date <= end_date]
 
 
 @router.get("/", response_model=PfxBattingStatsCollectionSchema)

@@ -9,6 +9,18 @@ from vigorish.util.string_helpers import parse_date, validate_pitch_app_id
 from app.core.database import get_vig_app
 
 
+def get_date_range(
+    start_date: str = Query(..., description="Date as a string in YYYYMMDD format"),
+    end_date: str = Query(..., description="Date as a string in YYYYMMDD format"),
+):
+    try:
+        start = parse_date(start_date)
+        end = parse_date(end_date)
+        return (start, end)
+    except ValueError as ex:
+        raise HTTPException(status_code=400, detail=ex.message)
+
+
 def get_pitch_app_params(
     game_id: Optional[str] = None, mlb_id: Optional[str] = None, pitch_app_id: Optional[str] = None
 ):
@@ -20,9 +32,7 @@ def get_pitch_app_params(
     if result.failure:
         raise HTTPException(status_code=400, detail=f"{pitch_app_id} is not a valid pitch app ID")
     pitch_app_dict = result.value
-    game_id = pitch_app_dict["game_id"]
-    mlb_id = pitch_app_dict["pitcher_id"]
-    return (mlb_id, game_id)
+    return (pitch_app_dict["pitcher_id"], pitch_app_dict["game_id"])
 
 
 class BatOrder:
@@ -39,28 +49,6 @@ class MLBSeason:
         self.start_date = season.start_date
         self.end_date = season.end_date
         self.asg_date = season.asg_date
-
-
-class MLBDateRange:
-    def __init__(
-        self,
-        start_date: str = Query(..., description="Date as a string in YYYYMMDD format"),
-        end_date: str = Query(..., description="Date as a string in YYYYMMDD format"),
-        app: Vigorish = Depends(get_vig_app),
-    ):
-        try:
-            start = parse_date(start_date)
-            end = parse_date(end_date)
-        except ValueError as ex:
-            raise HTTPException(status_code=400, detail=ex.message)
-        result = Season.is_date_in_season(app.db_session, start)
-        if result.failure:
-            raise HTTPException(status_code=400, detail=result.error)
-        result = Season.is_date_in_season(app.db_session, end)
-        if result.failure:
-            raise HTTPException(status_code=400, detail=result.error)
-        self.start_date = start
-        self.end_date = end
 
 
 class MLBGameDate:

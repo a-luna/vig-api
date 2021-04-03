@@ -5,7 +5,7 @@ from vigorish.app import Vigorish
 from vigorish.util.list_helpers import flatten_list2d
 
 from app.core import crud
-from app.api.dependencies import get_pitch_app_params, MLBDateRange, MLBSeason
+from app.api.dependencies import get_date_range, get_pitch_app_params, MLBSeason
 from app.core.database import get_vig_app
 from app.schemas import PitchFxSchema, PfxPercentileSchema, PfxPitchingStatsCollectionSchema
 from app.schemas.pfx_stats import prepare_response_model
@@ -16,13 +16,12 @@ router = APIRouter()
 
 @router.get("/in_date_range", response_model=List[PitchFxSchema])
 def get_all_pfx_within_date_range_for_player(
-    mlb_id: int, date_range: MLBDateRange = Depends(), app: Vigorish = Depends(get_vig_app)
+    mlb_id: int, date_range: tuple = Depends(get_date_range), app: Vigorish = Depends(get_vig_app)
 ):
+    start_date, end_date = date_range
     player_data = crud.get_player_data(mlb_id, app)
     all_pfx = [
-        p.pitchfx
-        for p in player_data.pitch_app_map.values()
-        if p.game_date >= date_range.start_date and p.game_date <= date_range.end_date
+        p.pitchfx for p in player_data.pitch_app_map.values() if p.game_date >= start_date and p.game_date <= end_date
     ]
     return flatten_list2d(all_pfx)
 
