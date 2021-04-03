@@ -1,13 +1,15 @@
+from typing import List
 from fastapi import APIRouter, Depends
 from vigorish.app import Vigorish
 
 from app.core.database import get_vig_app
 from app.api.api_v1.endpoints.player import bat_stats, pitch_stats, pfx_batter, pfx_pitcher
+from app.schemas import FuzzySearchResult
 
 router = APIRouter()
 
 
-@router.get("/search")
+@router.get("/search", response_model=List[FuzzySearchResult])
 def search_player_name(query: str, app: Vigorish = Depends(get_vig_app)):
     return app.scraped_data.player_name_search(query)
 

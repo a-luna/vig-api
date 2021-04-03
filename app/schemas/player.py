@@ -23,3 +23,9 @@ class PlayerSchema(BaseModel):
 
     class Config:
         orm_mode = True
+
+
+class FuzzySearchResult(BaseModel):
+    match: str
+    score: int
+    result: int

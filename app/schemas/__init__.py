@@ -11,6 +11,6 @@ from app.schemas.pfx_stats import (
 )
 from app.schemas.pitch_stats import PitchStatsSchema
 from app.schemas.pitchfx import PitchFxSchema
-from app.schemas.player import PlayerSchema
+from app.schemas.player import FuzzySearchResult, PlayerSchema
 from app.schemas.season import SeasonSchema
 from app.schemas.team import TeamSchema
