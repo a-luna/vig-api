@@ -1,17 +1,14 @@
-from typing import Dict, List, Optional
+from typing import Dict, List, Optional, Union
 
 from pydantic import BaseModel
+from vigorish.enums import DefensePosition
+
+from app.schemas.game_data.at_bat import PlayerSubEvent
 
 
 class BatStatDetailSchema(BaseModel):
     count: int
     stat: str
-
-
-class LineupSpotSchema(BaseModel):
-    player_id_br: str
-    bat_order: int
-    def_position: str
 
 
 class BBRefBatDataSchema(BaseModel):
@@ -37,18 +34,22 @@ class BBRefBatDataSchema(BaseModel):
 
 
 class BatStatsSchema(BaseModel):
-    batter_name: str
-    batter_id_mlb: int
-    batter_id_bbref: str
-    batter_team_id_bb: str
-    batter_team_id_bbref: str
-    opponent_team_id_bb: str
-    opponent_team_id_bbref: str
+    team_id: str
+    name: str
+    mlb_id: int
+    bbref_id: str
+    is_starter: bool
+    bat_order: int
+    def_position: DefensePosition
+    at_bats: str
+    bat_stats: str
+    stats_to_date: str
     total_pbp_events: int
     total_incomplete_at_bats: int
     total_plate_appearances: int
     at_bat_ids: List[str]
     incomplete_at_bat_ids: List[str]
+    substitutions: Optional[List[PlayerSubEvent]]
     bbref_data: BBRefBatDataSchema
 
 
@@ -79,18 +80,17 @@ class BBRefPitchDataSchema(BaseModel):
 
 
 class PitchStatsSchema(BaseModel):
-    pitcher_name: str
-    pitcher_id_mlb: int
-    pitcher_id_bbref: str
+    team_id: str
+    name: str
+    mlb_id: int
+    bbref_id: str
+    pitch_app_type: str
+    game_results: str
     pitch_app_id: str
-    pitcher_team_id_bb: str
-    pitcher_team_id_bbref: str
-    opponent_team_id_bb: str
-    opponent_team_id_bbref: str
-    bb_game_id: str
-    bbref_game_id: str
     pitch_count_by_inning: Dict[str, int]
     pitch_count_by_pitch_type: Dict[str, int]
+    at_bat_ids: List[str]
+    substitutions: Optional[List[PlayerSubEvent]]
     bbref_data: BBRefPitchDataSchema
 
 
@@ -107,6 +107,9 @@ class TeamDataSchema(BaseModel):
     team_won: bool
     pitcher_of_record: str
     pitcher_earned_save: str
-    starting_lineup: List[LineupSpotSchema]
-    batting_stats: List[BatStatsSchema]
-    pitching_stats: List[PitchStatsSchema]
+    batting: Dict[Union[int, str], BatStatsSchema]
+    pitching: Dict[str, PitchStatsSchema]
+
+
+class TeamDataMapSchema(BaseModel):
+    __root__: Dict[str, TeamDataSchema]

@@ -5,46 +5,16 @@ from vigorish.util.string_helpers import validate_at_bat_id
 
 from app.core import crud
 from app.core.database import get_vig_app
-from app.schemas import AtBatSchema, BatBoxscoreSchema, PitchBoxscoreSchema, TeamDataSchema
+from app.schemas import AtBatSchema, TeamDataMapSchema
 
 
 router = APIRouter()
 
 
-@router.get("/away", response_model=TeamDataSchema)
-def get_away_team_data(game_id: str, app: Vigorish = Depends(get_vig_app)):
+@router.get("/team_data", response_model=TeamDataMapSchema)
+def get_team_data(game_id: str, app: Vigorish = Depends(get_vig_app)):
     game_data = crud.get_game_data(game_id, app)
-    return game_data.team_data[game_data.away_team_id]
-
-
-@router.get("/home", response_model=TeamDataSchema)
-def get_home_team_data(game_id: str, app: Vigorish = Depends(get_vig_app)):
-    game_data = crud.get_game_data(game_id, app)
-    return game_data.team_data[game_data.home_team_id]
-
-
-@router.get("/away/batting", response_model=BatBoxscoreSchema)
-def get_away_team_bat_boxscore(game_id: str, app: Vigorish = Depends(get_vig_app)):
-    game_data = crud.get_game_data(game_id, app)
-    return game_data.bat_boxscore[game_data.away_team_id]
-
-
-@router.get("/home/batting", response_model=BatBoxscoreSchema)
-def get_home_team_bat_boxscore(game_id: str, app: Vigorish = Depends(get_vig_app)):
-    game_data = crud.get_game_data(game_id, app)
-    return game_data.bat_boxscore[game_data.home_team_id]
-
-
-@router.get("/away/pitching", response_model=PitchBoxscoreSchema)
-def get_away_team_pitch_boxscore(game_id: str, app: Vigorish = Depends(get_vig_app)):
-    game_data = crud.get_game_data(game_id, app)
-    return game_data.pitch_boxscore[game_data.away_team_id]
-
-
-@router.get("/home/pitching", response_model=PitchBoxscoreSchema)
-def get_home_team_pitch_boxscore(game_id: str, app: Vigorish = Depends(get_vig_app)):
-    game_data = crud.get_game_data(game_id, app)
-    return game_data.pitch_boxscore[game_data.home_team_id]
+    return game_data.get_team_data()
 
 
 @router.get("/pbp", response_model=AtBatSchema)
