@@ -1,25 +1,45 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.openapi.docs import get_redoc_html, get_swagger_ui_html
+from fastapi.staticfiles import StaticFiles
 
 from app.api.api_v1.api import api_router
 from app.core.config import settings
 
 app = FastAPI(
     title=settings.PROJECT_NAME,
-    openapi_url=f"{settings.API_V1_STR}/openapi.json",
-    docs_url=f"{settings.API_V1_STR}/docs",
-    redoc_url=f"{settings.API_V1_STR}/redoc",
+    version=settings.API_VERSION,
+    openapi_url=f"{settings.API_VERSION}/openapi.json",
+    docs_url=None,
+    redoc_url=None,
 )
-
-origins = ["http://localhost:3000"]
-
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=origins,
+    allow_origins=settings.CORS_ALLOW_ORIGINS,
     allow_credentials=True,
     allow_methods=["GET"],
     allow_headers=["*"],
 )
+app.mount("/static", StaticFiles(directory="static"), name="static")
+
+
+@app.get(f"{settings.API_VERSION}/docs", include_in_schema=False)
+async def swagger_ui_html():
+    return get_swagger_ui_html(
+        title=f"{settings.PROJECT_NAME} - Swagger UI",
+        openapi_url=app.openapi_url,
+        swagger_js_url="/static/swagger-ui-bundle.js",
+        swagger_css_url="/static/swagger-ui.css",
+    )
+
+
+@app.get(f"{settings.API_VERSION}/redoc", include_in_schema=False)
+async def redoc_html():
+    return get_redoc_html(
+        title=f"{settings.PROJECT_NAME} - ReDoc",
+        openapi_url=app.openapi_url,
+        redoc_js_url="/static/redoc.standalone.js",
+    )
 
 
 @app.get("/", include_in_schema=False)
@@ -27,4 +47,4 @@ def get_api_root():
     return {"message": "Welcome to Vigorish MLB Data API"}
 
 
-app.include_router(api_router, prefix=settings.API_V1_STR)
+app.include_router(api_router, prefix=settings.API_VERSION)
