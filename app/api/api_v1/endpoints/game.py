@@ -2,19 +2,17 @@ from fastapi import APIRouter, Depends, HTTPException
 from vigorish.app import Vigorish
 from vigorish.util.string_helpers import validate_at_bat_id
 
-
 from app.core import crud
 from app.core.database import get_vig_app
-from app.schemas import AtBatSchema, TeamDataMapSchema
-
+from app.schemas import AtBatSchema, BoxscoreSchema
 
 router = APIRouter()
 
 
-@router.get("/team_data", response_model=TeamDataMapSchema)
-def get_team_data(game_id: str, app: Vigorish = Depends(get_vig_app)):
+@router.get("/boxscore", response_model=BoxscoreSchema, response_model_exclude_unset=True)
+def get_boxscore_for_game(game_id: str, app: Vigorish = Depends(get_vig_app)):
     game_data = crud.get_game_data(game_id, app)
-    return game_data.get_team_data()
+    return game_data.get_boxscore_data()
 
 
 @router.get("/pbp", response_model=AtBatSchema)

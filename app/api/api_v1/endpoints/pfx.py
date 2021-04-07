@@ -19,6 +19,8 @@ def get_all_pfx_data_for_pitch_app(game_id: str, pitcher_id: int, app: Vigorish 
     if result.failure:
         raise HTTPException(status_code=404, detail="No results found")
     pfx = result.value
+    if not pfx:
+        raise HTTPException(status_code=404, detail="No results found")
     return pfx
 
 
