@@ -22,7 +22,7 @@ app.add_middleware(
 )
 
 
-@app.get("/")
+@app.get("/", include_in_schema=False)
 def get_api_root():
     return {"message": "Welcome to Vigorish MLB Data API"}
 

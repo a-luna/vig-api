@@ -9,7 +9,7 @@ from app.schemas import FuzzySearchResult
 router = APIRouter()
 
 
-@router.get("/search", response_model=List[FuzzySearchResult])
+@router.get("/search", response_model=List[FuzzySearchResult], tags=["player search"])
 def search_player_name(query: str, app: Vigorish = Depends(get_vig_app)):
     return app.scraped_data.player_name_search(query)
 

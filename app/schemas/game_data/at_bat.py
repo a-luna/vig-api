@@ -32,10 +32,10 @@ class PlayerSubEvent(AtBatEvent):
     sub_type: str
     team_id: str
     sub_description: str
-    incoming_player_id_br: str
-    incoming_player_pos: str
     outgoing_player_id_br: str
     outgoing_player_pos: str
+    incoming_player_id_br: str
+    incoming_player_pos: str
     lineup_slot: int
 
 
