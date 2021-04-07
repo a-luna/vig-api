@@ -1,6 +1,6 @@
 import os
 from pathlib import Path
-from typing import Optional
+from typing import List, Optional
 
 from pydantic import AnyHttpUrl, BaseSettings
 from dotenv import load_dotenv
@@ -17,7 +17,7 @@ class Settings(BaseSettings):
         os.environ["DOTENV_FILE"] = str(APP_ROOT.joinpath(".env"))
         load_dotenv(dotenv_path=os.environ["DOTENV_FILE"])
 
-    API_V1_STR: str = "/api/v1"
+    API_VERSION: str = "/api/v1"
     SECRET_KEY: str = os.environ.get("SECRET_KEY")
     DOTENV_FILE: Path = Path(os.environ.get("DOTENV_FILE"))
     CONFIG_FILE: Path = Path(os.environ.get("CONFIG_FILE"))
@@ -25,6 +25,7 @@ class Settings(BaseSettings):
     SERVER_NAME: Optional[str] = "vig-api.aaronluna.dev"
     SERVER_HOST: Optional[AnyHttpUrl] = "https://vig-api.aaronluna.dev"
     PROJECT_NAME: Optional[str] = "Vigorish API - MLB Data"
+    CORS_ALLOW_ORIGINS: List[str] = ["http://localhost:3000"]
 
     class Config:
         case_sensitive = True
