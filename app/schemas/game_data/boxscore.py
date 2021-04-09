@@ -6,6 +6,7 @@ from app.schemas import TeamDataMapSchema
 
 
 class LinescoreColumnSchema(BaseModel):
+    col_index: int
     col_header: str
     away_team: str
     home_team: str
@@ -52,6 +53,7 @@ class GameMetaSchema(BaseModel):
 
 
 class BoxscoreSchema(BaseModel):
+    game_id: str
     summary: List[str]
     extra_innings: bool
     linescore: List[LinescoreColumnSchema]
