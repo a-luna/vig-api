@@ -8,7 +8,7 @@ from vigorish.database import Season, Team
 from app.api.dependencies import MLBGameDate, MLBSeason
 from app.core import crud
 from app.core.database import get_vig_app
-from app.schemas import GameDataSchema, SeasonSchema, TeamLeagueStandings
+from app.schemas import ScoreboardSchema, SeasonSchema, TeamLeagueStandings
 
 
 router = APIRouter()
@@ -63,6 +63,7 @@ def get_all_game_ids_for_date(game_date: MLBGameDate = Depends(), app: Vigorish 
     return game_ids
 
 
-@router.get("/scoreboard", response_model=List[GameDataSchema])
+@router.get("/scoreboard", response_model=ScoreboardSchema)
 def get_scoreboard_for_date(game_date: MLBGameDate = Depends(), app: Vigorish = Depends(get_vig_app)):
-    return app.get_scoreboard_data_for_date(game_date.date)
+    games_for_date = app.get_scoreboard_data_for_date(game_date.date)
+    return {"season": game_date.season, "games_for_date": games_for_date}

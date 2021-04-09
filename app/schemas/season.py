@@ -1,6 +1,9 @@
 from datetime import datetime
+from typing import List
 
 from pydantic import BaseModel
+
+from app.schemas import GameDataSchema
 
 
 class SeasonSchema(BaseModel):
@@ -11,3 +14,8 @@ class SeasonSchema(BaseModel):
 
     class Config:
         orm_mode = True
+
+
+class ScoreboardSchema(BaseModel):
+    season: SeasonSchema
+    games_for_date: List[GameDataSchema]

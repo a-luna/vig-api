@@ -65,6 +65,7 @@ class MLBGameDate:
         if result.failure:
             raise HTTPException(status_code=400, detail=result.error)
         self.date = parsed_date
+        self.season = result.value
 
 
 class TeamParameters:
