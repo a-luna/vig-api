@@ -48,6 +48,7 @@ python-dotenv==0.17.0
 python-multipart==0.0.5
 PyYAML==5.4.1
 rapidfuzz==1.4.1
+redis==3.5.3
 requests==2.25.1
 Rx==1.6.1
 s3transfer==0.3.6

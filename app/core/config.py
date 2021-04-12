@@ -2,7 +2,7 @@ import os
 from pathlib import Path
 from typing import List, Optional
 
-from pydantic import AnyHttpUrl, BaseSettings
+from pydantic import AnyHttpUrl, BaseSettings, RedisDsn
 from dotenv import load_dotenv
 
 from app.data.initialize import extract_zip_files, set_env_variables
@@ -26,6 +26,7 @@ class Settings(BaseSettings):
     SERVER_HOST: Optional[AnyHttpUrl] = "https://vig-api.aaronluna.dev"
     PROJECT_NAME: Optional[str] = "Vigorish API - MLB Data"
     CORS_ALLOW_ORIGINS: List[str] = ["http://localhost:3000"]
+    REDIS_URL: RedisDsn = os.environ.get("REDIS_URL")
 
     class Config:
         case_sensitive = True
