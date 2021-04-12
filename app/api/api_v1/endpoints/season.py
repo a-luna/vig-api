@@ -8,7 +8,7 @@ from vigorish.database import Season, Team
 from app.api.dependencies import MLBGameDate, MLBSeason
 from app.core import crud
 from app.core.database import get_vig_app
-from app.schema_prep import convert_scoreboard_data
+from app.schema_prep import convert_scoreboard_data, convert_season_to_dict
 from app.schemas import ScoreboardSchema, SeasonSchema, TeamLeagueStandings
 
 
@@ -27,8 +27,7 @@ def get_season(season: MLBSeason = Depends(), app: Vigorish = Depends(get_vig_ap
 def get_all_regular_seasons(app: Vigorish = Depends(get_vig_app)):
     all_mlb_seasons = Season.get_all_regular_seasons(app.db_session)
     if not all_mlb_seasons:
-        raise HTTPException(status_code=404, detail="No results found")
-    return list(filter(lambda x: x.year > 2016 and x.year < 2020, all_mlb_seasons))
+    return list(map(convert_season_to_dict, filter(lambda x: x.year > 2016 and x.year < 2020, all_mlb_seasons)))
 
 
 @router.get("/all_dates")

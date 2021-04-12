@@ -1,5 +1,5 @@
 from datetime import datetime
-from typing import List
+from typing import List, Union
 
 from pydantic import BaseModel
 
@@ -8,9 +8,9 @@ from app.schemas import GameDataSchema
 
 class SeasonSchema(BaseModel):
     year: int
-    start_date: datetime
-    end_date: datetime
-    asg_date: datetime
+    start_date: Union[datetime, str]
+    end_date: Union[datetime, str]
+    asg_date: Union[datetime, str]
 
     class Config:
         orm_mode = True
