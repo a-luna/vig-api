@@ -1,11 +1,4 @@
-def convert_boxscore_data(boxscore):
-    boxscore["linescore"] = convert_linescore_for_html(boxscore["linescore"])
-    if boxscore["extra_innings"]:
-        boxscore["linescore_complete"] = convert_linescore_for_html(boxscore["linescore_complete"])
-    return boxscore
-
-
-def convert_linescore_for_html(linescore):
+def create_html_linescore_columns(linescore):
     if isinstance(linescore, list):
         linescore = linescore[0]
     (_, removed_inning_map) = get_inning_scored_removed_maps(linescore)
