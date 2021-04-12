@@ -8,6 +8,7 @@ from vigorish.database import Season, Team
 from app.api.dependencies import MLBGameDate, MLBSeason
 from app.core import crud
 from app.core.database import get_vig_app
+from app.schema_prep import convert_scoreboard_data
 from app.schemas import ScoreboardSchema, SeasonSchema, TeamLeagueStandings
 
 
@@ -66,4 +67,5 @@ def get_all_game_ids_for_date(game_date: MLBGameDate = Depends(), app: Vigorish 
 @router.get("/scoreboard", response_model=ScoreboardSchema)
 def get_scoreboard_for_date(game_date: MLBGameDate = Depends(), app: Vigorish = Depends(get_vig_app)):
     games_for_date = app.get_scoreboard_data_for_date(game_date.date)
-    return {"season": game_date.season, "games_for_date": games_for_date}
+    scoreboard = {"season": game_date.season, "games_for_date": games_for_date}
+    return convert_scoreboard_data(scoreboard)
