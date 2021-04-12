@@ -1,7 +1,10 @@
+from http import HTTPStatus
+
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.openapi.docs import get_redoc_html, get_swagger_ui_html
 from fastapi.staticfiles import StaticFiles
+from starlette.responses import RedirectResponse
 
 from app.api.api_v1.api import api_router
 from app.core.config import settings
@@ -44,7 +47,8 @@ async def redoc_html():
 
 @app.get("/", include_in_schema=False)
 def get_api_root():
-    return {"message": "Welcome to Vigorish MLB Data API"}
+    api_docs_url = app.url_path_for("swagger_ui_html")
+    return RedirectResponse(url=api_docs_url, status_code=HTTPStatus.PERMANENT_REDIRECT)
 
 
 app.include_router(api_router, prefix=settings.API_VERSION)
