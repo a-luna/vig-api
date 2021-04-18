@@ -5,6 +5,7 @@ from typing import List, Optional
 from pydantic import AnyHttpUrl, BaseSettings, RedisDsn
 from dotenv import load_dotenv
 
+from app.core.enums import RedisStatus
 from app.data.initialize import extract_zip_files, set_env_variables
 
 
@@ -27,6 +28,7 @@ class Settings(BaseSettings):
     PROJECT_NAME: Optional[str] = "Vigorish API - MLB Data"
     CORS_ALLOW_ORIGINS: List[str] = ["http://localhost:3000"]
     REDIS_URL: RedisDsn = os.environ.get("REDIS_URL")
+    REDIS_CLIENT_STATUS: RedisStatus = RedisStatus.NONE
 
     class Config:
         case_sensitive = True
