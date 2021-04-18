@@ -69,7 +69,7 @@ def create_html_row(player_bat_stats, sub_tracker):
         "wpa_bat_neg": player_bat_stats["bbref_data"]["wpa_bat_neg"],
         "re24_bat": player_bat_stats["bbref_data"]["re24_bat"],
         "details": player_bat_stats["bbref_data"]["details"],
-        "at_bat_ids": player_bat_stats["at_bat_ids"],
+        "at_bat_results": player_bat_stats["at_bat_results"],
         "incomplete_at_bat_ids": player_bat_stats["incomplete_at_bat_ids"],
         "substitutions": player_bat_stats["substitutions"],
     }

@@ -37,5 +37,6 @@ def create_html_row(row_id, player_pitch_stats):
         "avg_lvg_index": player_pitch_stats["bbref_data"]["avg_lvg_index"],
         "re24_pitch": player_pitch_stats["bbref_data"]["re24_pitch"],
         "at_bat_ids": player_pitch_stats["at_bat_ids"],
+        "inning_totals": player_pitch_stats["inning_totals"],
         "substitutions": player_pitch_stats["substitutions"],
     }

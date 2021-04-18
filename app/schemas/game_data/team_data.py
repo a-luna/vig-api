@@ -53,6 +53,17 @@ class BatStatsSchema(BaseModel):
     bbref_data: BBRefBatDataSchema
 
 
+class AtBatSummarySchema(BaseModel):
+    pbp_table_row_number: int
+    batter_name: str
+    pitcher_name: str
+    inning: str
+    runners_on_base: str
+    outs: int
+    play_description: str
+    pitch_sequence: str
+
+
 class BBRefPitchDataSchema(BaseModel):
     innings_pitched: float
     hits: int
@@ -77,6 +88,17 @@ class BBRefPitchDataSchema(BaseModel):
     wpa_pitch: float
     avg_lvg_index: float
     re24_pitch: float
+
+
+class InningTotalsSchema(BaseModel):
+    outs: int
+    hits: int
+    runs: int
+    bb: int
+    so: int
+    bf: int
+    pitch_count: int
+    strikes: int
 
 
 class PitchStatsSchema(BaseModel):
@@ -123,7 +145,7 @@ class HtmlBatStatsSchema(BaseModel):
     wpa_bat_neg: float
     re24_bat: float
     details: Optional[List[BatStatDetailSchema]]
-    at_bat_ids: List[str]
+    at_bat_results: List[AtBatSummarySchema]
     incomplete_at_bat_ids: List[str]
     substitutions: Optional[List[PlayerSubEvent]]
 
@@ -159,6 +181,7 @@ class HtmlPitchStatsSchema(BaseModel):
     avg_lvg_index: float
     re24_pitch: float
     at_bat_ids: List[str]
+    inning_totals: Dict[int, InningTotalsSchema]
     substitutions: Optional[List[PlayerSubEvent]]
 
 
