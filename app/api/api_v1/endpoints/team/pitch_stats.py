@@ -2,22 +2,23 @@ from dataclasses import asdict
 from http import HTTPStatus
 from typing import Dict, List
 
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends, HTTPException, Request, Response
+from fastapi_redis_cache import cache
 from vigorish.app import Vigorish
 from vigorish.enums import TeamID
 
 from app.api.dependencies import MLBSeason, TeamParameters
-from app.core.cache import cache
 from app.core.database import get_vig_app
 from app.schemas import PitchStatsSchema
-
 
 router = APIRouter()
 
 
 @router.get("/", response_model=PitchStatsSchema)
 @cache()
-def get_pitch_stats_for_team(team_params: TeamParameters = Depends(), app: Vigorish = Depends(get_vig_app)):
+def get_pitch_stats_for_team(
+    request: Request, response: Response, team_params: TeamParameters = Depends(), app: Vigorish = Depends(get_vig_app)
+):
     pitch_stats = app.scraped_data.get_pitch_stats_for_team(team_params.team_id, team_params.year)
     if not pitch_stats:
         raise HTTPException(status_code=HTTPStatus.NOT_FOUND, detail="No results found")
@@ -26,7 +27,9 @@ def get_pitch_stats_for_team(team_params: TeamParameters = Depends(), app: Vigor
 
 @router.get("/sp", response_model=PitchStatsSchema)
 @cache()
-def get_pitch_stats_for_sp_for_team(team_params: TeamParameters = Depends(), app: Vigorish = Depends(get_vig_app)):
+def get_pitch_stats_for_sp_for_team(
+    request: Request, response: Response, team_params: TeamParameters = Depends(), app: Vigorish = Depends(get_vig_app)
+):
     pitch_stats = app.scraped_data.get_pitch_stats_for_sp_for_team(team_params.team_id, team_params.year)
     if not pitch_stats:
         raise HTTPException(status_code=HTTPStatus.NOT_FOUND, detail="No results found")
@@ -35,7 +38,9 @@ def get_pitch_stats_for_sp_for_team(team_params: TeamParameters = Depends(), app
 
 @router.get("/rp", response_model=PitchStatsSchema)
 @cache()
-def get_pitch_stats_for_rp_for_team(team_params: TeamParameters = Depends(), app: Vigorish = Depends(get_vig_app)):
+def get_pitch_stats_for_rp_for_team(
+    request: Request, response: Response, team_params: TeamParameters = Depends(), app: Vigorish = Depends(get_vig_app)
+):
     pitch_stats = app.scraped_data.get_pitch_stats_for_rp_for_team(team_params.team_id, team_params.year)
     if not pitch_stats:
         raise HTTPException(status_code=HTTPStatus.NOT_FOUND, detail="No results found")
@@ -44,7 +49,9 @@ def get_pitch_stats_for_rp_for_team(team_params: TeamParameters = Depends(), app
 
 @router.get("/by_year", response_model=Dict[int, PitchStatsSchema])
 @cache()
-def get_pitch_stats_by_year_for_team(team_id: TeamID, app: Vigorish = Depends(get_vig_app)):
+def get_pitch_stats_by_year_for_team(
+    request: Request, response: Response, team_id: TeamID, app: Vigorish = Depends(get_vig_app)
+):
     pitch_stats_dict = app.scraped_data.get_pitch_stats_by_year_for_team(team_id.name)
     if not pitch_stats_dict:
         raise HTTPException(status_code=HTTPStatus.NOT_FOUND, detail="No results found")
@@ -53,7 +60,9 @@ def get_pitch_stats_by_year_for_team(team_id: TeamID, app: Vigorish = Depends(ge
 
 @router.get("/sp/by_year", response_model=Dict[int, PitchStatsSchema])
 @cache()
-def get_pitch_stats_for_sp_by_year_for_team(team_id: TeamID, app: Vigorish = Depends(get_vig_app)):
+def get_pitch_stats_for_sp_by_year_for_team(
+    request: Request, response: Response, team_id: TeamID, app: Vigorish = Depends(get_vig_app)
+):
     pitch_stats_dict = app.scraped_data.get_pitch_stats_for_sp_by_year_for_team(team_id.name)
     if not pitch_stats_dict:
         raise HTTPException(status_code=HTTPStatus.NOT_FOUND, detail="No results found")
@@ -62,7 +71,9 @@ def get_pitch_stats_for_sp_by_year_for_team(team_id: TeamID, app: Vigorish = Dep
 
 @router.get("/rp/by_year", response_model=Dict[int, PitchStatsSchema])
 @cache()
-def get_pitch_stats_for_rp_by_year_for_team(team_id: TeamID, app: Vigorish = Depends(get_vig_app)):
+def get_pitch_stats_for_rp_by_year_for_team(
+    request: Request, response: Response, team_id: TeamID, app: Vigorish = Depends(get_vig_app)
+):
     pitch_stats_dict = app.scraped_data.get_pitch_stats_for_rp_by_year_for_team(team_id.name)
     if not pitch_stats_dict:
         raise HTTPException(status_code=HTTPStatus.NOT_FOUND, detail="No results found")
@@ -71,7 +82,9 @@ def get_pitch_stats_for_rp_by_year_for_team(team_id: TeamID, app: Vigorish = Dep
 
 @router.get("/by_player", response_model=List[PitchStatsSchema])
 @cache()
-def get_pitch_stats_by_player_for_team(team_params: TeamParameters = Depends(), app: Vigorish = Depends(get_vig_app)):
+def get_pitch_stats_by_player_for_team(
+    request: Request, response: Response, team_params: TeamParameters = Depends(), app: Vigorish = Depends(get_vig_app)
+):
     pitch_stats = app.scraped_data.get_pitch_stats_by_player_for_team(team_params.team_id, team_params.year)
     if not pitch_stats:
         raise HTTPException(status_code=HTTPStatus.NOT_FOUND, detail="No results found")
@@ -81,7 +94,7 @@ def get_pitch_stats_by_player_for_team(team_params: TeamParameters = Depends(), 
 @router.get("/sp/by_player", response_model=List[PitchStatsSchema])
 @cache()
 def get_pitch_stats_for_sp_by_player_for_team(
-    team_params: TeamParameters = Depends(), app: Vigorish = Depends(get_vig_app)
+    request: Request, response: Response, team_params: TeamParameters = Depends(), app: Vigorish = Depends(get_vig_app)
 ):
     pitch_stats = app.scraped_data.get_pitch_stats_for_sp_by_player_for_team(team_params.team_id, team_params.year)
     if not pitch_stats:
@@ -92,7 +105,7 @@ def get_pitch_stats_for_sp_by_player_for_team(
 @router.get("/rp/by_player", response_model=List[PitchStatsSchema])
 @cache()
 def get_pitch_stats_for_rp_by_player_for_team(
-    team_params: TeamParameters = Depends(), app: Vigorish = Depends(get_vig_app)
+    request: Request, response: Response, team_params: TeamParameters = Depends(), app: Vigorish = Depends(get_vig_app)
 ):
     pitch_stats = app.scraped_data.get_pitch_stats_for_rp_by_player_for_team(team_params.team_id, team_params.year)
     if not pitch_stats:
@@ -102,7 +115,9 @@ def get_pitch_stats_for_rp_by_player_for_team(
 
 @router.get("/all_teams", response_model=Dict[str, PitchStatsSchema])
 @cache()
-def get_pitch_stats_for_season_for_all_teams(season: MLBSeason = Depends(), app: Vigorish = Depends(get_vig_app)):
+def get_pitch_stats_for_season_for_all_teams(
+    request: Request, response: Response, season: MLBSeason = Depends(), app: Vigorish = Depends(get_vig_app)
+):
     pitch_stats_dict = app.scraped_data.get_pitch_stats_for_season_for_all_teams(season.year)
     if not pitch_stats_dict:
         raise HTTPException(status_code=HTTPStatus.NOT_FOUND, detail="No results found")
@@ -112,7 +127,7 @@ def get_pitch_stats_for_season_for_all_teams(season: MLBSeason = Depends(), app:
 @router.get("/sp/all_teams", response_model=Dict[str, PitchStatsSchema])
 @cache()
 def get_pitch_stats_for_sp_for_season_for_all_teams(
-    season: MLBSeason = Depends(), app: Vigorish = Depends(get_vig_app)
+    request: Request, response: Response, season: MLBSeason = Depends(), app: Vigorish = Depends(get_vig_app)
 ):
     pitch_stats_dict = app.scraped_data.get_pitch_stats_for_sp_for_season_for_all_teams(season.year)
     if not pitch_stats_dict:
@@ -123,7 +138,7 @@ def get_pitch_stats_for_sp_for_season_for_all_teams(
 @router.get("/rp/all_teams", response_model=Dict[str, PitchStatsSchema])
 @cache()
 def get_pitch_stats_for_rp_for_season_for_all_teams(
-    season: MLBSeason = Depends(), app: Vigorish = Depends(get_vig_app)
+    request: Request, response: Response, season: MLBSeason = Depends(), app: Vigorish = Depends(get_vig_app)
 ):
     pitch_stats_dict = app.scraped_data.get_pitch_stats_for_rp_for_season_for_all_teams(season.year)
     if not pitch_stats_dict:

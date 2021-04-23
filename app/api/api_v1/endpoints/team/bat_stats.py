@@ -1,23 +1,24 @@
-from http import HTTPStatus
 from dataclasses import asdict
+from http import HTTPStatus
 from typing import Dict, List
 
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends, HTTPException, Request, Response
+from fastapi_redis_cache import cache
 from vigorish.app import Vigorish
-from vigorish.enums import TeamID, DefensePosition
+from vigorish.enums import DefensePosition, TeamID
 
 from app.api.dependencies import BatOrder, MLBSeason, TeamParameters
-from app.core.cache import cache
 from app.core.database import get_vig_app
 from app.schemas import BatStatsSchema
-
 
 router = APIRouter()
 
 
 @router.get("/", response_model=BatStatsSchema)
 @cache()
-def get_bat_stats_for_team(team_params: TeamParameters = Depends(), app: Vigorish = Depends(get_vig_app)):
+def get_bat_stats_for_team(
+    request: Request, response: Response, team_params: TeamParameters = Depends(), app: Vigorish = Depends(get_vig_app)
+):
     bat_stats = app.scraped_data.get_bat_stats_for_team(team_params.team_id, team_params.year)
     if not bat_stats:
         raise HTTPException(status_code=HTTPStatus.NOT_FOUND, detail="No results found")
@@ -26,7 +27,9 @@ def get_bat_stats_for_team(team_params: TeamParameters = Depends(), app: Vigoris
 
 @router.get("/by_bat_order", response_model=List[BatStatsSchema])
 @cache()
-def get_bat_stats_by_bat_order_for_team(team_params: TeamParameters = Depends(), app: Vigorish = Depends(get_vig_app)):
+def get_bat_stats_by_bat_order_for_team(
+    request: Request, response: Response, team_params: TeamParameters = Depends(), app: Vigorish = Depends(get_vig_app)
+):
     bat_stats = app.scraped_data.get_bat_stats_by_lineup_spot_for_team(team_params.team_id, team_params.year)
     if not bat_stats:
         raise HTTPException(status_code=HTTPStatus.NOT_FOUND, detail="No results found")
@@ -35,7 +38,9 @@ def get_bat_stats_by_bat_order_for_team(team_params: TeamParameters = Depends(),
 
 @router.get("/by_position", response_model=List[BatStatsSchema])
 @cache()
-def get_bat_stats_by_defpos_for_team(team_params: TeamParameters = Depends(), app: Vigorish = Depends(get_vig_app)):
+def get_bat_stats_by_defpos_for_team(
+    request: Request, response: Response, team_params: TeamParameters = Depends(), app: Vigorish = Depends(get_vig_app)
+):
     bat_stats = app.scraped_data.get_bat_stats_by_defpos_for_team(team_params.team_id, team_params.year)
     if not bat_stats:
         raise HTTPException(status_code=HTTPStatus.NOT_FOUND, detail="No results found")
@@ -44,7 +49,9 @@ def get_bat_stats_by_defpos_for_team(team_params: TeamParameters = Depends(), ap
 
 @router.get("/starters", response_model=BatStatsSchema)
 @cache()
-def get_bat_stats_for_starters_for_team(team_params: TeamParameters = Depends(), app: Vigorish = Depends(get_vig_app)):
+def get_bat_stats_for_starters_for_team(
+    request: Request, response: Response, team_params: TeamParameters = Depends(), app: Vigorish = Depends(get_vig_app)
+):
     bat_stats = app.scraped_data.get_bat_stats_for_starters_for_team(team_params.team_id, team_params.year)
     if not bat_stats:
         raise HTTPException(status_code=HTTPStatus.NOT_FOUND, detail="No results found")
@@ -53,7 +60,9 @@ def get_bat_stats_for_starters_for_team(team_params: TeamParameters = Depends(),
 
 @router.get("/subs", response_model=BatStatsSchema)
 @cache()
-def get_bat_stats_for_subs_for_team(team_params: TeamParameters = Depends(), app: Vigorish = Depends(get_vig_app)):
+def get_bat_stats_for_subs_for_team(
+    request: Request, response: Response, team_params: TeamParameters = Depends(), app: Vigorish = Depends(get_vig_app)
+):
     bat_stats = app.scraped_data.get_bat_stats_for_subs_for_team(team_params.team_id, team_params.year)
     if not bat_stats:
         raise HTTPException(status_code=HTTPStatus.NOT_FOUND, detail="No results found")
@@ -62,7 +71,9 @@ def get_bat_stats_for_subs_for_team(team_params: TeamParameters = Depends(), app
 
 @router.get("/by_year", response_model=Dict[int, BatStatsSchema])
 @cache()
-def get_bat_stats_by_year_for_team(team_id: TeamID, app: Vigorish = Depends(get_vig_app)):
+def get_bat_stats_by_year_for_team(
+    request: Request, response: Response, team_id: TeamID, app: Vigorish = Depends(get_vig_app)
+):
     bat_stats_dict = app.scraped_data.get_bat_stats_by_year_for_team(team_id.name)
     if not bat_stats_dict:
         raise HTTPException(status_code=HTTPStatus.NOT_FOUND, detail="No results found")
@@ -71,7 +82,9 @@ def get_bat_stats_by_year_for_team(team_id: TeamID, app: Vigorish = Depends(get_
 
 @router.get("/bat_order/by_year", response_model=Dict[int, BatStatsSchema])
 @cache()
-def get_bat_stats_for_lineup_spot_by_year_for_team(team_id: TeamID, app: Vigorish = Depends(get_vig_app)):
+def get_bat_stats_for_lineup_spot_by_year_for_team(
+    request: Request, response: Response, team_id: TeamID, app: Vigorish = Depends(get_vig_app)
+):
     bat_stats_dict = app.scraped_data.get_bat_stats_for_lineup_spot_by_year_for_team(team_id.name)
     if not bat_stats_dict:
         raise HTTPException(status_code=HTTPStatus.NOT_FOUND, detail="No results found")
@@ -81,7 +94,11 @@ def get_bat_stats_for_lineup_spot_by_year_for_team(team_id: TeamID, app: Vigoris
 @router.get("/position/by_year", response_model=Dict[int, BatStatsSchema])
 @cache()
 def get_bat_stats_for_defpos_by_year_for_team(
-    def_position: DefensePosition, team_id: TeamID, app: Vigorish = Depends(get_vig_app)
+    request: Request,
+    response: Response,
+    def_position: DefensePosition,
+    team_id: TeamID,
+    app: Vigorish = Depends(get_vig_app),
 ):
     bat_stats_dict = app.scraped_data.get_bat_stats_for_defpos_by_year_for_team(def_position, team_id.name)
     if not bat_stats_dict:
@@ -91,7 +108,9 @@ def get_bat_stats_for_defpos_by_year_for_team(
 
 @router.get("/starters/by_year", response_model=Dict[int, BatStatsSchema])
 @cache()
-def get_bat_stats_for_starters_by_year_for_team(team_id: TeamID, app: Vigorish = Depends(get_vig_app)):
+def get_bat_stats_for_starters_by_year_for_team(
+    request: Request, response: Response, team_id: TeamID, app: Vigorish = Depends(get_vig_app)
+):
     bat_stats_dict = app.scraped_data.get_bat_stats_for_starters_by_year_for_team(team_id.name)
     if not bat_stats_dict:
         raise HTTPException(status_code=HTTPStatus.NOT_FOUND, detail="No results found")
@@ -100,7 +119,9 @@ def get_bat_stats_for_starters_by_year_for_team(team_id: TeamID, app: Vigorish =
 
 @router.get("/subs/by_year", response_model=Dict[int, BatStatsSchema])
 @cache()
-def get_bat_stats_for_subs_by_year_for_team(team_id: TeamID, app: Vigorish = Depends(get_vig_app)):
+def get_bat_stats_for_subs_by_year_for_team(
+    request: Request, response: Response, team_id: TeamID, app: Vigorish = Depends(get_vig_app)
+):
     bat_stats_dict = app.scraped_data.get_bat_stats_for_subs_by_year_for_team(team_id.name)
     if not bat_stats_dict:
         raise HTTPException(status_code=HTTPStatus.NOT_FOUND, detail="No results found")
@@ -109,7 +130,9 @@ def get_bat_stats_for_subs_by_year_for_team(team_id: TeamID, app: Vigorish = Dep
 
 @router.get("/by_player", response_model=List[BatStatsSchema])
 @cache()
-def get_bat_stats_by_player_for_team(team_params: TeamParameters = Depends(), app: Vigorish = Depends(get_vig_app)):
+def get_bat_stats_by_player_for_team(
+    request: Request, response: Response, team_params: TeamParameters = Depends(), app: Vigorish = Depends(get_vig_app)
+):
     bat_stats = app.scraped_data.get_bat_stats_by_player_for_team(team_params.team_id, team_params.year)
     if not bat_stats:
         raise HTTPException(status_code=HTTPStatus.NOT_FOUND, detail="No results found")
@@ -119,7 +142,11 @@ def get_bat_stats_by_player_for_team(team_params: TeamParameters = Depends(), ap
 @router.get("/bat_order/by_player", response_model=List[BatStatsSchema])
 @cache()
 def get_bat_stats_for_lineup_spot_by_player_for_team(
-    bat_order: BatOrder = Depends(), team_params: TeamParameters = Depends(), app: Vigorish = Depends(get_vig_app)
+    request: Request,
+    response: Response,
+    bat_order: BatOrder = Depends(),
+    team_params: TeamParameters = Depends(),
+    app: Vigorish = Depends(get_vig_app),
 ):
     bat_stats = app.scraped_data.get_bat_stats_for_lineup_spot_by_player_for_team(
         bat_order.number, team_params.team_id, team_params.year
@@ -132,7 +159,11 @@ def get_bat_stats_for_lineup_spot_by_player_for_team(
 @router.get("/position/by_player", response_model=List[BatStatsSchema])
 @cache()
 def get_bat_stats_for_defensive_position_by_player_for_team(
-    def_position: DefensePosition, team_params: TeamParameters = Depends(), app: Vigorish = Depends(get_vig_app)
+    request: Request,
+    response: Response,
+    def_position: DefensePosition,
+    team_params: TeamParameters = Depends(),
+    app: Vigorish = Depends(get_vig_app),
 ):
     bat_stats = app.scraped_data.get_bat_stats_for_defpos_by_player_for_team(
         def_position, team_params.team_id, team_params.year
@@ -145,7 +176,7 @@ def get_bat_stats_for_defensive_position_by_player_for_team(
 @router.get("/starters/by_player", response_model=List[BatStatsSchema])
 @cache()
 def get_bat_stats_for_starters_by_player_for_team(
-    team_params: TeamParameters = Depends(), app: Vigorish = Depends(get_vig_app)
+    request: Request, response: Response, team_params: TeamParameters = Depends(), app: Vigorish = Depends(get_vig_app)
 ):
     bat_stats = app.scraped_data.get_bat_stats_for_starters_by_player_for_team(team_params.team_id, team_params.year)
     if not bat_stats:
@@ -156,7 +187,7 @@ def get_bat_stats_for_starters_by_player_for_team(
 @router.get("/subs/by_player", response_model=List[BatStatsSchema])
 @cache()
 def get_bat_stats_for_subs_by_player_for_team(
-    team_params: TeamParameters = Depends(), app: Vigorish = Depends(get_vig_app)
+    request: Request, response: Response, team_params: TeamParameters = Depends(), app: Vigorish = Depends(get_vig_app)
 ):
     bat_stats = app.scraped_data.get_bat_stats_for_subs_by_player_for_team(team_params.team_id, team_params.year)
     if not bat_stats:
@@ -166,7 +197,9 @@ def get_bat_stats_for_subs_by_player_for_team(
 
 @router.get("/all_teams", response_model=Dict[str, BatStatsSchema])
 @cache()
-def get_bat_stats_for_season_for_all_teams(season: MLBSeason = Depends(), app: Vigorish = Depends(get_vig_app)):
+def get_bat_stats_for_season_for_all_teams(
+    request: Request, response: Response, season: MLBSeason = Depends(), app: Vigorish = Depends(get_vig_app)
+):
     bat_stats_dict = app.scraped_data.get_bat_stats_for_season_for_all_teams(season.year)
     if not bat_stats_dict:
         raise HTTPException(status_code=HTTPStatus.NOT_FOUND, detail="No results found")
@@ -176,7 +209,11 @@ def get_bat_stats_for_season_for_all_teams(season: MLBSeason = Depends(), app: V
 @router.get("/bat_order/all_teams", response_model=Dict[str, BatStatsSchema])
 @cache()
 def get_bat_stats_for_lineup_spot_for_season_for_all_teams(
-    bat_order: BatOrder = Depends(), season: MLBSeason = Depends(), app: Vigorish = Depends(get_vig_app)
+    request: Request,
+    response: Response,
+    bat_order: BatOrder = Depends(),
+    season: MLBSeason = Depends(),
+    app: Vigorish = Depends(get_vig_app),
 ):
     bat_stats_dict = app.scraped_data.get_bat_stats_for_lineup_spot_for_season_for_all_teams(
         bat_order.number, season.year
@@ -189,7 +226,11 @@ def get_bat_stats_for_lineup_spot_for_season_for_all_teams(
 @router.get("/position/all_teams", response_model=Dict[str, BatStatsSchema])
 @cache()
 def get_bat_stats_for_defpos_for_season_for_all_teams(
-    def_position: DefensePosition, season: MLBSeason = Depends(), app: Vigorish = Depends(get_vig_app)
+    request: Request,
+    response: Response,
+    def_position: DefensePosition,
+    season: MLBSeason = Depends(),
+    app: Vigorish = Depends(get_vig_app),
 ):
     bat_stats_dict = app.scraped_data.get_bat_stats_for_defpos_for_season_for_all_teams(def_position, season.year)
     if not bat_stats_dict:
@@ -200,7 +241,7 @@ def get_bat_stats_for_defpos_for_season_for_all_teams(
 @router.get("/starters/all_teams", response_model=Dict[str, BatStatsSchema])
 @cache()
 def get_bat_stats_for_starters_for_season_for_all_teams(
-    season: MLBSeason = Depends(), app: Vigorish = Depends(get_vig_app)
+    request: Request, response: Response, season: MLBSeason = Depends(), app: Vigorish = Depends(get_vig_app)
 ):
     bat_stats_dict = app.scraped_data.get_bat_stats_for_starters_for_season_for_all_teams(season.year)
     if not bat_stats_dict:
@@ -211,7 +252,7 @@ def get_bat_stats_for_starters_for_season_for_all_teams(
 @router.get("/subs/all_teams", response_model=Dict[str, BatStatsSchema])
 @cache()
 def get_bat_stats_for_subs_for_season_for_all_teams(
-    season: MLBSeason = Depends(), app: Vigorish = Depends(get_vig_app)
+    request: Request, response: Response, season: MLBSeason = Depends(), app: Vigorish = Depends(get_vig_app)
 ):
     bat_stats_dict = app.scraped_data.get_bat_stats_for_subs_for_season_for_all_teams(season.year)
     if not bat_stats_dict:
