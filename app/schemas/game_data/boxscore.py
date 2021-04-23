@@ -1,7 +1,8 @@
-from app.schemas.game_data.team_data import TeamDataSchema
 from typing import List, Optional
 
 from pydantic import BaseModel
+
+from app.schemas.game_data.team_data import TeamDataSchema
 
 
 class LinescoreColumnSchema(BaseModel):
@@ -52,6 +53,7 @@ class GameMetaSchema(BaseModel):
 
 
 class BoxscoreSchema(BaseModel):
+    last_modified: str
     game_id: str
     away_team: TeamDataSchema
     home_team: TeamDataSchema

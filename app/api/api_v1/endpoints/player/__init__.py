@@ -1,9 +1,10 @@
 from typing import List
+
 from fastapi import APIRouter, Depends
 from vigorish.app import Vigorish
 
+from app.api.api_v1.endpoints.player import bat_stats, pfx_batter, pfx_pitcher, pitch_stats
 from app.core.database import get_vig_app
-from app.api.api_v1.endpoints.player import bat_stats, pitch_stats, pfx_batter, pfx_pitcher
 from app.schemas import FuzzySearchResult
 
 router = APIRouter()

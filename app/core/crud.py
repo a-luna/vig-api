@@ -4,14 +4,9 @@ from typing import Union
 
 from fastapi import HTTPException
 from vigorish.app import Vigorish
-from vigorish.database import (
-    DateScrapeStatus,
-    Player,
-    Season,
-    Team,
-)
 from vigorish.data.game_data import GameData
 from vigorish.data.player_data import PlayerData
+from vigorish.database import DateScrapeStatus, Player, Season, Team
 from vigorish.util.exceptions import ScrapedDataException, UnknownPlayerException
 
 

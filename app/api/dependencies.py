@@ -1,7 +1,7 @@
 from http import HTTPStatus
 from typing import Optional
 
-from fastapi import Query, Depends, HTTPException
+from fastapi import Depends, HTTPException, Query
 from vigorish.app import Vigorish
 from vigorish.database import Season
 from vigorish.enums import TeamID

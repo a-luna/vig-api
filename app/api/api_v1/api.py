@@ -2,7 +2,6 @@ from fastapi import APIRouter
 
 from app.api.api_v1.endpoints import game, pfx, player, season, team
 
-
 api_router = APIRouter()
 api_router.include_router(game.router, prefix="/game", tags=["game"])
 api_router.include_router(pfx.router, prefix="/pfx", tags=["pitchfx"])
