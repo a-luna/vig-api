@@ -54,6 +54,7 @@ class BatStatsSchema(BaseModel):
 
 
 class AtBatSummarySchema(BaseModel):
+    at_bat_id: str
     pbp_table_row_number: int
     batter_name: str
     pitcher_name: str
