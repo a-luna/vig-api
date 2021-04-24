@@ -31,7 +31,11 @@ app.mount("/static", StaticFiles(directory="app/static"), name="static")
 @app.on_event("startup")
 def startup():
     redis_cache = FastApiRedisCache()
-    redis_cache.connect(host_url=settings.REDIS_URL, response_header=settings.CACHE_HEADER, ignore_arg_types=[Vigorish])
+    redis_cache.init(
+        host_url=settings.REDIS_URL,
+        response_header=settings.CACHE_HEADER,
+        ignore_arg_types=[Vigorish],
+    )
 
 
 @app.get(f"{settings.API_VERSION}/docs", include_in_schema=False)
