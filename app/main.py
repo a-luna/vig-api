@@ -2,7 +2,7 @@ from http import HTTPStatus
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.openapi.docs import get_redoc_html, get_swagger_ui_html
+from fastapi.openapi.docs import get_swagger_ui_html
 from fastapi.staticfiles import StaticFiles
 from fastapi_redis_cache import FastApiRedisCache
 from starlette.responses import RedirectResponse
@@ -45,15 +45,6 @@ async def swagger_ui_html():
         openapi_url=app.openapi_url,
         swagger_js_url="/static/swagger-ui-bundle.js",
         swagger_css_url="/static/swagger-ui.css",
-    )
-
-
-@app.get(f"{settings.API_VERSION}/redoc", include_in_schema=False)
-async def redoc_html():
-    return get_redoc_html(
-        title=f"{settings.PROJECT_NAME} - ReDoc",
-        openapi_url=app.openapi_url,
-        redoc_js_url="/static/redoc.standalone.js",
     )
 
 
