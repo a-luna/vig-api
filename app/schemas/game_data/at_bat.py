@@ -55,8 +55,6 @@ class AtBatSchema(BaseModel):
     batter_id_bbref: str
     batter_id_mlb: int
     batter_name: str
-    first_pitch_thrown: str
-    last_pitch_thrown: str
     since_game_start: int
     at_bat_duration: int
     is_complete_at_bat: bool
@@ -67,6 +65,8 @@ class AtBatSchema(BaseModel):
     play_description: str
     pitch_sequence_description: List[List[str]]
     pbp_events: List[Union[PlayByPlayEvent, PlayerSubEvent, MiscGameEvent]]
+    first_pitch_thrown: str = None
+    last_pitch_thrown: str = None
 
     @property
     def first_pitch_thrown_at(self):
