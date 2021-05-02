@@ -4,7 +4,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.openapi.docs import get_swagger_ui_html
 from fastapi.staticfiles import StaticFiles
-from fastapi_redis_cache import FastApiRedisCache
+from fastapi_redis_cache import FastApiRedisCache, cache
 from starlette.responses import RedirectResponse
 from vigorish.app import Vigorish
 
@@ -39,6 +39,7 @@ def startup():
 
 
 @app.get(f"{settings.API_VERSION}/docs", include_in_schema=False)
+@cache()
 async def swagger_ui_html():
     return get_swagger_ui_html(
         title=f"{settings.PROJECT_NAME} - Swagger UI",
