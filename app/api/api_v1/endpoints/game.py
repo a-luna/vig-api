@@ -1,4 +1,5 @@
 from http import HTTPStatus
+from typing import List
 
 from fastapi import APIRouter, Depends, HTTPException, Request, Response
 from fastapi_redis_cache import cache
@@ -18,6 +19,13 @@ router = APIRouter()
 def get_boxscore_for_game(request: Request, response: Response, game_id: str, app: Vigorish = Depends(get_vig_app)):
     game_data = crud.get_game_data(game_id, app)
     return convert_boxscore_data(game_data.get_boxscore_data())
+
+
+@router.get("/all_pbp", response_model=List[AtBatSchema])
+@cache()
+def get_play_by_play_for_game(request: Request, response: Response, game_id: str, app: Vigorish = Depends(get_vig_app)):
+    game_data = crud.get_game_data(game_id, app)
+    return game_data.get_all_at_bats_no_pfx()
 
 
 @router.get("/pbp", response_model=AtBatSchema)
