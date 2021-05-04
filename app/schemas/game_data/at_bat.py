@@ -47,6 +47,7 @@ class AtBatSchema(BaseModel):
     at_bat_id: str
     pfx_ab_id: int
     inning_id: str
+    inning_label: str
     pitch_app_id: str
     pbp_table_row_number: int
     pitcher_id_bbref: str
@@ -63,6 +64,10 @@ class AtBatSchema(BaseModel):
     runners_on_base: str
     runs_outs_result: str
     play_description: str
+    total_pitches: int
+    pfx_complete: bool
+    final_count_balls: int
+    final_count_strikes: int
     pitch_sequence_description: List[List[str]]
     pbp_events: List[Union[PlayByPlayEvent, PlayerSubEvent, MiscGameEvent]]
     first_pitch_thrown: str = None

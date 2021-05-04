@@ -38,7 +38,7 @@ def get_play_by_play_for_at_bat(
         raise HTTPException(status_code=HTTPStatus.BAD_REQUEST, detail=f"At Bat ID: {at_bat_id} is invalid")
     game_id = result.value["game_id"]
     game_data = crud.get_game_data(game_id, app)
-    at_bat_data = game_data.at_bat_map.get(at_bat_id)
+    at_bat_data = game_data.get_pbp_for_at_bat(at_bat_id)
     if not at_bat_data:
         raise HTTPException(status_code=HTTPStatus.NOT_FOUND, detail="No results found")
     return at_bat_data
