@@ -21,7 +21,7 @@ def get_bat_stats_for_team(
 ):
     bat_stats = app.scraped_data.get_bat_stats_for_team(team_params.team_id, team_params.year)
     if not bat_stats:
-        raise HTTPException(status_code=HTTPStatus.NOT_FOUND, detail="No results found")
+        raise HTTPException(status_code=int(HTTPStatus.NOT_FOUND), detail="No results found")
     return asdict(bat_stats)
 
 
@@ -32,7 +32,7 @@ def get_bat_stats_by_bat_order_for_team(
 ):
     bat_stats = app.scraped_data.get_bat_stats_by_lineup_spot_for_team(team_params.team_id, team_params.year)
     if not bat_stats:
-        raise HTTPException(status_code=HTTPStatus.NOT_FOUND, detail="No results found")
+        raise HTTPException(status_code=int(HTTPStatus.NOT_FOUND), detail="No results found")
     return [asdict(s) for s in bat_stats]
 
 
@@ -43,7 +43,7 @@ def get_bat_stats_by_defpos_for_team(
 ):
     bat_stats = app.scraped_data.get_bat_stats_by_defpos_for_team(team_params.team_id, team_params.year)
     if not bat_stats:
-        raise HTTPException(status_code=HTTPStatus.NOT_FOUND, detail="No results found")
+        raise HTTPException(status_code=int(HTTPStatus.NOT_FOUND), detail="No results found")
     return [asdict(s) for s in bat_stats]
 
 
@@ -54,7 +54,7 @@ def get_bat_stats_for_starters_for_team(
 ):
     bat_stats = app.scraped_data.get_bat_stats_for_starters_for_team(team_params.team_id, team_params.year)
     if not bat_stats:
-        raise HTTPException(status_code=HTTPStatus.NOT_FOUND, detail="No results found")
+        raise HTTPException(status_code=int(HTTPStatus.NOT_FOUND), detail="No results found")
     return asdict(bat_stats)
 
 
@@ -65,7 +65,7 @@ def get_bat_stats_for_subs_for_team(
 ):
     bat_stats = app.scraped_data.get_bat_stats_for_subs_for_team(team_params.team_id, team_params.year)
     if not bat_stats:
-        raise HTTPException(status_code=HTTPStatus.NOT_FOUND, detail="No results found")
+        raise HTTPException(status_code=int(HTTPStatus.NOT_FOUND), detail="No results found")
     return asdict(bat_stats)
 
 
@@ -76,7 +76,7 @@ def get_bat_stats_by_year_for_team(
 ):
     bat_stats_dict = app.scraped_data.get_bat_stats_by_year_for_team(team_id.name)
     if not bat_stats_dict:
-        raise HTTPException(status_code=HTTPStatus.NOT_FOUND, detail="No results found")
+        raise HTTPException(status_code=int(HTTPStatus.NOT_FOUND), detail="No results found")
     return {year: asdict(bat_stats) for year, bat_stats in bat_stats_dict.items()}
 
 
@@ -87,7 +87,7 @@ def get_bat_stats_for_lineup_spot_by_year_for_team(
 ):
     bat_stats_dict = app.scraped_data.get_bat_stats_for_lineup_spot_by_year_for_team(team_id.name)
     if not bat_stats_dict:
-        raise HTTPException(status_code=HTTPStatus.NOT_FOUND, detail="No results found")
+        raise HTTPException(status_code=int(HTTPStatus.NOT_FOUND), detail="No results found")
     return {year: asdict(bat_stats) for year, bat_stats in bat_stats_dict.items()}
 
 
@@ -102,7 +102,7 @@ def get_bat_stats_for_defpos_by_year_for_team(
 ):
     bat_stats_dict = app.scraped_data.get_bat_stats_for_defpos_by_year_for_team(def_position, team_id.name)
     if not bat_stats_dict:
-        raise HTTPException(status_code=HTTPStatus.NOT_FOUND, detail="No results found")
+        raise HTTPException(status_code=int(HTTPStatus.NOT_FOUND), detail="No results found")
     return {year: asdict(bat_stats) for year, bat_stats in bat_stats_dict.items()}
 
 
@@ -113,7 +113,7 @@ def get_bat_stats_for_starters_by_year_for_team(
 ):
     bat_stats_dict = app.scraped_data.get_bat_stats_for_starters_by_year_for_team(team_id.name)
     if not bat_stats_dict:
-        raise HTTPException(status_code=HTTPStatus.NOT_FOUND, detail="No results found")
+        raise HTTPException(status_code=int(HTTPStatus.NOT_FOUND), detail="No results found")
     return {year: asdict(bat_stats) for year, bat_stats in bat_stats_dict.items()}
 
 
@@ -124,7 +124,7 @@ def get_bat_stats_for_subs_by_year_for_team(
 ):
     bat_stats_dict = app.scraped_data.get_bat_stats_for_subs_by_year_for_team(team_id.name)
     if not bat_stats_dict:
-        raise HTTPException(status_code=HTTPStatus.NOT_FOUND, detail="No results found")
+        raise HTTPException(status_code=int(HTTPStatus.NOT_FOUND), detail="No results found")
     return {year: asdict(bat_stats) for year, bat_stats in bat_stats_dict.items()}
 
 
@@ -135,7 +135,7 @@ def get_bat_stats_by_player_for_team(
 ):
     bat_stats = app.scraped_data.get_bat_stats_by_player_for_team(team_params.team_id, team_params.year)
     if not bat_stats:
-        raise HTTPException(status_code=HTTPStatus.NOT_FOUND, detail="No results found")
+        raise HTTPException(status_code=int(HTTPStatus.NOT_FOUND), detail="No results found")
     return [asdict(s) for s in bat_stats]
 
 
@@ -152,7 +152,7 @@ def get_bat_stats_for_lineup_spot_by_player_for_team(
         bat_order.number, team_params.team_id, team_params.year
     )
     if not bat_stats:
-        raise HTTPException(status_code=HTTPStatus.NOT_FOUND, detail="No results found")
+        raise HTTPException(status_code=int(HTTPStatus.NOT_FOUND), detail="No results found")
     return [asdict(s) for s in bat_stats]
 
 
@@ -169,7 +169,7 @@ def get_bat_stats_for_defensive_position_by_player_for_team(
         def_position, team_params.team_id, team_params.year
     )
     if not bat_stats:
-        raise HTTPException(status_code=HTTPStatus.NOT_FOUND, detail="No results found")
+        raise HTTPException(status_code=int(HTTPStatus.NOT_FOUND), detail="No results found")
     return [asdict(s) for s in bat_stats]
 
 
@@ -180,7 +180,7 @@ def get_bat_stats_for_starters_by_player_for_team(
 ):
     bat_stats = app.scraped_data.get_bat_stats_for_starters_by_player_for_team(team_params.team_id, team_params.year)
     if not bat_stats:
-        raise HTTPException(status_code=HTTPStatus.NOT_FOUND, detail="No results found")
+        raise HTTPException(status_code=int(HTTPStatus.NOT_FOUND), detail="No results found")
     return [asdict(s) for s in bat_stats]
 
 
@@ -191,7 +191,7 @@ def get_bat_stats_for_subs_by_player_for_team(
 ):
     bat_stats = app.scraped_data.get_bat_stats_for_subs_by_player_for_team(team_params.team_id, team_params.year)
     if not bat_stats:
-        raise HTTPException(status_code=HTTPStatus.NOT_FOUND, detail="No results found")
+        raise HTTPException(status_code=int(HTTPStatus.NOT_FOUND), detail="No results found")
     return [asdict(s) for s in bat_stats]
 
 
@@ -202,7 +202,7 @@ def get_bat_stats_for_season_for_all_teams(
 ):
     bat_stats_dict = app.scraped_data.get_bat_stats_for_season_for_all_teams(season.year)
     if not bat_stats_dict:
-        raise HTTPException(status_code=HTTPStatus.NOT_FOUND, detail="No results found")
+        raise HTTPException(status_code=int(HTTPStatus.NOT_FOUND), detail="No results found")
     return {year: asdict(bat_stats) for year, bat_stats in bat_stats_dict.items()}
 
 
@@ -219,7 +219,7 @@ def get_bat_stats_for_lineup_spot_for_season_for_all_teams(
         bat_order.number, season.year
     )
     if not bat_stats_dict:
-        raise HTTPException(status_code=HTTPStatus.NOT_FOUND, detail="No results found")
+        raise HTTPException(status_code=int(HTTPStatus.NOT_FOUND), detail="No results found")
     return {year: asdict(bat_stats) for year, bat_stats in bat_stats_dict.items()}
 
 
@@ -234,7 +234,7 @@ def get_bat_stats_for_defpos_for_season_for_all_teams(
 ):
     bat_stats_dict = app.scraped_data.get_bat_stats_for_defpos_for_season_for_all_teams(def_position, season.year)
     if not bat_stats_dict:
-        raise HTTPException(status_code=HTTPStatus.NOT_FOUND, detail="No results found")
+        raise HTTPException(status_code=int(HTTPStatus.NOT_FOUND), detail="No results found")
     return {year: asdict(bat_stats) for year, bat_stats in bat_stats_dict.items()}
 
 
@@ -245,7 +245,7 @@ def get_bat_stats_for_starters_for_season_for_all_teams(
 ):
     bat_stats_dict = app.scraped_data.get_bat_stats_for_starters_for_season_for_all_teams(season.year)
     if not bat_stats_dict:
-        raise HTTPException(status_code=HTTPStatus.NOT_FOUND, detail="No results found")
+        raise HTTPException(status_code=int(HTTPStatus.NOT_FOUND), detail="No results found")
     return {year: asdict(bat_stats) for year, bat_stats in bat_stats_dict.items()}
 
 
@@ -256,5 +256,5 @@ def get_bat_stats_for_subs_for_season_for_all_teams(
 ):
     bat_stats_dict = app.scraped_data.get_bat_stats_for_subs_for_season_for_all_teams(season.year)
     if not bat_stats_dict:
-        raise HTTPException(status_code=HTTPStatus.NOT_FOUND, detail="No results found")
+        raise HTTPException(status_code=int(HTTPStatus.NOT_FOUND), detail="No results found")
     return {year: asdict(bat_stats) for year, bat_stats in bat_stats_dict.items()}

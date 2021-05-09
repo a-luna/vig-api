@@ -39,7 +39,7 @@ def get_career_pfx_metrics_for_pitcher(
 ):
     pfx_stats = app.scraped_data.get_career_pfx_metrics_for_pitcher(mlb_id)
     if not pfx_stats or not pfx_stats.total_pitches:
-        raise HTTPException(status_code=HTTPStatus.NOT_FOUND, detail="No results found")
+        raise HTTPException(status_code=int(HTTPStatus.NOT_FOUND), detail="No results found")
     return prepare_pfx_response_model(pfx_stats)
 
 
@@ -59,7 +59,7 @@ def get_career_pfx_metrics_vs_rhb_for_pitcher(
 ):
     pfx_stats = app.scraped_data.get_career_pfx_metrics_vs_rhb_for_pitcher(mlb_id)
     if not pfx_stats or not pfx_stats.total_pitches:
-        raise HTTPException(status_code=HTTPStatus.NOT_FOUND, detail="No results found")
+        raise HTTPException(status_code=int(HTTPStatus.NOT_FOUND), detail="No results found")
     return prepare_pfx_response_model(pfx_stats)
 
 
@@ -79,7 +79,7 @@ def get_career_pfx_metrics_vs_lhb_for_pitcher(
 ):
     pfx_stats = app.scraped_data.get_career_pfx_metrics_vs_lhb_for_pitcher(mlb_id)
     if not pfx_stats or not pfx_stats.total_pitches:
-        raise HTTPException(status_code=HTTPStatus.NOT_FOUND, detail="No results found")
+        raise HTTPException(status_code=int(HTTPStatus.NOT_FOUND), detail="No results found")
     return prepare_pfx_response_model(pfx_stats)
 
 
@@ -103,7 +103,7 @@ def get_pfx_metrics_for_year_for_pitcher(
 ):
     pfx_stats = app.scraped_data.get_pfx_metrics_for_year_for_pitcher(mlb_id, season.year)
     if not pfx_stats or not pfx_stats.total_pitches:
-        raise HTTPException(status_code=HTTPStatus.NOT_FOUND, detail="No results found")
+        raise HTTPException(status_code=int(HTTPStatus.NOT_FOUND), detail="No results found")
     return prepare_pfx_response_model(pfx_stats)
 
 
@@ -127,7 +127,7 @@ def get_pfx_metrics_vs_rhb_for_year_for_pitcher(
 ):
     pfx_stats = app.scraped_data.get_pfx_metrics_for_year_vs_rhb_for_pitcher(mlb_id, season.year)
     if not pfx_stats or not pfx_stats.total_pitches:
-        raise HTTPException(status_code=HTTPStatus.NOT_FOUND, detail="No results found")
+        raise HTTPException(status_code=int(HTTPStatus.NOT_FOUND), detail="No results found")
     return prepare_pfx_response_model(pfx_stats)
 
 
@@ -151,7 +151,7 @@ def get_pfx_metrics_vs_lhb_for_year_for_pitcher(
 ):
     pfx_stats = app.scraped_data.get_pfx_metrics_for_year_vs_lhb_for_pitcher(mlb_id, season.year)
     if not pfx_stats or not pfx_stats.total_pitches:
-        raise HTTPException(status_code=HTTPStatus.NOT_FOUND, detail="No results found")
+        raise HTTPException(status_code=int(HTTPStatus.NOT_FOUND), detail="No results found")
     return prepare_pfx_response_model(pfx_stats)
 
 
@@ -175,7 +175,7 @@ def get_pfx_metrics_for_game_for_pitcher(
     mlb_id, game_id = pitch_app_params
     pfx_stats = app.scraped_data.get_pfx_metrics_for_game_for_pitcher(mlb_id, game_id)
     if not pfx_stats or not pfx_stats.total_pitches:
-        raise HTTPException(status_code=HTTPStatus.NOT_FOUND, detail="No results found")
+        raise HTTPException(status_code=int(HTTPStatus.NOT_FOUND), detail="No results found")
     return prepare_pfx_response_model(pfx_stats)
 
 
@@ -190,7 +190,7 @@ def get_pfx_metrics_for_game_vs_rhb_for_pitcher(
     mlb_id, game_id = pitch_app_params
     pfx_stats = app.scraped_data.get_pfx_metrics_for_game_vs_rhb_for_pitcher(mlb_id, game_id)
     if not pfx_stats or not pfx_stats.total_pitches:
-        raise HTTPException(status_code=HTTPStatus.NOT_FOUND, detail="No results found")
+        raise HTTPException(status_code=int(HTTPStatus.NOT_FOUND), detail="No results found")
     return prepare_pfx_response_model(pfx_stats)
 
 
@@ -205,5 +205,5 @@ def get_pfx_metrics_for_game_vs_lhb_for_pitcher(
     mlb_id, game_id = pitch_app_params
     pfx_stats = app.scraped_data.get_pfx_metrics_for_game_vs_lhb_for_pitcher(mlb_id, game_id)
     if not pfx_stats or not pfx_stats.total_pitches:
-        raise HTTPException(status_code=HTTPStatus.NOT_FOUND, detail="No results found")
+        raise HTTPException(status_code=int(HTTPStatus.NOT_FOUND), detail="No results found")
     return prepare_pfx_response_model(pfx_stats)

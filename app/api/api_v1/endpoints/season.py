@@ -23,7 +23,7 @@ def get_season(
 ):
     season = Season.find_by_year(app.db_session, season.year)
     if not season:
-        raise HTTPException(status_code=HTTPStatus.NOT_FOUND, detail="No results found")
+        raise HTTPException(status_code=int(HTTPStatus.NOT_FOUND), detail="No results found")
     return season
 
 
@@ -32,7 +32,7 @@ def get_season(
 def get_all_regular_seasons(request: Request, response: Response, app: Vigorish = Depends(get_vig_app)):
     all_mlb_seasons = Season.get_all_regular_seasons(app.db_session)
     if not all_mlb_seasons:
-        raise HTTPException(status_code=HTTPStatus.NOT_FOUND, detail="No results found")
+        raise HTTPException(status_code=int(HTTPStatus.NOT_FOUND), detail="No results found")
     return list(map(convert_season_to_dict, filter(lambda x: x.year > 2016 and x.year < 2020, all_mlb_seasons)))
 
 
@@ -43,7 +43,7 @@ def get_all_dates_in_season(
 ):
     all_dates = crud.get_all_dates_in_season(season.year, app)
     if not all_dates:
-        raise HTTPException(status_code=HTTPStatus.NOT_FOUND, detail="No results found")
+        raise HTTPException(status_code=int(HTTPStatus.NOT_FOUND), detail="No results found")
     return [dt.strftime(DATE_ONLY) for dt in all_dates]
 
 
@@ -86,7 +86,7 @@ def get_all_game_ids_for_date(
 ):
     game_ids = crud.get_all_game_ids_for_date(game_date.date, app)
     if not game_ids:
-        raise HTTPException(status_code=HTTPStatus.NOT_FOUND, detail="No results found")
+        raise HTTPException(status_code=int(HTTPStatus.NOT_FOUND), detail="No results found")
     return game_ids
 
 

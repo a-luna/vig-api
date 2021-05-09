@@ -31,11 +31,11 @@ def get_game_data(bbref_game_id: str, app: Vigorish):
     try:
         return GameData(app, bbref_game_id)
     except ScrapedDataException as ex:
-        raise HTTPException(status_code=HTTPStatus.NOT_FOUND, detail=repr(ex))
+        raise HTTPException(status_code=int(HTTPStatus.NOT_FOUND), detail=repr(ex))
 
 
 def get_player_data(player_mlb_id: int, app: Vigorish):
     try:
         return PlayerData(app, player_mlb_id)
     except UnknownPlayerException as ex:
-        raise HTTPException(status_code=HTTPStatus.NOT_FOUND, detail=repr(ex))
+        raise HTTPException(status_code=int(HTTPStatus.NOT_FOUND), detail=repr(ex))

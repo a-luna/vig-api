@@ -21,7 +21,7 @@ def get_pitch_stats_for_team(
 ):
     pitch_stats = app.scraped_data.get_pitch_stats_for_team(team_params.team_id, team_params.year)
     if not pitch_stats:
-        raise HTTPException(status_code=HTTPStatus.NOT_FOUND, detail="No results found")
+        raise HTTPException(status_code=int(HTTPStatus.NOT_FOUND), detail="No results found")
     return asdict(pitch_stats)
 
 
@@ -32,7 +32,7 @@ def get_pitch_stats_for_sp_for_team(
 ):
     pitch_stats = app.scraped_data.get_pitch_stats_for_sp_for_team(team_params.team_id, team_params.year)
     if not pitch_stats:
-        raise HTTPException(status_code=HTTPStatus.NOT_FOUND, detail="No results found")
+        raise HTTPException(status_code=int(HTTPStatus.NOT_FOUND), detail="No results found")
     return asdict(pitch_stats)
 
 
@@ -43,7 +43,7 @@ def get_pitch_stats_for_rp_for_team(
 ):
     pitch_stats = app.scraped_data.get_pitch_stats_for_rp_for_team(team_params.team_id, team_params.year)
     if not pitch_stats:
-        raise HTTPException(status_code=HTTPStatus.NOT_FOUND, detail="No results found")
+        raise HTTPException(status_code=int(HTTPStatus.NOT_FOUND), detail="No results found")
     return asdict(pitch_stats)
 
 
@@ -54,7 +54,7 @@ def get_pitch_stats_by_year_for_team(
 ):
     pitch_stats_dict = app.scraped_data.get_pitch_stats_by_year_for_team(team_id.name)
     if not pitch_stats_dict:
-        raise HTTPException(status_code=HTTPStatus.NOT_FOUND, detail="No results found")
+        raise HTTPException(status_code=int(HTTPStatus.NOT_FOUND), detail="No results found")
     return {year: asdict(pitch_stats) for year, pitch_stats in pitch_stats_dict.items()}
 
 
@@ -65,7 +65,7 @@ def get_pitch_stats_for_sp_by_year_for_team(
 ):
     pitch_stats_dict = app.scraped_data.get_pitch_stats_for_sp_by_year_for_team(team_id.name)
     if not pitch_stats_dict:
-        raise HTTPException(status_code=HTTPStatus.NOT_FOUND, detail="No results found")
+        raise HTTPException(status_code=int(HTTPStatus.NOT_FOUND), detail="No results found")
     return {year: asdict(pitch_stats) for year, pitch_stats in pitch_stats_dict.items()}
 
 
@@ -76,7 +76,7 @@ def get_pitch_stats_for_rp_by_year_for_team(
 ):
     pitch_stats_dict = app.scraped_data.get_pitch_stats_for_rp_by_year_for_team(team_id.name)
     if not pitch_stats_dict:
-        raise HTTPException(status_code=HTTPStatus.NOT_FOUND, detail="No results found")
+        raise HTTPException(status_code=int(HTTPStatus.NOT_FOUND), detail="No results found")
     return {year: asdict(pitch_stats) for year, pitch_stats in pitch_stats_dict.items()}
 
 
@@ -87,7 +87,7 @@ def get_pitch_stats_by_player_for_team(
 ):
     pitch_stats = app.scraped_data.get_pitch_stats_by_player_for_team(team_params.team_id, team_params.year)
     if not pitch_stats:
-        raise HTTPException(status_code=HTTPStatus.NOT_FOUND, detail="No results found")
+        raise HTTPException(status_code=int(HTTPStatus.NOT_FOUND), detail="No results found")
     return [asdict(s) for s in pitch_stats]
 
 
@@ -98,7 +98,7 @@ def get_pitch_stats_for_sp_by_player_for_team(
 ):
     pitch_stats = app.scraped_data.get_pitch_stats_for_sp_by_player_for_team(team_params.team_id, team_params.year)
     if not pitch_stats:
-        raise HTTPException(status_code=HTTPStatus.NOT_FOUND, detail="No results found")
+        raise HTTPException(status_code=int(HTTPStatus.NOT_FOUND), detail="No results found")
     return [asdict(s) for s in pitch_stats]
 
 
@@ -109,7 +109,7 @@ def get_pitch_stats_for_rp_by_player_for_team(
 ):
     pitch_stats = app.scraped_data.get_pitch_stats_for_rp_by_player_for_team(team_params.team_id, team_params.year)
     if not pitch_stats:
-        raise HTTPException(status_code=HTTPStatus.NOT_FOUND, detail="No results found")
+        raise HTTPException(status_code=int(HTTPStatus.NOT_FOUND), detail="No results found")
     return [asdict(s) for s in pitch_stats]
 
 
@@ -120,7 +120,7 @@ def get_pitch_stats_for_season_for_all_teams(
 ):
     pitch_stats_dict = app.scraped_data.get_pitch_stats_for_season_for_all_teams(season.year)
     if not pitch_stats_dict:
-        raise HTTPException(status_code=HTTPStatus.NOT_FOUND, detail="No results found")
+        raise HTTPException(status_code=int(HTTPStatus.NOT_FOUND), detail="No results found")
     return {team_id: asdict(pitch_stats) for team_id, pitch_stats in pitch_stats_dict.items()}
 
 
@@ -131,7 +131,7 @@ def get_pitch_stats_for_sp_for_season_for_all_teams(
 ):
     pitch_stats_dict = app.scraped_data.get_pitch_stats_for_sp_for_season_for_all_teams(season.year)
     if not pitch_stats_dict:
-        raise HTTPException(status_code=HTTPStatus.NOT_FOUND, detail="No results found")
+        raise HTTPException(status_code=int(HTTPStatus.NOT_FOUND), detail="No results found")
     return {team_id: asdict(pitch_stats) for team_id, pitch_stats in pitch_stats_dict.items()}
 
 
@@ -142,5 +142,5 @@ def get_pitch_stats_for_rp_for_season_for_all_teams(
 ):
     pitch_stats_dict = app.scraped_data.get_pitch_stats_for_rp_for_season_for_all_teams(season.year)
     if not pitch_stats_dict:
-        raise HTTPException(status_code=HTTPStatus.NOT_FOUND, detail="No results found")
+        raise HTTPException(status_code=int(HTTPStatus.NOT_FOUND), detail="No results found")
     return {team_id: asdict(pitch_stats) for team_id, pitch_stats in pitch_stats_dict.items()}

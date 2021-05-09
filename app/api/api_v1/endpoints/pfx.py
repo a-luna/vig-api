@@ -26,10 +26,10 @@ def get_all_pfx_data_for_pitch_app(
     game_data = crud.get_game_data(game_id, app)
     result = game_data.get_pfx_for_pitcher(mlb_id)
     if result.failure:
-        raise HTTPException(status_code=HTTPStatus.NOT_FOUND, detail="No results found")
+        raise HTTPException(status_code=int(HTTPStatus.NOT_FOUND), detail="No results found")
     pfx = result.value
     if not pfx:
-        raise HTTPException(status_code=HTTPStatus.NOT_FOUND, detail="No results found")
+        raise HTTPException(status_code=int(HTTPStatus.NOT_FOUND), detail="No results found")
     return pfx
 
 
@@ -40,10 +40,10 @@ def get_all_pfx_data_for_at_bat(
 ):
     result = validate_at_bat_id(at_bat_id)
     if result.failure:
-        raise HTTPException(status_code=HTTPStatus.NOT_FOUND, detail="No results found")
+        raise HTTPException(status_code=int(HTTPStatus.NOT_FOUND), detail="No results found")
     at_bat_dict = result.value
     game_data = crud.get_game_data(at_bat_dict["game_id"], app)
     pfx = game_data.get_pfx_for_at_bat(at_bat_id)
     if not pfx:
-        raise HTTPException(status_code=HTTPStatus.NOT_FOUND, detail="No results found")
+        raise HTTPException(status_code=int(HTTPStatus.NOT_FOUND), detail="No results found")
     return pfx

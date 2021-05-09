@@ -19,7 +19,7 @@ def get_bat_stats_for_career_for_player(
 ):
     bat_stats = app.scraped_data.get_bat_stats_for_career_for_player(mlb_id)
     if not bat_stats:
-        raise HTTPException(status_code=HTTPStatus.NOT_FOUND, detail="No results found")
+        raise HTTPException(status_code=int(HTTPStatus.NOT_FOUND), detail="No results found")
     return asdict(bat_stats)
 
 
@@ -30,7 +30,7 @@ def get_bat_stats_by_year_for_player(
 ):
     bat_stats = app.scraped_data.get_bat_stats_by_year_for_player(mlb_id)
     if not bat_stats:
-        raise HTTPException(status_code=HTTPStatus.NOT_FOUND, detail="No results found")
+        raise HTTPException(status_code=int(HTTPStatus.NOT_FOUND), detail="No results found")
     return [asdict(s) for s in bat_stats]
 
 
@@ -41,7 +41,7 @@ def get_bat_stats_by_team_for_player(
 ):
     bat_stats = app.scraped_data.get_bat_stats_by_team_for_player(mlb_id)
     if not bat_stats:
-        raise HTTPException(status_code=HTTPStatus.NOT_FOUND, detail="No results found")
+        raise HTTPException(status_code=int(HTTPStatus.NOT_FOUND), detail="No results found")
     return [asdict(s) for s in bat_stats]
 
 
@@ -52,7 +52,7 @@ def get_bat_stats_by_team_by_year_for_player(
 ):
     bat_stats = app.scraped_data.get_bat_stats_by_team_by_year_for_player(mlb_id)
     if not bat_stats:
-        raise HTTPException(status_code=HTTPStatus.NOT_FOUND, detail="No results found")
+        raise HTTPException(status_code=int(HTTPStatus.NOT_FOUND), detail="No results found")
     return [asdict(s) for s in bat_stats]
 
 
@@ -63,7 +63,7 @@ def get_bat_stats_by_opp_for_player(
 ):
     bat_stats = app.scraped_data.get_bat_stats_by_opp_for_player(mlb_id)
     if not bat_stats:
-        raise HTTPException(status_code=HTTPStatus.NOT_FOUND, detail="No results found")
+        raise HTTPException(status_code=int(HTTPStatus.NOT_FOUND), detail="No results found")
     return [asdict(s) for s in bat_stats]
 
 
@@ -74,5 +74,5 @@ def get_bat_stats_by_opp_by_year_for_player(
 ):
     bat_stats = app.scraped_data.get_bat_stats_by_opp_by_year_for_player(mlb_id)
     if not bat_stats:
-        raise HTTPException(status_code=HTTPStatus.NOT_FOUND, detail="No results found")
+        raise HTTPException(status_code=int(HTTPStatus.NOT_FOUND), detail="No results found")
     return [asdict(s) for s in bat_stats]

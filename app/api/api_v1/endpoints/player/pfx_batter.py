@@ -35,7 +35,7 @@ def get_pfx_metrics_for_career_for_batter(
 ):
     pfx_stats = app.scraped_data.get_pfx_metrics_for_career_for_batter(mlb_id)
     if not pfx_stats:
-        raise HTTPException(status_code=HTTPStatus.NOT_FOUND, detail="No results found")
+        raise HTTPException(status_code=int(HTTPStatus.NOT_FOUND), detail="No results found")
     return prepare_pfx_response_model(pfx_stats)
 
 
@@ -46,7 +46,7 @@ def get_pfx_metrics_vs_rhp_as_rhb_for_career_for_batter(
 ):
     pfx_stats = app.scraped_data.get_pfx_metrics_vs_rhp_as_rhb_for_career_for_batter(mlb_id)
     if not pfx_stats:
-        raise HTTPException(status_code=HTTPStatus.NOT_FOUND, detail="No results found")
+        raise HTTPException(status_code=int(HTTPStatus.NOT_FOUND), detail="No results found")
     return prepare_pfx_response_model(pfx_stats)
 
 
@@ -57,7 +57,7 @@ def get_pfx_metrics_vs_rhp_as_lhb_for_career_for_batter(
 ):
     pfx_stats = app.scraped_data.get_pfx_metrics_vs_rhp_as_lhb_for_career_for_batter(mlb_id)
     if not pfx_stats:
-        raise HTTPException(status_code=HTTPStatus.NOT_FOUND, detail="No results found")
+        raise HTTPException(status_code=int(HTTPStatus.NOT_FOUND), detail="No results found")
     return prepare_pfx_response_model(pfx_stats)
 
 
@@ -68,7 +68,7 @@ def get_pfx_metrics_vs_lhp_as_lhb_for_career_for_batter(
 ):
     pfx_stats = app.scraped_data.get_pfx_metrics_vs_lhp_as_lhb_for_career_for_batter(mlb_id)
     if not pfx_stats:
-        raise HTTPException(status_code=HTTPStatus.NOT_FOUND, detail="No results found")
+        raise HTTPException(status_code=int(HTTPStatus.NOT_FOUND), detail="No results found")
     return prepare_pfx_response_model(pfx_stats)
 
 
@@ -79,7 +79,7 @@ def get_pfx_metrics_vs_lhp_as_rhb_for_career_for_batter(
 ):
     pfx_stats = app.scraped_data.get_pfx_metrics_vs_lhp_as_rhb_for_career_for_batter(mlb_id)
     if not pfx_stats:
-        raise HTTPException(status_code=HTTPStatus.NOT_FOUND, detail="No results found")
+        raise HTTPException(status_code=int(HTTPStatus.NOT_FOUND), detail="No results found")
     return prepare_pfx_response_model(pfx_stats)
 
 
@@ -94,7 +94,7 @@ def get_pfx_metrics_for_year_for_batter(
 ):
     pfx_stats = app.scraped_data.get_pfx_metrics_for_year_for_batter(mlb_id, season.year)
     if not pfx_stats:
-        raise HTTPException(status_code=HTTPStatus.NOT_FOUND, detail="No results found")
+        raise HTTPException(status_code=int(HTTPStatus.NOT_FOUND), detail="No results found")
     return prepare_pfx_response_model(pfx_stats)
 
 
@@ -105,7 +105,7 @@ def get_pfx_metrics_for_game_for_batter(
 ):
     pfx_stats = app.scraped_data.get_pfx_metrics_for_game_for_batter(mlb_id, game_id)
     if not pfx_stats:
-        raise HTTPException(status_code=HTTPStatus.NOT_FOUND, detail="No results found")
+        raise HTTPException(status_code=int(HTTPStatus.NOT_FOUND), detail="No results found")
     return prepare_pfx_response_model(pfx_stats)
 
 
@@ -116,7 +116,7 @@ def get_pfx_metrics_vs_rhp_as_rhb_for_game_for_batter(
 ):
     pfx_stats = app.scraped_data.get_pfx_metrics_vs_rhp_as_rhb_for_game_for_batter(mlb_id, game_id)
     if not pfx_stats:
-        raise HTTPException(status_code=HTTPStatus.NOT_FOUND, detail="No results found")
+        raise HTTPException(status_code=int(HTTPStatus.NOT_FOUND), detail="No results found")
     return prepare_pfx_response_model(pfx_stats)
 
 
@@ -127,7 +127,7 @@ def get_pfx_metrics_vs_rhp_as_lhb_for_game_for_batter(
 ):
     pfx_stats = app.scraped_data.get_pfx_metrics_vs_rhp_as_lhb_for_game_for_batter(mlb_id, game_id)
     if not pfx_stats:
-        raise HTTPException(status_code=HTTPStatus.NOT_FOUND, detail="No results found")
+        raise HTTPException(status_code=int(HTTPStatus.NOT_FOUND), detail="No results found")
     return prepare_pfx_response_model(pfx_stats)
 
 
@@ -138,7 +138,7 @@ def get_pfx_metrics_vs_lhp_as_lhb_for_game_for_batter(
 ):
     pfx_stats = app.scraped_data.get_pfx_metrics_vs_lhp_as_lhb_for_game_for_batter(mlb_id, game_id)
     if not pfx_stats:
-        raise HTTPException(status_code=HTTPStatus.NOT_FOUND, detail="No results found")
+        raise HTTPException(status_code=int(HTTPStatus.NOT_FOUND), detail="No results found")
     return prepare_pfx_response_model(pfx_stats)
 
 
@@ -149,5 +149,5 @@ def get_pfx_metrics_vs_lhp_as_rhb_for_game_for_batter(
 ):
     pfx_stats = app.scraped_data.get_pfx_metrics_vs_lhp_as_rhb_for_game_for_batter(mlb_id, game_id)
     if not pfx_stats:
-        raise HTTPException(status_code=HTTPStatus.NOT_FOUND, detail="No results found")
+        raise HTTPException(status_code=int(HTTPStatus.NOT_FOUND), detail="No results found")
     return prepare_pfx_response_model(pfx_stats)
