@@ -1,3 +1,4 @@
+import json
 import os
 from pathlib import Path
 from typing import List, Optional
@@ -17,17 +18,16 @@ class Settings(BaseSettings):
         os.environ["DOTENV_FILE"] = str(APP_ROOT.joinpath(".env"))
         load_dotenv(dotenv_path=os.environ["DOTENV_FILE"])
 
-    API_VERSION: str = "/api/v1"
-    SECRET_KEY: str = os.environ.get("SECRET_KEY")
+    API_VERSION: str = os.environ.get("API_VERSION")
     DOTENV_FILE: Path = Path(os.environ.get("DOTENV_FILE"))
     CONFIG_FILE: Path = Path(os.environ.get("CONFIG_FILE"))
     DATABASE_URL: str = os.environ.get("DATABASE_URL")
-    SERVER_NAME: Optional[str] = "vig-api.aaronluna.dev"
-    SERVER_HOST: Optional[AnyHttpUrl] = "https://vig-api.aaronluna.dev"
-    PROJECT_NAME: Optional[str] = "Vigorish API - MLB Data"
-    CORS_ALLOW_ORIGINS: List[str] = ["http://localhost:3000"]
+    SERVER_NAME: Optional[str] = os.environ.get("SERVER_NAME")
+    SERVER_HOST: Optional[AnyHttpUrl] = os.environ.get("SERVER_HOST")
+    PROJECT_NAME: Optional[str] = os.environ.get("PROJECT_NAME")
+    CORS_ALLOW_ORIGINS: List[str] = json.loads(os.environ.get("CORS_ALLOW_ORIGINS"))
     REDIS_URL: RedisDsn = os.environ.get("REDIS_URL")
-    CACHE_HEADER: str = "X-Vigorish-Cache"
+    CACHE_HEADER: str = os.environ.get("CACHE_HEADER")
 
     class Config:
         case_sensitive = True
