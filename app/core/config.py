@@ -6,12 +6,12 @@ from typing import List, Optional
 from dotenv import load_dotenv
 from pydantic import AnyHttpUrl, BaseSettings, RedisDsn
 
-from app.data.initialize import extract_zip_files, set_env_variables
+from app.data.initialize import download_and_extract_zip_files, set_env_variables
 
 
 class Settings(BaseSettings):
     if str(Path(__file__).resolve()).startswith("/app"):
-        extract_zip_files()
+        download_and_extract_zip_files()
         set_env_variables()
     else:
         APP_ROOT = Path(__file__).parent.parent.parent.resolve()
