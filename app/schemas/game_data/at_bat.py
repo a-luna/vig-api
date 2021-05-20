@@ -53,9 +53,11 @@ class AtBatSchema(BaseModel):
     pitcher_id_bbref: str
     pitcher_id_mlb: int
     pitcher_name: str
+    pitcher_throws: str
     batter_id_bbref: str
     batter_id_mlb: int
     batter_name: str
+    batter_stance: str
     since_game_start: int
     at_bat_duration: int
     is_complete_at_bat: bool
@@ -66,6 +68,7 @@ class AtBatSchema(BaseModel):
     play_description: str
     total_pitches: int
     pfx_complete: bool
+    pfx_des: str
     final_count_balls: int
     final_count_strikes: int
     pitch_sequence_description: List[List[str]]
