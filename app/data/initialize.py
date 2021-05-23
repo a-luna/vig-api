@@ -63,14 +63,17 @@ def download_and_extract_zip_files():
     if error or retry:
         raise ValueError("Failed to download vig db and yearly data files!")
     for zip_file_path, hash_file_path in ZIP_FILES:
+        print(f"Calculating MD5 hash for: {zip_file_path.name}...")
         result = validate_file(zip_file_path, hash_file_path)
         if result.failure:
             raise ValueError(result.error)
         print(f"MD5 hash for {zip_file_path.name} successfully validated")
+        print(f"Extracting contents of zip file: {zip_file_path.name}...")
         with ZipFile(zip_file_path, mode="r") as zip:
             zip.extractall(path=zip_file_path.parent)
         zip_file_path.unlink()
         hash_file_path.unlink()
+        print(f"Deleted {zip_file_path.name} after all contents were extracted.")
 
 
 def download_files_from_s3():
