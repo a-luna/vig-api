@@ -1,3 +1,4 @@
+from typing import Optional
 from pydantic import BaseModel
 from vigorish.enums import DefensePosition
 
@@ -44,3 +45,5 @@ class BatStatsSchema(BaseModel):
     wpa_bat_pos: float
     wpa_bat_neg: float
     re24_bat: float
+    league: Optional[str]
+    division: Optional[str]
