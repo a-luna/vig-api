@@ -1,4 +1,4 @@
 # flake8: noqa
-from app.schema_prep.boxscore.linescore import create_html_linescore_columns
+from app.schema_prep.boxscore.linescore import create_complete_linescore, create_condensed_linescore
 from app.schema_prep.boxscore.team_batting import create_team_batting_stats_html_table
 from app.schema_prep.boxscore.team_pitching import create_team_pitching_stats_html_table

@@ -1,4 +1,4 @@
-from typing import Dict, List, Optional
+from typing import Dict, List, Optional, Union
 
 from pydantic import BaseModel
 
@@ -12,6 +12,28 @@ class LinescoreColumnSchema(BaseModel):
     home_team: str
     css_class: str
     removed_inning: bool
+
+
+class InningsRunsScoredSchema(BaseModel):
+    runs_scored: bool
+    inning: int
+    away_runs: int
+    home_runs: int
+    total_runs_scored: int
+    removed_inning: bool
+
+
+class LinescoreSchema(BaseModel):
+    inning_numbers: List[int]
+    game_totals: List[str]
+    away_team_id: str
+    away_team_runs: List[int]
+    away_team_totals: List[int]
+    home_team_id: str
+    home_team_runs: List[Union[int, str]]
+    home_team_totals: List[int]
+    extra_innings: bool
+    removed_innings: Optional[List[bool]]
 
 
 class PlayerIdsSchema(BaseModel):
@@ -28,7 +50,7 @@ class PitcherResultsSchema(BaseModel):
 
 class GameDataSchema(BaseModel):
     game_id: str
-    linescore: List[LinescoreColumnSchema]
+    linescore: LinescoreSchema
     pitcher_results: PitcherResultsSchema
     extra_innings: bool
 
@@ -75,6 +97,6 @@ class BoxscoreSchema(BaseModel):
     home_team: TeamDataSchema
     extra_innings: bool
     game_meta: GameMetaSchema
-    linescore: List[LinescoreColumnSchema]
-    linescore_complete: Optional[List[LinescoreColumnSchema]] = None
+    linescore: LinescoreSchema
+    linescore_complete: Optional[LinescoreSchema] = None
     inning_summaries: Dict[str, InningSummary]

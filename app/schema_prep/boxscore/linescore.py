@@ -1,3 +1,36 @@
+def create_complete_linescore(linescore):
+    if isinstance(linescore, list):
+        linescore = linescore[0]
+    return {
+        "inning_numbers": [inn_map["inning"] for inn_map in linescore["inning_runs_scored_map"]],
+        "game_totals": linescore["game_totals"],
+        "away_team_id": linescore["away_team_id"],
+        "away_team_runs": [inn_map["away_runs"] for inn_map in linescore["inning_runs_scored_map"]],
+        "away_team_totals": linescore["away_team_totals"],
+        "home_team_id": linescore["home_team_id"],
+        "home_team_runs": [inn_map["home_runs"] for inn_map in linescore["inning_runs_scored_map"]],
+        "home_team_totals": linescore["home_team_totals"],
+        "extra_innings": linescore["extra_innings"],
+        "removed_innings": [inn_map["removed_inning"] for inn_map in linescore["inning_runs_scored_map"]],
+    }
+
+
+def create_condensed_linescore(linescore):
+    if isinstance(linescore, list):
+        linescore = linescore[0]
+    return {
+        "inning_numbers": linescore["inning_numbers"],
+        "game_totals": linescore["game_totals"],
+        "away_team_id": linescore["away_team_id"],
+        "away_team_runs": linescore["away_team_runs_by_inning"],
+        "away_team_totals": linescore["away_team_totals"],
+        "home_team_id": linescore["home_team_id"],
+        "home_team_runs": linescore["home_team_runs_by_inning"],
+        "home_team_totals": linescore["home_team_totals"],
+        "extra_innings": linescore["extra_innings"],
+    }
+
+
 def create_html_linescore_columns(linescore):
     if isinstance(linescore, list):
         linescore = linescore[0]
