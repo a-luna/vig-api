@@ -1,3 +1,4 @@
+from typing import Optional
 from pydantic import BaseModel
 
 
@@ -46,3 +47,5 @@ class PitchStatsSchema(BaseModel):
     inherited_scored: int
     wpa_pitch: float
     re24_pitch: float
+    league: Optional[str]
+    division: Optional[str]

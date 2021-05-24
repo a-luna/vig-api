@@ -9,7 +9,7 @@ from vigorish.enums import DefensePosition, TeamID
 
 from app.api.dependencies import BatOrder, MLBSeason, TeamParameters
 from app.core.database import get_vig_app
-from app.schema_prep import convert_team_bat_stats
+from app.schema_prep import convert_team_stats
 from app.schemas import BatStatsSchema
 
 router = APIRouter()
@@ -205,7 +205,7 @@ def get_bat_stats_for_season_for_all_teams(
     if not bat_stats_dict:
         raise HTTPException(status_code=int(HTTPStatus.NOT_FOUND), detail="No results found")
     all_teams = {team_id: asdict(bat_stats) for team_id, bat_stats in bat_stats_dict.items()}
-    return convert_team_bat_stats(all_teams)
+    return convert_team_stats(all_teams)
 
 
 @router.get("/bat_order/all_teams", response_model=Dict[str, BatStatsSchema])
@@ -223,7 +223,7 @@ def get_bat_stats_for_lineup_spot_for_season_for_all_teams(
     if not bat_stats_dict:
         raise HTTPException(status_code=int(HTTPStatus.NOT_FOUND), detail="No results found")
     all_teams = {team_id: asdict(bat_stats) for team_id, bat_stats in bat_stats_dict.items()}
-    return convert_team_bat_stats(all_teams)
+    return convert_team_stats(all_teams)
 
 
 @router.get("/position/all_teams", response_model=Dict[str, BatStatsSchema])
@@ -239,7 +239,7 @@ def get_bat_stats_for_defpos_for_season_for_all_teams(
     if not bat_stats_dict:
         raise HTTPException(status_code=int(HTTPStatus.NOT_FOUND), detail="No results found")
     all_teams = {team_id: asdict(bat_stats) for team_id, bat_stats in bat_stats_dict.items()}
-    return convert_team_bat_stats(all_teams)
+    return convert_team_stats(all_teams)
 
 
 @router.get("/starters/all_teams", response_model=Dict[str, BatStatsSchema])
@@ -251,7 +251,7 @@ def get_bat_stats_for_starters_for_season_for_all_teams(
     if not bat_stats_dict:
         raise HTTPException(status_code=int(HTTPStatus.NOT_FOUND), detail="No results found")
     all_teams = {team_id: asdict(bat_stats) for team_id, bat_stats in bat_stats_dict.items()}
-    return convert_team_bat_stats(all_teams)
+    return convert_team_stats(all_teams)
 
 
 @router.get("/subs/all_teams", response_model=Dict[str, BatStatsSchema])
@@ -263,4 +263,4 @@ def get_bat_stats_for_subs_for_season_for_all_teams(
     if not bat_stats_dict:
         raise HTTPException(status_code=int(HTTPStatus.NOT_FOUND), detail="No results found")
     all_teams = {team_id: asdict(bat_stats) for team_id, bat_stats in bat_stats_dict.items()}
-    return convert_team_bat_stats(all_teams)
+    return convert_team_stats(all_teams)

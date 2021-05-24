@@ -1,4 +1,4 @@
-from typing import Dict, Union
+from typing import Dict, List, Union
 
 TEAM_ID_MAP = {
     "ARI": {"league": "NL", "division": "W"},
@@ -34,8 +34,25 @@ TEAM_ID_MAP = {
 }
 
 
-def convert_team_bat_stats(team_bat_stats: Dict[str, Union[int, float, str]]) -> Dict[str, Union[int, float, str]]:
-    for bat_stats in team_bat_stats.values():
-        bat_stats["league"] = TEAM_ID_MAP[bat_stats["team_id_bbref"]]["league"]
-        bat_stats["division"] = TEAM_ID_MAP[bat_stats["team_id_bbref"]]["division"]
-    return team_bat_stats
+def convert_team_stats(team_stats):
+    print(f"type(team stats)={type(team_stats)}")
+    if isinstance(team_stats, dict):
+        return convert_team_stats_dict(team_stats)
+    if isinstance(team_stats, list):
+        return convert_team_stats_list(team_stats)
+
+
+def convert_team_stats_dict(team_stats: Dict[str, Union[int, float, str]]) -> Dict[str, Union[int, float, str]]:
+    for stats in team_stats.values():
+        stats["league"] = TEAM_ID_MAP[stats["team_id_bbref"]]["league"]
+        stats["division"] = TEAM_ID_MAP[stats["team_id_bbref"]]["division"]
+    return team_stats
+
+
+def convert_team_stats_list(
+    team_stats: List[Dict[str, Union[int, float, str]]]
+) -> List[Dict[str, Union[int, float, str]]]:
+    for stats in team_stats:
+        stats["league"] = TEAM_ID_MAP[stats["team_id_bbref"]]["league"]
+        stats["division"] = TEAM_ID_MAP[stats["team_id_bbref"]]["division"]
+    return team_stats

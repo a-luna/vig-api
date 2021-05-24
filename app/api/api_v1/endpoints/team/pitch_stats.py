@@ -10,6 +10,7 @@ from vigorish.enums import TeamID
 from app.api.dependencies import MLBSeason, TeamParameters
 from app.core.database import get_vig_app
 from app.schemas import PitchStatsSchema
+from app.schema_prep import convert_team_stats
 
 router = APIRouter()
 
@@ -121,7 +122,8 @@ def get_pitch_stats_for_season_for_all_teams(
     pitch_stats_dict = app.scraped_data.get_pitch_stats_for_season_for_all_teams(season.year)
     if not pitch_stats_dict:
         raise HTTPException(status_code=int(HTTPStatus.NOT_FOUND), detail="No results found")
-    return {team_id: asdict(pitch_stats) for team_id, pitch_stats in pitch_stats_dict.items()}
+    all_teams = {team_id: asdict(pitch_stats) for team_id, pitch_stats in pitch_stats_dict.items()}
+    return convert_team_stats(all_teams)
 
 
 @router.get("/sp/all_teams", response_model=Dict[str, PitchStatsSchema])
@@ -132,7 +134,8 @@ def get_pitch_stats_for_sp_for_season_for_all_teams(
     pitch_stats_dict = app.scraped_data.get_pitch_stats_for_sp_for_season_for_all_teams(season.year)
     if not pitch_stats_dict:
         raise HTTPException(status_code=int(HTTPStatus.NOT_FOUND), detail="No results found")
-    return {team_id: asdict(pitch_stats) for team_id, pitch_stats in pitch_stats_dict.items()}
+    all_teams = {team_id: asdict(pitch_stats) for team_id, pitch_stats in pitch_stats_dict.items()}
+    return convert_team_stats(all_teams)
 
 
 @router.get("/rp/all_teams", response_model=Dict[str, PitchStatsSchema])
@@ -143,4 +146,5 @@ def get_pitch_stats_for_rp_for_season_for_all_teams(
     pitch_stats_dict = app.scraped_data.get_pitch_stats_for_rp_for_season_for_all_teams(season.year)
     if not pitch_stats_dict:
         raise HTTPException(status_code=int(HTTPStatus.NOT_FOUND), detail="No results found")
-    return {team_id: asdict(pitch_stats) for team_id, pitch_stats in pitch_stats_dict.items()}
+    all_teams = {team_id: asdict(pitch_stats) for team_id, pitch_stats in pitch_stats_dict.items()}
+    return convert_team_stats(all_teams)
