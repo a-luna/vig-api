@@ -101,6 +101,17 @@ class PfxPitchingStatsCollectionSchema(PfxStatsSchema):
     pitch_type_metrics: Dict[Union[str, PitchType], PfxPitchingStatsSchema]
 
 
+class PfxPitchingStatsWithPercentiles(BaseModel):
+    metrics: PfxPitchingStatsCollectionSchema
+    percentiles: List[PfxPercentileSchema]
+
+
+class AllPfxDataWithPercentiles(BaseModel):
+    both: PfxPitchingStatsWithPercentiles
+    rhb: PfxPitchingStatsWithPercentiles
+    lhb: PfxPitchingStatsWithPercentiles
+
+
 def prepare_pfx_response_model(pfx_stats):
     response = asdict(pfx_stats)
     response["pitch_types_filtered"] = deconstruct_pitch_types_from_int(response.pop("pitch_type"))
