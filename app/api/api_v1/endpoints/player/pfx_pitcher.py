@@ -9,7 +9,13 @@ from vigorish.util.list_helpers import flatten_list2d
 from app.api.dependencies import get_date_range, get_pitch_app_params, MLBSeason
 from app.core import crud
 from app.core.database import get_vig_app
-from app.schemas import PfxPercentileSchema, PfxPitchingStatsCollectionSchema, PitchFxSchema
+from app.schemas import (
+    AllPfxDataWithPercentiles,
+    PfxPercentileSchema,
+    PfxPitchingStatsCollectionSchema,
+    PitchFxSchema,
+    YearlyPfxDataWithPercentiles,
+)
 from app.schemas.pfx_stats import prepare_pfx_response_model
 
 router = APIRouter()
@@ -92,6 +98,17 @@ def get_career_percentiles_vs_lhb_for_pitch_types(
     return player_data.percentiles_for_pitch_types_vs_lhb_for_career
 
 
+@router.get("/career_pfx", response_model=AllPfxDataWithPercentiles)
+@cache()
+def get_all_pfx_career_data(request: Request, response: Response, mlb_id: str, app: Vigorish = Depends(get_vig_app)):
+    player_data = crud.get_player_data(mlb_id, app)
+    career_pfx = player_data.get_all_pfx_career_data()
+    career_pfx["both"]["metrics"] = prepare_pfx_response_model(career_pfx["both"]["metrics"])
+    career_pfx["rhb"]["metrics"] = prepare_pfx_response_model(career_pfx["rhb"]["metrics"])
+    career_pfx["lhb"]["metrics"] = prepare_pfx_response_model(career_pfx["lhb"]["metrics"])
+    return career_pfx
+
+
 @router.get("/for_year", response_model=PfxPitchingStatsCollectionSchema)
 @cache()
 def get_pfx_metrics_for_year_for_pitcher(
@@ -162,6 +179,20 @@ def get_percentiles_vs_lhb_for_pitch_types_by_year(
 ):
     player_data = crud.get_player_data(mlb_id, app)
     return player_data.percentiles_for_pitch_types_vs_lhb_by_year
+
+
+@router.get("/yearly_pfx", response_model=YearlyPfxDataWithPercentiles)
+@cache()
+def get_all_pfx_yearly_data(request: Request, response: Response, mlb_id: str, app: Vigorish = Depends(get_vig_app)):
+    player_data = crud.get_player_data(mlb_id, app)
+    pfx_yearly = player_data.get_all_pfx_yearly_data()
+    for year, pfx_stats_for_year in pfx_yearly["both"]["metrics"].items():
+        pfx_yearly["both"]["metrics"][year] = prepare_pfx_response_model(pfx_stats_for_year)
+    for year, pfx_stats_for_year in pfx_yearly["rhb"]["metrics"].items():
+        pfx_yearly["rhb"]["metrics"][year] = prepare_pfx_response_model(pfx_stats_for_year)
+    for year, pfx_stats_for_year in pfx_yearly["lhb"]["metrics"].items():
+        pfx_yearly["lhb"]["metrics"][year] = prepare_pfx_response_model(pfx_stats_for_year)
+    return pfx_yearly
 
 
 @router.get("/for_game", response_model=PfxPitchingStatsCollectionSchema)

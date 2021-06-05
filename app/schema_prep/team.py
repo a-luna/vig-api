@@ -36,6 +36,12 @@ TEAM_ID_MAP = {
 }
 
 
+def convert_team_stats_by_year(stats_by_year):
+    for stats in stats_by_year.values():
+        stats = convert_team_stats(stats)
+    return stats_by_year
+
+
 def convert_team_stats(
     team_stats: Union[List[TeamStatDict], Dict[str, TeamStatDict]]
 ) -> Union[List[TeamStatDict], Dict[str, TeamStatDict]]:
