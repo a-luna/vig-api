@@ -106,10 +106,21 @@ class PfxPitchingStatsWithPercentiles(BaseModel):
     percentiles: List[PfxPercentileSchema]
 
 
+class YearlyPfxPitchingStatsWithPercentiles(BaseModel):
+    metrics: Dict[int, PfxPitchingStatsCollectionSchema]
+    percentiles: Dict[int, List[PfxPercentileSchema]]
+
+
 class AllPfxDataWithPercentiles(BaseModel):
     both: PfxPitchingStatsWithPercentiles
     rhb: PfxPitchingStatsWithPercentiles
     lhb: PfxPitchingStatsWithPercentiles
+
+
+class YearlyPfxDataWithPercentiles(BaseModel):
+    both: YearlyPfxPitchingStatsWithPercentiles
+    rhb: YearlyPfxPitchingStatsWithPercentiles
+    lhb: YearlyPfxPitchingStatsWithPercentiles
 
 
 def prepare_pfx_response_model(pfx_stats):

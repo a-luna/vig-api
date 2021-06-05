@@ -9,6 +9,7 @@ from app.schemas.pfx_stats import (
     PfxPitchingStatsCollectionSchema,
     PfxPitchingStatsSchema,
     PfxStatsSchema,
+    YearlyPfxDataWithPercentiles,
 )
 from app.schemas.pitch_stats import PitchStatsSchema
 from app.schemas.pitchfx import PitchFxSchema
