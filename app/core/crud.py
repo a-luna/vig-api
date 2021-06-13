@@ -11,7 +11,10 @@ from vigorish.util.exceptions import ScrapedDataException, UnknownPlayerExceptio
 
 
 def get_player(mlb_id: int, app: Vigorish):
-    return Player.find_by_mlb_id(app.db_session, mlb_id)
+    try:
+        return Player.find_by_mlb_id(app.db_session, mlb_id)
+    except UnknownPlayerException as ex:
+        raise HTTPException(status_code=int(HTTPStatus.NOT_FOUND), detail=repr(ex))
 
 
 def get_team(team_id_br: str, year: int, app: Vigorish):
