@@ -22,7 +22,6 @@ router = APIRouter()
 
 
 @router.get("/in_date_range", response_model=List[PitchFxSchema])
-@cache()
 def get_all_pfx_within_date_range_for_player(
     request: Request,
     response: Response,
