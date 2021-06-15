@@ -8,6 +8,7 @@ from app.api.api_v1.endpoints.player import bat_stats, pfx_batter, pfx_pitcher, 
 from app.core.crud import get_player
 from app.core.database import get_vig_app
 from app.schemas import FuzzySearchResult, PlayerSchema
+from app.schema_prep import convert_player_to_dict
 
 router = APIRouter()
 
@@ -20,7 +21,7 @@ def search_player_name(query: str, app: Vigorish = Depends(get_vig_app)):
 @router.get("/details", response_model=PlayerSchema, tags=["player search"])
 @cache()
 def get_player_details(request: Request, response: Response, mlb_id: str, app: Vigorish = Depends(get_vig_app)):
-    return get_player(mlb_id, app)
+    return convert_player_to_dict(get_player(mlb_id, app))
 
 
 router.include_router(bat_stats.router, prefix="/batting", tags=["player batting"])
