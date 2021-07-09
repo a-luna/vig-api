@@ -33,7 +33,7 @@ def get_all_regular_seasons(request: Request, response: Response, app: Vigorish 
     all_mlb_seasons = Season.get_all_regular_seasons(app.db_session)
     if not all_mlb_seasons:
         raise HTTPException(status_code=int(HTTPStatus.NOT_FOUND), detail="No results found")
-    return list(map(convert_season_to_dict, filter(lambda x: x.year > 2016 and x.year < 2020, all_mlb_seasons)))
+    return list(map(convert_season_to_dict, filter(lambda x: x.year > 2016 and x.year < 2022, all_mlb_seasons)))
 
 
 @router.get("/all_dates")
