@@ -13,6 +13,9 @@ class PfxPercentileSchema(BaseModel):
     zone_rate: Tuple[float, float]
     contact_rate: Tuple[float, float]
     o_swing_rate: Tuple[float, float]
+    ground_ball_rate: Tuple[float, float]
+    barrel_rate: Tuple[float, float]
+    avg_exit_velocity: Tuple[float, float]
 
 
 class PfxStatsSchema(BaseModel):
@@ -25,7 +28,14 @@ class PfxStatsSchema(BaseModel):
     fly_ball_rate: float
     ground_ball_rate: float
     line_drive_rate: float
-    pop_up_rate: float
+    popup_rate: float
+    hard_hit_rate: float
+    medium_hit_rate: float
+    soft_hit_rate: float
+    barrel_rate: float
+    avg_launch_speed: float
+    avg_launch_angle: float
+    avg_hit_distance: float
     bb_rate: float
     k_rate: float
     hr_per_fb: float
@@ -57,11 +67,15 @@ class PfxStatsSchema(BaseModel):
     total_swings_outside_zone: int
     total_contact_inside_zone: int
     total_contact_outside_zone: int
-    total_batted_balls: int
+    total_balls_in_play: int
     total_ground_balls: int
     total_line_drives: int
     total_fly_balls: int
-    total_pop_ups: int
+    total_popups: int
+    total_hard_hits: int
+    total_medium_hits: int
+    total_soft_hits: int
+    total_barrels: int
     total_singles: int
     total_doubles: int
     total_triples: int
@@ -83,12 +97,20 @@ class PfxBattingStatsCollectionSchema(PfxStatsSchema):
 
 
 class PfxPitchingStatsSchema(PfxStatsSchema):
+    p_throws: str
     pitch_type: Union[str, PitchType]
     avg_speed: float
     avg_pfx_x: float
     avg_pfx_z: float
     avg_px: float
     avg_pz: float
+    avg_plate_time: float
+    avg_extension: float
+    avg_break_angle: float
+    avg_break_length: float
+    avg_break_y: float
+    avg_spin_rate: float
+    avg_spin_direction: float
     percent: float
 
 

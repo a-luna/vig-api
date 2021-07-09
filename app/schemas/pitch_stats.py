@@ -6,6 +6,7 @@ class PitchStatsSchema(BaseModel):
     year: int
     team_id_bbref: str
     opponent_team_id_bbref: str
+    player_name: str
     mlb_id: int
     bbref_id: str
     stint_number: int

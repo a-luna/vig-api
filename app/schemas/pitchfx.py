@@ -1,5 +1,4 @@
 from datetime import datetime
-from typing import Optional
 
 from pydantic import BaseModel
 
@@ -23,14 +22,45 @@ class PitchFxSchema(BaseModel):
     ab_total: int
     ab_count: int
     ab_id: int
-    table_row_number: int
     des: str
     strikes: int
     balls: int
     basic_type: str
     pdes: str
     mlbam_pitch_name: str
+    start_speed: float
+    zone_location: int
+    sz_top: float
+    sz_bot: float
+    pfx_x: float
+    pfx_z: float
+    x0: float
+    y0: float
+    z0: float
+    vx0: float
+    vy0: float
+    vz0: float
+    ax: float
+    ay: float
+    az: float
+    px: float
+    pz: float
     park_sv_id: str
+    plate_time: float
+    extension: float
+    break_angle: float
+    break_length: float
+    break_y: float
+    spin_rate: int
+    spin_direction: int
+    launch_speed: float
+    launch_angle: float
+    total_distance: float
+    trajectory: str
+    hardness: str
+    location: int
+    coord_x: float
+    coord_y: float
     game_start_time_utc: datetime
     time_pitch_thrown_utc: datetime
     seconds_since_game_start: int
@@ -45,11 +75,15 @@ class PitchFxSchema(BaseModel):
     swing_outside_zone: int
     contact_inside_zone: int
     contact_outside_zone: int
-    is_batted_ball: int
+    is_in_play: int
     is_ground_ball: int
     is_fly_ball: int
     is_line_drive: int
-    is_pop_up: int
+    is_popup: int
+    is_hard_hit: int
+    is_medium_hit: int
+    is_soft_hit: int
+    is_barreled: int
     is_final_pitch_of_ab: int
     ab_result_out: int
     ab_result_hit: int
@@ -73,17 +107,6 @@ class PitchFxSchema(BaseModel):
     is_patched: int
     is_invalid_ibb: int
     is_out_of_sequence: int
-    start_speed: Optional[float] = 0.0
-    spin: Optional[float] = 0.0
-    zone_location: Optional[int] = 0
-    sz_top: Optional[float] = 0.0
-    sz_bot: Optional[float] = 0.0
-    pfx_x: Optional[float] = 0.0
-    pfx_z: Optional[float] = 0.0
-    px: Optional[float] = 0.0
-    pz: Optional[float] = 0.0
-    pxold: Optional[float] = 0.0
-    pzold: Optional[float] = 0.0
 
     class Config:
         orm_mode = True
