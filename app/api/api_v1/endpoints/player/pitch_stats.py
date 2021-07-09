@@ -8,6 +8,7 @@ from vigorish.app import Vigorish
 
 from app.core.database import get_vig_app
 from app.schemas import PitchStatsSchema
+from app.schema_prep import convert_team_stats
 
 router = APIRouter()
 
@@ -53,7 +54,8 @@ def get_pitch_stats_by_year_for_player(
     pitch_stats = app.scraped_data.get_pitch_stats_by_year_for_player(mlb_id)
     if not pitch_stats:
         raise HTTPException(status_code=int(HTTPStatus.NOT_FOUND), detail="No results found")
-    return [asdict(s) for s in pitch_stats]
+    player_pitch_stats = [asdict(stats) for stats in pitch_stats]
+    return convert_team_stats(app.db_session, player_pitch_stats)
 
 
 @router.get("/by_team", response_model=List[PitchStatsSchema])
@@ -64,7 +66,8 @@ def get_pitch_stats_by_team_for_player(
     pitch_stats = app.scraped_data.get_pitch_stats_by_team_for_player(mlb_id)
     if not pitch_stats:
         raise HTTPException(status_code=int(HTTPStatus.NOT_FOUND), detail="No results found")
-    return [asdict(s) for s in pitch_stats]
+    player_pitch_stats = [asdict(stats) for stats in pitch_stats]
+    return convert_team_stats(app.db_session, player_pitch_stats)
 
 
 @router.get("/by_team_by_year", response_model=List[PitchStatsSchema])
@@ -75,7 +78,8 @@ def get_pitch_stats_by_team_by_year_for_player(
     pitch_stats = app.scraped_data.get_pitch_stats_by_team_by_year_for_player(mlb_id)
     if not pitch_stats:
         raise HTTPException(status_code=int(HTTPStatus.NOT_FOUND), detail="No results found")
-    return [asdict(s) for s in pitch_stats]
+    player_pitch_stats = [asdict(stats) for stats in pitch_stats]
+    return convert_team_stats(app.db_session, player_pitch_stats)
 
 
 @router.get("/by_opp_team", response_model=List[PitchStatsSchema])
@@ -86,7 +90,8 @@ def get_pitch_stats_by_opp_team_for_player(
     pitch_stats = app.scraped_data.get_pitch_stats_by_opp_team_for_player(mlb_id)
     if not pitch_stats:
         raise HTTPException(status_code=int(HTTPStatus.NOT_FOUND), detail="No results found")
-    return [asdict(s) for s in pitch_stats]
+    player_pitch_stats = [asdict(stats) for stats in pitch_stats]
+    return convert_team_stats(app.db_session, player_pitch_stats)
 
 
 @router.get("/by_opp_team_by_year", response_model=List[PitchStatsSchema])
@@ -97,4 +102,5 @@ def get_pitch_stats_by_opp_team_by_year_for_player(
     pitch_stats = app.scraped_data.get_pitch_stats_by_opp_team_by_year_for_player(mlb_id)
     if not pitch_stats:
         raise HTTPException(status_code=int(HTTPStatus.NOT_FOUND), detail="No results found")
-    return [asdict(s) for s in pitch_stats]
+    player_pitch_stats = [asdict(stats) for stats in pitch_stats]
+    return convert_team_stats(app.db_session, player_pitch_stats)

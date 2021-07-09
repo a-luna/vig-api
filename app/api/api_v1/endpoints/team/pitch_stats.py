@@ -89,7 +89,8 @@ def get_pitch_stats_by_player_for_team(
     pitch_stats = app.scraped_data.get_pitch_stats_by_player_for_team(team_params.team_id, team_params.year)
     if not pitch_stats:
         raise HTTPException(status_code=int(HTTPStatus.NOT_FOUND), detail="No results found")
-    return [asdict(s) for s in pitch_stats]
+    player_pitch_stats = [asdict(stats) for stats in pitch_stats]
+    return convert_team_stats(app.db_session, player_pitch_stats)
 
 
 @router.get("/sp/by_player", response_model=List[PitchStatsSchema])
@@ -100,7 +101,8 @@ def get_pitch_stats_for_sp_by_player_for_team(
     pitch_stats = app.scraped_data.get_pitch_stats_for_sp_by_player_for_team(team_params.team_id, team_params.year)
     if not pitch_stats:
         raise HTTPException(status_code=int(HTTPStatus.NOT_FOUND), detail="No results found")
-    return [asdict(s) for s in pitch_stats]
+    player_pitch_stats = [asdict(stats) for stats in pitch_stats]
+    return convert_team_stats(app.db_session, player_pitch_stats)
 
 
 @router.get("/rp/by_player", response_model=List[PitchStatsSchema])
@@ -111,7 +113,8 @@ def get_pitch_stats_for_rp_by_player_for_team(
     pitch_stats = app.scraped_data.get_pitch_stats_for_rp_by_player_for_team(team_params.team_id, team_params.year)
     if not pitch_stats:
         raise HTTPException(status_code=int(HTTPStatus.NOT_FOUND), detail="No results found")
-    return [asdict(s) for s in pitch_stats]
+    player_pitch_stats = [asdict(stats) for stats in pitch_stats]
+    return convert_team_stats(app.db_session, player_pitch_stats)
 
 
 @router.get("/all_teams", response_model=Dict[str, PitchStatsSchema])
@@ -123,7 +126,7 @@ def get_pitch_stats_for_season_for_all_teams(
     if not pitch_stats_dict:
         raise HTTPException(status_code=int(HTTPStatus.NOT_FOUND), detail="No results found")
     all_teams = {team_id: asdict(pitch_stats) for team_id, pitch_stats in pitch_stats_dict.items()}
-    return convert_team_stats(all_teams)
+    return convert_team_stats(app.db_session, all_teams)
 
 
 @router.get("/sp/all_teams", response_model=Dict[str, PitchStatsSchema])
@@ -135,7 +138,7 @@ def get_pitch_stats_for_sp_for_season_for_all_teams(
     if not pitch_stats_dict:
         raise HTTPException(status_code=int(HTTPStatus.NOT_FOUND), detail="No results found")
     all_teams = {team_id: asdict(pitch_stats) for team_id, pitch_stats in pitch_stats_dict.items()}
-    return convert_team_stats(all_teams)
+    return convert_team_stats(app.db_session, all_teams)
 
 
 @router.get("/rp/all_teams", response_model=Dict[str, PitchStatsSchema])
@@ -147,4 +150,4 @@ def get_pitch_stats_for_rp_for_season_for_all_teams(
     if not pitch_stats_dict:
         raise HTTPException(status_code=int(HTTPStatus.NOT_FOUND), detail="No results found")
     all_teams = {team_id: asdict(pitch_stats) for team_id, pitch_stats in pitch_stats_dict.items()}
-    return convert_team_stats(all_teams)
+    return convert_team_stats(app.db_session, all_teams)

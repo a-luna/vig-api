@@ -1,6 +1,4 @@
-from typing import Dict, List, Union
-
-TeamStatDict = Dict[str, Union[int, float, str]]
+import vigorish.database as db
 
 TEAM_ID_MAP = {
     "ARI": {"league": "NL", "division": "W"},
@@ -42,18 +40,28 @@ def convert_team_stats_by_year(stats_by_year):
     return stats_by_year
 
 
-def convert_team_stats(
-    team_stats: Union[List[TeamStatDict], Dict[str, TeamStatDict]]
-) -> Union[List[TeamStatDict], Dict[str, TeamStatDict]]:
+def convert_team_stats(db_session, team_stats):
     if isinstance(team_stats, dict):
         for stats in team_stats.values():
-            assign_league_and_division_to_team_stats(stats)
+            convert_for_api_response(db_session, stats)
     if isinstance(team_stats, list):
         for stats in team_stats:
-            assign_league_and_division_to_team_stats(stats)
+            convert_for_api_response(db_session, stats)
     return team_stats
 
 
-def assign_league_and_division_to_team_stats(team_stats: TeamStatDict) -> TeamStatDict:
+def convert_for_api_response(db_session, stats):
+    assign_league_and_division_to_team_stats(stats)
+    add_player_names_to_team_pitching_stats(db_session, stats)
+    return stats
+
+
+def assign_league_and_division_to_team_stats(team_stats):
     team_stats["league"] = TEAM_ID_MAP[team_stats["team_id_bbref"]]["league"]
     team_stats["division"] = TEAM_ID_MAP[team_stats["team_id_bbref"]]["division"]
+
+
+def add_player_names_to_team_pitching_stats(db_session, pitch_stats):
+    player_id = db.PlayerId.find_by_mlb_id(db_session, pitch_stats["mlb_id"])
+    pitch_stats["player_name"] = player_id.mlb_name if player_id else ""
+    return pitch_stats
