@@ -47,6 +47,9 @@ class BatOrder:
     def __init__(self, bat_order: int = Query(..., ge=0, le=9)):
         self.number = bat_order
 
+    def __str__(self):
+        return str(self.number)
+
 
 class MLBSeason:
     def __init__(self, year: int = Query(..., ge=2017, le=2019), app: Vigorish = Depends(get_vig_app)):
@@ -86,3 +89,6 @@ class TeamParameters:
     def __init__(self, team_id: TeamID, season: MLBSeason = Depends()):
         self.team_id = team_id.name
         self.year = season.year
+
+    def __str__(self):
+        return f"{self.team_id}_{self.year}"
