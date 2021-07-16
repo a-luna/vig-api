@@ -11,14 +11,17 @@ from app.data.initialize import download_files_from_s3, extract_zip_files, set_e
 
 class Settings(BaseSettings):
     if str(Path(__file__).resolve()).startswith("/app"):
+        env_dev = False
         set_env_variables()
         download_files_from_s3()
         extract_zip_files()
     else:
+        env_dev = True
         APP_ROOT = Path(__file__).parent.parent.parent.resolve()
         os.environ["DOTENV_FILE"] = str(APP_ROOT.joinpath(".env"))
         load_dotenv(dotenv_path=os.environ["DOTENV_FILE"])
 
+    ENV: str = "DEV" if env_dev else "PROD"
     API_VERSION: str = os.environ.get("API_VERSION")
     DOTENV_FILE: Path = Path(os.environ.get("DOTENV_FILE"))
     CONFIG_FILE: Path = Path(os.environ.get("CONFIG_FILE"))
