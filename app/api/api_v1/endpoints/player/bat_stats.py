@@ -8,6 +8,7 @@ from vigorish.app import Vigorish
 
 from app.core.database import get_vig_app
 from app.schemas import BatStatsSchema
+from app.schema_prep import convert_team_stats
 
 router = APIRouter()
 
@@ -31,7 +32,8 @@ def get_bat_stats_by_year_for_player(
     bat_stats = app.scraped_data.get_bat_stats_by_year_for_player(mlb_id)
     if not bat_stats:
         raise HTTPException(status_code=int(HTTPStatus.NOT_FOUND), detail="No results found")
-    return [asdict(s) for s in bat_stats]
+    player_bat_stats = [asdict(s) for s in bat_stats]
+    return convert_team_stats(app.db_session, player_bat_stats)
 
 
 @router.get("/by_team", response_model=List[BatStatsSchema])
@@ -42,7 +44,8 @@ def get_bat_stats_by_team_for_player(
     bat_stats = app.scraped_data.get_bat_stats_by_team_for_player(mlb_id)
     if not bat_stats:
         raise HTTPException(status_code=int(HTTPStatus.NOT_FOUND), detail="No results found")
-    return [asdict(s) for s in bat_stats]
+    player_bat_stats = [asdict(s) for s in bat_stats]
+    return convert_team_stats(app.db_session, player_bat_stats)
 
 
 @router.get("/by_team_by_year", response_model=List[BatStatsSchema])
@@ -53,7 +56,8 @@ def get_bat_stats_by_team_by_year_for_player(
     bat_stats = app.scraped_data.get_bat_stats_by_team_by_year_for_player(mlb_id)
     if not bat_stats:
         raise HTTPException(status_code=int(HTTPStatus.NOT_FOUND), detail="No results found")
-    return [asdict(s) for s in bat_stats]
+    player_bat_stats = [asdict(s) for s in bat_stats]
+    return convert_team_stats(app.db_session, player_bat_stats)
 
 
 @router.get("/by_opp_team", response_model=List[BatStatsSchema])
@@ -64,7 +68,8 @@ def get_bat_stats_by_opp_for_player(
     bat_stats = app.scraped_data.get_bat_stats_by_opp_for_player(mlb_id)
     if not bat_stats:
         raise HTTPException(status_code=int(HTTPStatus.NOT_FOUND), detail="No results found")
-    return [asdict(s) for s in bat_stats]
+    player_bat_stats = [asdict(s) for s in bat_stats]
+    return convert_team_stats(app.db_session, player_bat_stats)
 
 
 @router.get("/by_opp_team_by_year", response_model=List[BatStatsSchema])
@@ -75,4 +80,5 @@ def get_bat_stats_by_opp_by_year_for_player(
     bat_stats = app.scraped_data.get_bat_stats_by_opp_by_year_for_player(mlb_id)
     if not bat_stats:
         raise HTTPException(status_code=int(HTTPStatus.NOT_FOUND), detail="No results found")
-    return [asdict(s) for s in bat_stats]
+    player_bat_stats = [asdict(s) for s in bat_stats]
+    return convert_team_stats(app.db_session, player_bat_stats)

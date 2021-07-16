@@ -1,8 +1,8 @@
 from dataclasses import asdict
 from http import HTTPStatus
-from typing import Dict, List
+from typing import Dict, List, Optional
 
-from fastapi import APIRouter, Depends, HTTPException, Request, Response
+from fastapi import APIRouter, Depends, HTTPException, Query, Request, Response
 from fastapi_redis_cache import cache
 from vigorish.app import Vigorish
 from vigorish.enums import DefensePosition, TeamID
@@ -97,8 +97,8 @@ def get_bat_stats_for_lineup_spot_by_year_for_team(
 def get_bat_stats_for_defpos_by_year_for_team(
     request: Request,
     response: Response,
-    def_position: DefensePosition,
     team_id: TeamID,
+    def_position: Optional[List[DefensePosition]] = Query(None),
     app: Vigorish = Depends(get_vig_app),
 ):
     bat_stats_dict = app.scraped_data.get_bat_stats_for_defpos_by_year_for_team(def_position, team_id.name)
@@ -137,7 +137,8 @@ def get_bat_stats_by_player_for_team(
     bat_stats = app.scraped_data.get_bat_stats_by_player_for_team(team_params.team_id, team_params.year)
     if not bat_stats:
         raise HTTPException(status_code=int(HTTPStatus.NOT_FOUND), detail="No results found")
-    return [asdict(s) for s in bat_stats]
+    player_bat_stats = [asdict(s) for s in bat_stats]
+    return convert_team_stats(app.db_session, player_bat_stats)
 
 
 @router.get("/bat_order/by_player", response_model=List[BatStatsSchema])
@@ -154,7 +155,8 @@ def get_bat_stats_for_lineup_spot_by_player_for_team(
     )
     if not bat_stats:
         raise HTTPException(status_code=int(HTTPStatus.NOT_FOUND), detail="No results found")
-    return [asdict(s) for s in bat_stats]
+    player_bat_stats = [asdict(s) for s in bat_stats]
+    return convert_team_stats(app.db_session, player_bat_stats)
 
 
 @router.get("/position/by_player", response_model=List[BatStatsSchema])
@@ -162,7 +164,7 @@ def get_bat_stats_for_lineup_spot_by_player_for_team(
 def get_bat_stats_for_defensive_position_by_player_for_team(
     request: Request,
     response: Response,
-    def_position: DefensePosition,
+    def_position: Optional[List[DefensePosition]] = Query(None),
     team_params: TeamParameters = Depends(),
     app: Vigorish = Depends(get_vig_app),
 ):
@@ -171,7 +173,8 @@ def get_bat_stats_for_defensive_position_by_player_for_team(
     )
     if not bat_stats:
         raise HTTPException(status_code=int(HTTPStatus.NOT_FOUND), detail="No results found")
-    return [asdict(s) for s in bat_stats]
+    player_bat_stats = [asdict(s) for s in bat_stats]
+    return convert_team_stats(app.db_session, player_bat_stats)
 
 
 @router.get("/starters/by_player", response_model=List[BatStatsSchema])
@@ -182,7 +185,8 @@ def get_bat_stats_for_starters_by_player_for_team(
     bat_stats = app.scraped_data.get_bat_stats_for_starters_by_player_for_team(team_params.team_id, team_params.year)
     if not bat_stats:
         raise HTTPException(status_code=int(HTTPStatus.NOT_FOUND), detail="No results found")
-    return [asdict(s) for s in bat_stats]
+    player_bat_stats = [asdict(s) for s in bat_stats]
+    return convert_team_stats(app.db_session, player_bat_stats)
 
 
 @router.get("/subs/by_player", response_model=List[BatStatsSchema])
@@ -193,7 +197,8 @@ def get_bat_stats_for_subs_by_player_for_team(
     bat_stats = app.scraped_data.get_bat_stats_for_subs_by_player_for_team(team_params.team_id, team_params.year)
     if not bat_stats:
         raise HTTPException(status_code=int(HTTPStatus.NOT_FOUND), detail="No results found")
-    return [asdict(s) for s in bat_stats]
+    player_bat_stats = [asdict(s) for s in bat_stats]
+    return convert_team_stats(app.db_session, player_bat_stats)
 
 
 @router.get("/all_teams", response_model=Dict[str, BatStatsSchema])
@@ -205,7 +210,7 @@ def get_bat_stats_for_season_for_all_teams(
     if not bat_stats_dict:
         raise HTTPException(status_code=int(HTTPStatus.NOT_FOUND), detail="No results found")
     all_teams = {team_id: asdict(bat_stats) for team_id, bat_stats in bat_stats_dict.items()}
-    return convert_team_stats(all_teams)
+    return convert_team_stats(app.db_session, all_teams)
 
 
 @router.get("/bat_order/all_teams", response_model=Dict[str, BatStatsSchema])
@@ -223,7 +228,7 @@ def get_bat_stats_for_lineup_spot_for_season_for_all_teams(
     if not bat_stats_dict:
         raise HTTPException(status_code=int(HTTPStatus.NOT_FOUND), detail="No results found")
     all_teams = {team_id: asdict(bat_stats) for team_id, bat_stats in bat_stats_dict.items()}
-    return convert_team_stats(all_teams)
+    return convert_team_stats(app.db_session, all_teams)
 
 
 @router.get("/position/all_teams", response_model=Dict[str, BatStatsSchema])
@@ -231,7 +236,7 @@ def get_bat_stats_for_lineup_spot_for_season_for_all_teams(
 def get_bat_stats_for_defpos_for_season_for_all_teams(
     request: Request,
     response: Response,
-    def_position: DefensePosition,
+    def_position: Optional[List[DefensePosition]] = Query(None),
     season: MLBSeason = Depends(),
     app: Vigorish = Depends(get_vig_app),
 ):
@@ -239,7 +244,7 @@ def get_bat_stats_for_defpos_for_season_for_all_teams(
     if not bat_stats_dict:
         raise HTTPException(status_code=int(HTTPStatus.NOT_FOUND), detail="No results found")
     all_teams = {team_id: asdict(bat_stats) for team_id, bat_stats in bat_stats_dict.items()}
-    return convert_team_stats(all_teams)
+    return convert_team_stats(app.db_session, all_teams)
 
 
 @router.get("/starters/all_teams", response_model=Dict[str, BatStatsSchema])
@@ -251,7 +256,7 @@ def get_bat_stats_for_starters_for_season_for_all_teams(
     if not bat_stats_dict:
         raise HTTPException(status_code=int(HTTPStatus.NOT_FOUND), detail="No results found")
     all_teams = {team_id: asdict(bat_stats) for team_id, bat_stats in bat_stats_dict.items()}
-    return convert_team_stats(all_teams)
+    return convert_team_stats(app.db_session, all_teams)
 
 
 @router.get("/subs/all_teams", response_model=Dict[str, BatStatsSchema])
@@ -263,4 +268,4 @@ def get_bat_stats_for_subs_for_season_for_all_teams(
     if not bat_stats_dict:
         raise HTTPException(status_code=int(HTTPStatus.NOT_FOUND), detail="No results found")
     all_teams = {team_id: asdict(bat_stats) for team_id, bat_stats in bat_stats_dict.items()}
-    return convert_team_stats(all_teams)
+    return convert_team_stats(app.db_session, all_teams)

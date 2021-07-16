@@ -7,6 +7,7 @@ class BatStatsSchema(BaseModel):
     year: int
     team_id_bbref: str
     opponent_team_id_bbref: str
+    player_name: str
     is_starter: bool
     bat_order: int
     def_position: DefensePosition
