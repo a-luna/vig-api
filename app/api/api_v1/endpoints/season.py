@@ -2,7 +2,7 @@ from http import HTTPStatus
 from typing import List
 
 from fastapi import APIRouter, Depends, HTTPException, Request, Response
-from fastapi_redis_cache import cache
+from fastapi_redis_cache import cache, cache_one_day
 from vigorish.app import Vigorish
 from vigorish.database import Season, Team
 from vigorish.util.dt_format_strings import DATE_ONLY
@@ -48,7 +48,7 @@ def get_all_dates_in_season(
 
 
 @router.get("/standings", response_model=TeamLeagueStandings)
-@cache()
+@cache_one_day()
 def get_regular_season_standings(
     request: Request, response: Response, season: MLBSeason = Depends(), app: Vigorish = Depends(get_vig_app)
 ):
