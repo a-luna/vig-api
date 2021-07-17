@@ -1,3 +1,4 @@
+from datetime import datetime
 from http import HTTPStatus
 from typing import List
 
@@ -52,7 +53,10 @@ def get_all_dates_in_season(
 def get_regular_season_standings(
     request: Request, response: Response, season: MLBSeason = Depends(), app: Vigorish = Depends(get_vig_app)
 ):
-    all_teams = [team.as_dict() for team in Team.get_all_teams_for_season(app.db_session, season.year)]
+    if season.year == datetime.today().year and app.regular_season_is_in_progress():
+        all_teams = app.scraped_data.get_season_standings(season.year)
+    else:
+        all_teams = [team.as_dict() for team in Team.get_all_teams_for_season(app.db_session, season.year)]
     return {
         "al": {
             "w": sorted(
