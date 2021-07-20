@@ -43,14 +43,6 @@ def get_pitch_app_params(
     return (pitch_app_dict["pitcher_id"], pitch_app_dict["game_id"])
 
 
-class BatOrder:
-    def __init__(self, bat_order: int = Query(..., ge=0, le=9)):
-        self.number = bat_order
-
-    def __str__(self):
-        return str(self.number)
-
-
 class MLBSeason:
     def __init__(self, year: int = Query(..., ge=2017, le=2021), app: Vigorish = Depends(get_vig_app)):
         season = Season.find_by_year(app.db_session, year)
