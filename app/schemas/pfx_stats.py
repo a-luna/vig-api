@@ -20,6 +20,7 @@ class PitchTypePercentilesSchema(BaseModel):
 
 class PfxStatsSchema(BaseModel):
     mlb_id: int
+    bat_stand: Optional[str]
     avg: float
     obp: float
     slg: float
@@ -34,6 +35,7 @@ class PfxStatsSchema(BaseModel):
     soft_hit_rate: float
     barrel_rate: float
     avg_launch_speed: float
+    max_launch_speed: Optional[float]
     avg_launch_angle: float
     avg_hit_distance: float
     bb_rate: float

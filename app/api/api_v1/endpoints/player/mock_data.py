@@ -3,6 +3,7 @@ YEARLY_PFX = {
         "metrics": {
             "2017": {
                 "mlb_id": 592662,
+                "bat_stand": "",
                 "avg": 0.199,
                 "obp": 0.288,
                 "slg": 0.356,
@@ -17,6 +18,7 @@ YEARLY_PFX = {
                 "soft_hit_rate": 0.038,
                 "barrel_rate": 0.051,
                 "avg_launch_speed": 78.585,
+                "max_launch_speed": 99.999,
                 "avg_launch_angle": 11.563,
                 "avg_hit_distance": 154.943,
                 "bb_rate": 0.104,
@@ -76,6 +78,7 @@ YEARLY_PFX = {
                 "pitch_type_metrics": {
                     "FF": {
                         "mlb_id": 592662,
+                        "bat_stand": "",
                         "avg": 0.188,
                         "obp": 0.294,
                         "slg": 0.361,
@@ -90,6 +93,7 @@ YEARLY_PFX = {
                         "soft_hit_rate": 0.028,
                         "barrel_rate": 0.061,
                         "avg_launch_speed": 76.396,
+                        "max_launch_speed": 99.999,
                         "avg_launch_angle": 13.896,
                         "avg_hit_distance": 157.401,
                         "bb_rate": 0.122,
@@ -159,6 +163,7 @@ YEARLY_PFX = {
                     },
                     "SL": {
                         "mlb_id": 592662,
+                        "bat_stand": "",
                         "avg": 0.172,
                         "obp": 0.229,
                         "slg": 0.312,
@@ -173,6 +178,7 @@ YEARLY_PFX = {
                         "soft_hit_rate": 0.028,
                         "barrel_rate": 0.042,
                         "avg_launch_speed": 81.266,
+                        "max_launch_speed": 99.999,
                         "avg_launch_angle": 14.775,
                         "avg_hit_distance": 173.169,
                         "bb_rate": 0.056,
@@ -242,6 +248,7 @@ YEARLY_PFX = {
                     },
                     "KC": {
                         "mlb_id": 592662,
+                        "bat_stand": "",
                         "avg": 0.202,
                         "obp": 0.272,
                         "slg": 0.288,
@@ -256,6 +263,7 @@ YEARLY_PFX = {
                         "soft_hit_rate": 0.087,
                         "barrel_rate": 0.029,
                         "avg_launch_speed": 79.762,
+                        "max_launch_speed": 99.999,
                         "avg_launch_angle": 3.609,
                         "avg_hit_distance": 131.29,
                         "bb_rate": 0.086,
@@ -325,6 +333,7 @@ YEARLY_PFX = {
                     },
                     "FT": {
                         "mlb_id": 592662,
+                        "bat_stand": "",
                         "avg": 0.55,
                         "obp": 0.625,
                         "slg": 0.9,
@@ -339,6 +348,7 @@ YEARLY_PFX = {
                         "soft_hit_rate": 0.0,
                         "barrel_rate": 0.053,
                         "avg_launch_speed": 88.721,
+                        "max_launch_speed": 99.999,
                         "avg_launch_angle": 2.421,
                         "avg_hit_distance": 145.316,
                         "bb_rate": 0.167,
@@ -410,6 +420,7 @@ YEARLY_PFX = {
             },
             "2018": {
                 "mlb_id": 592662,
+                "bat_stand": "",
                 "avg": 0.217,
                 "obp": 0.327,
                 "slg": 0.379,
@@ -424,6 +435,7 @@ YEARLY_PFX = {
                 "soft_hit_rate": 0.038,
                 "barrel_rate": 0.077,
                 "avg_launch_speed": 82.25,
+                "max_launch_speed": 99.999,
                 "avg_launch_angle": 12.199,
                 "avg_hit_distance": 168.374,
                 "bb_rate": 0.131,
@@ -483,6 +495,7 @@ YEARLY_PFX = {
                 "pitch_type_metrics": {
                     "FF": {
                         "mlb_id": 592662,
+                        "bat_stand": "",
                         "avg": 0.254,
                         "obp": 0.383,
                         "slg": 0.433,
@@ -497,6 +510,7 @@ YEARLY_PFX = {
                         "soft_hit_rate": 0.023,
                         "barrel_rate": 0.068,
                         "avg_launch_speed": 84.775,
+                        "max_launch_speed": 99.999,
                         "avg_launch_angle": 13.559,
                         "avg_hit_distance": 178.181,
                         "bb_rate": 0.164,
@@ -566,6 +580,7 @@ YEARLY_PFX = {
                     },
                     "SL": {
                         "mlb_id": 592662,
+                        "bat_stand": "",
                         "avg": 0.177,
                         "obp": 0.241,
                         "slg": 0.323,
@@ -580,6 +595,7 @@ YEARLY_PFX = {
                         "soft_hit_rate": 0.072,
                         "barrel_rate": 0.101,
                         "avg_launch_speed": 75.343,
+                        "max_launch_speed": 99.999,
                         "avg_launch_angle": 10.449,
                         "avg_hit_distance": 151.768,
                         "bb_rate": 0.057,
@@ -649,6 +665,7 @@ YEARLY_PFX = {
                     },
                     "KC": {
                         "mlb_id": 592662,
+                        "bat_stand": "",
                         "avg": 0.169,
                         "obp": 0.286,
                         "slg": 0.312,
@@ -663,6 +680,7 @@ YEARLY_PFX = {
                         "soft_hit_rate": 0.051,
                         "barrel_rate": 0.077,
                         "avg_launch_speed": 83.172,
+                        "max_launch_speed": 99.999,
                         "avg_launch_angle": 9.821,
                         "avg_hit_distance": 157.333,
                         "bb_rate": 0.141,
@@ -734,6 +752,7 @@ YEARLY_PFX = {
             },
             "2019": {
                 "mlb_id": 592662,
+                "bat_stand": "",
                 "avg": 0.234,
                 "obp": 0.322,
                 "slg": 0.441,
@@ -748,6 +767,7 @@ YEARLY_PFX = {
                 "soft_hit_rate": 0.043,
                 "barrel_rate": 0.099,
                 "avg_launch_speed": 79.597,
+                "max_launch_speed": 99.999,
                 "avg_launch_angle": 11.913,
                 "avg_hit_distance": 171.957,
                 "bb_rate": 0.107,
@@ -807,6 +827,7 @@ YEARLY_PFX = {
                 "pitch_type_metrics": {
                     "FF": {
                         "mlb_id": 592662,
+                        "bat_stand": "",
                         "avg": 0.222,
                         "obp": 0.323,
                         "slg": 0.393,
@@ -821,6 +842,7 @@ YEARLY_PFX = {
                         "soft_hit_rate": 0.052,
                         "barrel_rate": 0.081,
                         "avg_launch_speed": 75.54,
+                        "max_launch_speed": 99.999,
                         "avg_launch_angle": 14.983,
                         "avg_hit_distance": 172.244,
                         "bb_rate": 0.119,
@@ -890,6 +912,7 @@ YEARLY_PFX = {
                     },
                     "SL": {
                         "mlb_id": 592662,
+                        "bat_stand": "",
                         "avg": 0.221,
                         "obp": 0.297,
                         "slg": 0.424,
@@ -904,6 +927,7 @@ YEARLY_PFX = {
                         "soft_hit_rate": 0.036,
                         "barrel_rate": 0.116,
                         "avg_launch_speed": 80.225,
+                        "max_launch_speed": 99.999,
                         "avg_launch_angle": 10.674,
                         "avg_hit_distance": 166.007,
                         "bb_rate": 0.092,
@@ -973,6 +997,7 @@ YEARLY_PFX = {
                     },
                     "KC": {
                         "mlb_id": 592662,
+                        "bat_stand": "",
                         "avg": 0.19,
                         "obp": 0.296,
                         "slg": 0.405,
@@ -987,6 +1012,7 @@ YEARLY_PFX = {
                         "soft_hit_rate": 0.039,
                         "barrel_rate": 0.157,
                         "avg_launch_speed": 87.143,
+                        "max_launch_speed": 99.999,
                         "avg_launch_angle": 10.902,
                         "avg_hit_distance": 201.176,
                         "bb_rate": 0.133,
@@ -1056,6 +1082,7 @@ YEARLY_PFX = {
                     },
                     "FT": {
                         "mlb_id": 592662,
+                        "bat_stand": "",
                         "avg": 0.348,
                         "obp": 0.416,
                         "slg": 0.638,
@@ -1070,6 +1097,7 @@ YEARLY_PFX = {
                         "soft_hit_rate": 0.035,
                         "barrel_rate": 0.053,
                         "avg_launch_speed": 83.065,
+                        "max_launch_speed": 99.999,
                         "avg_launch_angle": 6.789,
                         "avg_hit_distance": 154.456,
                         "bb_rate": 0.089,
@@ -1141,6 +1169,7 @@ YEARLY_PFX = {
             },
             "2020": {
                 "mlb_id": 592662,
+                "bat_stand": "",
                 "avg": 0.261,
                 "obp": 0.394,
                 "slg": 0.522,
@@ -1155,6 +1184,7 @@ YEARLY_PFX = {
                 "soft_hit_rate": 0.022,
                 "barrel_rate": 0.117,
                 "avg_launch_speed": 91.3,
+                "max_launch_speed": 99.999,
                 "avg_launch_angle": 22.409,
                 "avg_hit_distance": 215.474,
                 "bb_rate": 0.179,
@@ -1214,6 +1244,7 @@ YEARLY_PFX = {
                 "pitch_type_metrics": {
                     "FF": {
                         "mlb_id": 592662,
+                        "bat_stand": "",
                         "avg": 0.292,
                         "obp": 0.468,
                         "slg": 0.689,
@@ -1228,6 +1259,7 @@ YEARLY_PFX = {
                         "soft_hit_rate": 0.025,
                         "barrel_rate": 0.148,
                         "avg_launch_speed": 91.599,
+                        "max_launch_speed": 99.999,
                         "avg_launch_angle": 24.556,
                         "avg_hit_distance": 231.222,
                         "bb_rate": 0.241,
@@ -1297,6 +1329,7 @@ YEARLY_PFX = {
                     },
                     "SL": {
                         "mlb_id": 592662,
+                        "bat_stand": "",
                         "avg": 0.164,
                         "obp": 0.205,
                         "slg": 0.224,
@@ -1311,6 +1344,7 @@ YEARLY_PFX = {
                         "soft_hit_rate": 0.028,
                         "barrel_rate": 0.028,
                         "avg_launch_speed": 90.514,
+                        "max_launch_speed": 99.999,
                         "avg_launch_angle": 20.278,
                         "avg_hit_distance": 187.5,
                         "bb_rate": 0.055,
@@ -1380,6 +1414,7 @@ YEARLY_PFX = {
                     },
                     "CU": {
                         "mlb_id": 592662,
+                        "bat_stand": "",
                         "avg": 0.474,
                         "obp": 0.545,
                         "slg": 0.684,
@@ -1394,6 +1429,7 @@ YEARLY_PFX = {
                         "soft_hit_rate": 0.0,
                         "barrel_rate": 0.154,
                         "avg_launch_speed": 93.731,
+                        "max_launch_speed": 99.999,
                         "avg_launch_angle": 17.538,
                         "avg_hit_distance": 215.231,
                         "bb_rate": 0.136,
@@ -1463,6 +1499,7 @@ YEARLY_PFX = {
                     },
                     "SI": {
                         "mlb_id": 592662,
+                        "bat_stand": "",
                         "avg": 0.111,
                         "obp": 0.385,
                         "slg": 0.111,
@@ -1477,6 +1514,7 @@ YEARLY_PFX = {
                         "soft_hit_rate": 0.0,
                         "barrel_rate": 0.0,
                         "avg_launch_speed": 84.367,
+                        "max_launch_speed": 99.999,
                         "avg_launch_angle": 15.833,
                         "avg_hit_distance": 135.0,
                         "bb_rate": 0.308,
@@ -1546,6 +1584,7 @@ YEARLY_PFX = {
                     },
                     "CH": {
                         "mlb_id": 592662,
+                        "bat_stand": "",
                         "avg": 0.5,
                         "obp": 0.5,
                         "slg": 2.0,
@@ -1560,6 +1599,7 @@ YEARLY_PFX = {
                         "soft_hit_rate": 0.0,
                         "barrel_rate": 1.0,
                         "avg_launch_speed": 105.4,
+                        "max_launch_speed": 99.999,
                         "avg_launch_angle": 28.0,
                         "avg_hit_distance": 433.0,
                         "bb_rate": 0.0,
@@ -1631,6 +1671,7 @@ YEARLY_PFX = {
             },
             "2021": {
                 "mlb_id": 592662,
+                "bat_stand": "",
                 "avg": 0.228,
                 "obp": 0.277,
                 "slg": 0.444,
@@ -1645,6 +1686,7 @@ YEARLY_PFX = {
                 "soft_hit_rate": 0.013,
                 "barrel_rate": 0.105,
                 "avg_launch_speed": 91.113,
+                "max_launch_speed": 99.999,
                 "avg_launch_angle": 13.531,
                 "avg_hit_distance": 175.828,
                 "bb_rate": 0.06,
@@ -1704,6 +1746,7 @@ YEARLY_PFX = {
                 "pitch_type_metrics": {
                     "FF": {
                         "mlb_id": 592662,
+                        "bat_stand": "",
                         "avg": 0.227,
                         "obp": 0.283,
                         "slg": 0.44,
@@ -1718,6 +1761,7 @@ YEARLY_PFX = {
                         "soft_hit_rate": 0.006,
                         "barrel_rate": 0.106,
                         "avg_launch_speed": 92.242,
+                        "max_launch_speed": 99.999,
                         "avg_launch_angle": 17.292,
                         "avg_hit_distance": 184.019,
                         "bb_rate": 0.068,
@@ -1787,6 +1831,7 @@ YEARLY_PFX = {
                     },
                     "SL": {
                         "mlb_id": 592662,
+                        "bat_stand": "",
                         "avg": 0.212,
                         "obp": 0.245,
                         "slg": 0.423,
@@ -1801,6 +1846,7 @@ YEARLY_PFX = {
                         "soft_hit_rate": 0.039,
                         "barrel_rate": 0.118,
                         "avg_launch_speed": 88.482,
+                        "max_launch_speed": 99.999,
                         "avg_launch_angle": 2.961,
                         "avg_hit_distance": 158.51,
                         "bb_rate": 0.036,
@@ -1870,6 +1916,7 @@ YEARLY_PFX = {
                     },
                     "KC": {
                         "mlb_id": 592662,
+                        "bat_stand": "",
                         "avg": 0.333,
                         "obp": 0.36,
                         "slg": 0.542,
@@ -1884,6 +1931,7 @@ YEARLY_PFX = {
                         "soft_hit_rate": 0.0,
                         "barrel_rate": 0.059,
                         "avg_launch_speed": 86.265,
+                        "max_launch_speed": 99.999,
                         "avg_launch_angle": 7.412,
                         "avg_hit_distance": 134.176,
                         "bb_rate": 0.04,
@@ -1953,6 +2001,7 @@ YEARLY_PFX = {
                     },
                     "CH": {
                         "mlb_id": 592662,
+                        "bat_stand": "",
                         "avg": 0.2,
                         "obp": 0.333,
                         "slg": 0.6,
@@ -1967,6 +2016,7 @@ YEARLY_PFX = {
                         "soft_hit_rate": 0.0,
                         "barrel_rate": 0.111,
                         "avg_launch_speed": 93.733,
+                        "max_launch_speed": 99.999,
                         "avg_launch_angle": 20.667,
                         "avg_hit_distance": 224.444,
                         "bb_rate": 0.167,
@@ -2294,6 +2344,7 @@ YEARLY_PFX = {
         "metrics": {
             "2017": {
                 "mlb_id": 592662,
+                "bat_stand": "",
                 "avg": 0.195,
                 "obp": 0.295,
                 "slg": 0.354,
@@ -2308,6 +2359,7 @@ YEARLY_PFX = {
                 "soft_hit_rate": 0.033,
                 "barrel_rate": 0.053,
                 "avg_launch_speed": 79.454,
+                "max_launch_speed": 99.999,
                 "avg_launch_angle": 11.25,
                 "avg_hit_distance": 154.329,
                 "bb_rate": 0.116,
@@ -2367,6 +2419,7 @@ YEARLY_PFX = {
                 "pitch_type_metrics": {
                     "FF": {
                         "mlb_id": 592662,
+                        "bat_stand": "",
                         "avg": 0.187,
                         "obp": 0.304,
                         "slg": 0.356,
@@ -2381,6 +2434,7 @@ YEARLY_PFX = {
                         "soft_hit_rate": 0.017,
                         "barrel_rate": 0.056,
                         "avg_launch_speed": 76.286,
+                        "max_launch_speed": 99.999,
                         "avg_launch_angle": 13.842,
                         "avg_hit_distance": 155.548,
                         "bb_rate": 0.133,
@@ -2450,6 +2504,7 @@ YEARLY_PFX = {
                     },
                     "KC": {
                         "mlb_id": 592662,
+                        "bat_stand": "",
                         "avg": 0.207,
                         "obp": 0.281,
                         "slg": 0.31,
@@ -2464,6 +2519,7 @@ YEARLY_PFX = {
                         "soft_hit_rate": 0.102,
                         "barrel_rate": 0.034,
                         "avg_launch_speed": 79.941,
+                        "max_launch_speed": 99.999,
                         "avg_launch_angle": 1.525,
                         "avg_hit_distance": 129.034,
                         "bb_rate": 0.092,
@@ -2533,6 +2589,7 @@ YEARLY_PFX = {
                     },
                     "SL": {
                         "mlb_id": 592662,
+                        "bat_stand": "",
                         "avg": 0.137,
                         "obp": 0.208,
                         "slg": 0.274,
@@ -2547,6 +2604,7 @@ YEARLY_PFX = {
                         "soft_hit_rate": 0.02,
                         "barrel_rate": 0.059,
                         "avg_launch_speed": 86.175,
+                        "max_launch_speed": 99.999,
                         "avg_launch_angle": 15.0,
                         "avg_hit_distance": 176.843,
                         "bb_rate": 0.074,
@@ -2616,6 +2674,7 @@ YEARLY_PFX = {
                     },
                     "FT": {
                         "mlb_id": 592662,
+                        "bat_stand": "",
                         "avg": 0.588,
                         "obp": 0.667,
                         "slg": 1.0,
@@ -2630,6 +2689,7 @@ YEARLY_PFX = {
                         "soft_hit_rate": 0.0,
                         "barrel_rate": 0.059,
                         "avg_launch_speed": 90.588,
+                        "max_launch_speed": 99.999,
                         "avg_launch_angle": 6.765,
                         "avg_hit_distance": 161.882,
                         "bb_rate": 0.19,
@@ -2701,6 +2761,7 @@ YEARLY_PFX = {
             },
             "2018": {
                 "mlb_id": 592662,
+                "bat_stand": "",
                 "avg": 0.246,
                 "obp": 0.362,
                 "slg": 0.421,
@@ -2715,6 +2776,7 @@ YEARLY_PFX = {
                 "soft_hit_rate": 0.032,
                 "barrel_rate": 0.077,
                 "avg_launch_speed": 85.842,
+                "max_launch_speed": 99.999,
                 "avg_launch_angle": 14.936,
                 "avg_hit_distance": 184.541,
                 "bb_rate": 0.149,
@@ -2774,6 +2836,7 @@ YEARLY_PFX = {
                 "pitch_type_metrics": {
                     "FF": {
                         "mlb_id": 592662,
+                        "bat_stand": "",
                         "avg": 0.272,
                         "obp": 0.406,
                         "slg": 0.445,
@@ -2788,6 +2851,7 @@ YEARLY_PFX = {
                         "soft_hit_rate": 0.014,
                         "barrel_rate": 0.063,
                         "avg_launch_speed": 86.59,
+                        "max_launch_speed": 99.999,
                         "avg_launch_angle": 16.427,
                         "avg_hit_distance": 192.643,
                         "bb_rate": 0.182,
@@ -2857,6 +2921,7 @@ YEARLY_PFX = {
                     },
                     "KC": {
                         "mlb_id": 592662,
+                        "bat_stand": "",
                         "avg": 0.188,
                         "obp": 0.293,
                         "slg": 0.359,
@@ -2871,6 +2936,7 @@ YEARLY_PFX = {
                         "soft_hit_rate": 0.062,
                         "barrel_rate": 0.094,
                         "avg_launch_speed": 84.066,
+                        "max_launch_speed": 99.999,
                         "avg_launch_angle": 12.125,
                         "avg_hit_distance": 172.688,
                         "bb_rate": 0.132,
@@ -2940,6 +3006,7 @@ YEARLY_PFX = {
                     },
                     "SL": {
                         "mlb_id": 592662,
+                        "bat_stand": "",
                         "avg": 0.233,
                         "obp": 0.312,
                         "slg": 0.419,
@@ -2954,6 +3021,7 @@ YEARLY_PFX = {
                         "soft_hit_rate": 0.068,
                         "barrel_rate": 0.114,
                         "avg_launch_speed": 84.925,
+                        "max_launch_speed": 99.999,
                         "avg_launch_angle": 12.818,
                         "avg_hit_distance": 170.818,
                         "bb_rate": 0.083,
@@ -3025,6 +3093,7 @@ YEARLY_PFX = {
             },
             "2019": {
                 "mlb_id": 592662,
+                "bat_stand": "",
                 "avg": 0.241,
                 "obp": 0.337,
                 "slg": 0.462,
@@ -3039,6 +3108,7 @@ YEARLY_PFX = {
                 "soft_hit_rate": 0.037,
                 "barrel_rate": 0.103,
                 "avg_launch_speed": 80.59,
+                "max_launch_speed": 99.999,
                 "avg_launch_angle": 12.722,
                 "avg_hit_distance": 179.541,
                 "bb_rate": 0.121,
@@ -3098,6 +3168,7 @@ YEARLY_PFX = {
                 "pitch_type_metrics": {
                     "FF": {
                         "mlb_id": 592662,
+                        "bat_stand": "",
                         "avg": 0.213,
                         "obp": 0.329,
                         "slg": 0.378,
@@ -3112,6 +3183,7 @@ YEARLY_PFX = {
                         "soft_hit_rate": 0.047,
                         "barrel_rate": 0.079,
                         "avg_launch_speed": 74.567,
+                        "max_launch_speed": 99.999,
                         "avg_launch_angle": 16.402,
                         "avg_hit_distance": 178.071,
                         "bb_rate": 0.133,
@@ -3181,6 +3253,7 @@ YEARLY_PFX = {
                     },
                     "SL": {
                         "mlb_id": 592662,
+                        "bat_stand": "",
                         "avg": 0.252,
                         "obp": 0.345,
                         "slg": 0.497,
@@ -3195,6 +3268,7 @@ YEARLY_PFX = {
                         "soft_hit_rate": 0.022,
                         "barrel_rate": 0.133,
                         "avg_launch_speed": 82.327,
+                        "max_launch_speed": 99.999,
                         "avg_launch_angle": 11.856,
                         "avg_hit_distance": 178.478,
                         "bb_rate": 0.122,
@@ -3264,6 +3338,7 @@ YEARLY_PFX = {
                     },
                     "KC": {
                         "mlb_id": 592662,
+                        "bat_stand": "",
                         "avg": 0.179,
                         "obp": 0.27,
                         "slg": 0.385,
@@ -3278,6 +3353,7 @@ YEARLY_PFX = {
                         "soft_hit_rate": 0.043,
                         "barrel_rate": 0.152,
                         "avg_launch_speed": 87.57,
+                        "max_launch_speed": 99.999,
                         "avg_launch_angle": 10.5,
                         "avg_hit_distance": 202.63,
                         "bb_rate": 0.112,
@@ -3347,6 +3423,7 @@ YEARLY_PFX = {
                     },
                     "FT": {
                         "mlb_id": 592662,
+                        "bat_stand": "",
                         "avg": 0.344,
                         "obp": 0.408,
                         "slg": 0.625,
@@ -3361,6 +3438,7 @@ YEARLY_PFX = {
                         "soft_hit_rate": 0.038,
                         "barrel_rate": 0.057,
                         "avg_launch_speed": 84.051,
+                        "max_launch_speed": 99.999,
                         "avg_launch_angle": 7.396,
                         "avg_hit_distance": 156.887,
                         "bb_rate": 0.096,
@@ -3432,6 +3510,7 @@ YEARLY_PFX = {
             },
             "2020": {
                 "mlb_id": 592662,
+                "bat_stand": "",
                 "avg": 0.283,
                 "obp": 0.433,
                 "slg": 0.579,
@@ -3446,6 +3525,7 @@ YEARLY_PFX = {
                 "soft_hit_rate": 0.01,
                 "barrel_rate": 0.13,
                 "avg_launch_speed": 92.55,
+                "max_launch_speed": 99.999,
                 "avg_launch_angle": 22.3,
                 "avg_hit_distance": 220.95,
                 "bb_rate": 0.209,
@@ -3505,6 +3585,7 @@ YEARLY_PFX = {
                 "pitch_type_metrics": {
                     "FF": {
                         "mlb_id": 592662,
+                        "bat_stand": "",
                         "avg": 0.321,
                         "obp": 0.518,
                         "slg": 0.753,
@@ -3519,6 +3600,7 @@ YEARLY_PFX = {
                         "soft_hit_rate": 0.016,
                         "barrel_rate": 0.159,
                         "avg_launch_speed": 91.951,
+                        "max_launch_speed": 99.999,
                         "avg_launch_angle": 24.587,
                         "avg_hit_distance": 232.286,
                         "bb_rate": 0.281,
@@ -3588,6 +3670,7 @@ YEARLY_PFX = {
                     },
                     "SL": {
                         "mlb_id": 592662,
+                        "bat_stand": "",
                         "avg": 0.14,
                         "obp": 0.17,
                         "slg": 0.163,
@@ -3602,6 +3685,7 @@ YEARLY_PFX = {
                         "soft_hit_rate": 0.0,
                         "barrel_rate": 0.0,
                         "avg_launch_speed": 92.757,
+                        "max_launch_speed": 99.999,
                         "avg_launch_angle": 20.565,
                         "avg_hit_distance": 181.087,
                         "bb_rate": 0.043,
@@ -3671,6 +3755,7 @@ YEARLY_PFX = {
                     },
                     "CU": {
                         "mlb_id": 592662,
+                        "bat_stand": "",
                         "avg": 0.571,
                         "obp": 0.625,
                         "slg": 0.857,
@@ -3685,6 +3770,7 @@ YEARLY_PFX = {
                         "soft_hit_rate": 0.0,
                         "barrel_rate": 0.2,
                         "avg_launch_speed": 96.59,
+                        "max_launch_speed": 99.999,
                         "avg_launch_angle": 16.0,
                         "avg_hit_distance": 237.7,
                         "bb_rate": 0.125,
@@ -3754,6 +3840,7 @@ YEARLY_PFX = {
                     },
                     "SI": {
                         "mlb_id": 592662,
+                        "bat_stand": "",
                         "avg": 0.0,
                         "obp": 0.333,
                         "slg": 0.0,
@@ -3768,6 +3855,7 @@ YEARLY_PFX = {
                         "soft_hit_rate": 0.0,
                         "barrel_rate": 0.0,
                         "avg_launch_speed": 85.8,
+                        "max_launch_speed": 99.999,
                         "avg_launch_angle": 6.667,
                         "avg_hit_distance": 162.0,
                         "bb_rate": 0.333,
@@ -3837,6 +3925,7 @@ YEARLY_PFX = {
                     },
                     "CH": {
                         "mlb_id": 592662,
+                        "bat_stand": "",
                         "avg": 1.0,
                         "obp": 1.0,
                         "slg": 4.0,
@@ -3851,6 +3940,7 @@ YEARLY_PFX = {
                         "soft_hit_rate": 0.0,
                         "barrel_rate": 1.0,
                         "avg_launch_speed": 105.4,
+                        "max_launch_speed": 99.999,
                         "avg_launch_angle": 28.0,
                         "avg_hit_distance": 433.0,
                         "bb_rate": 0.0,
@@ -3922,6 +4012,7 @@ YEARLY_PFX = {
             },
             "2021": {
                 "mlb_id": 592662,
+                "bat_stand": "",
                 "avg": 0.235,
                 "obp": 0.287,
                 "slg": 0.463,
@@ -3936,6 +4027,7 @@ YEARLY_PFX = {
                 "soft_hit_rate": 0.016,
                 "barrel_rate": 0.111,
                 "avg_launch_speed": 91.356,
+                "max_launch_speed": 99.999,
                 "avg_launch_angle": 16.0,
                 "avg_hit_distance": 180.742,
                 "bb_rate": 0.066,
@@ -3995,6 +4087,7 @@ YEARLY_PFX = {
                 "pitch_type_metrics": {
                     "FF": {
                         "mlb_id": 592662,
+                        "bat_stand": "",
                         "avg": 0.23,
                         "obp": 0.286,
                         "slg": 0.444,
@@ -4009,6 +4102,7 @@ YEARLY_PFX = {
                         "soft_hit_rate": 0.007,
                         "barrel_rate": 0.104,
                         "avg_launch_speed": 91.947,
+                        "max_launch_speed": 99.999,
                         "avg_launch_angle": 20.313,
                         "avg_hit_distance": 189.388,
                         "bb_rate": 0.073,
@@ -4078,6 +4172,7 @@ YEARLY_PFX = {
                     },
                     "SL": {
                         "mlb_id": 592662,
+                        "bat_stand": "",
                         "avg": 0.222,
                         "obp": 0.26,
                         "slg": 0.458,
@@ -4092,6 +4187,7 @@ YEARLY_PFX = {
                         "soft_hit_rate": 0.059,
                         "barrel_rate": 0.147,
                         "avg_launch_speed": 91.103,
+                        "max_launch_speed": 99.999,
                         "avg_launch_angle": 1.853,
                         "avg_hit_distance": 157.971,
                         "bb_rate": 0.039,
@@ -4161,6 +4257,7 @@ YEARLY_PFX = {
                     },
                     "KC": {
                         "mlb_id": 592662,
+                        "bat_stand": "",
                         "avg": 0.35,
                         "obp": 0.381,
                         "slg": 0.6,
@@ -4175,6 +4272,7 @@ YEARLY_PFX = {
                         "soft_hit_rate": 0.0,
                         "barrel_rate": 0.077,
                         "avg_launch_speed": 84.277,
+                        "max_launch_speed": 99.999,
                         "avg_launch_angle": 5.308,
                         "avg_hit_distance": 120.923,
                         "bb_rate": 0.048,
@@ -4244,6 +4342,7 @@ YEARLY_PFX = {
                     },
                     "CH": {
                         "mlb_id": 592662,
+                        "bat_stand": "",
                         "avg": 0.2,
                         "obp": 0.333,
                         "slg": 0.6,
@@ -4258,6 +4357,7 @@ YEARLY_PFX = {
                         "soft_hit_rate": 0.0,
                         "barrel_rate": 0.111,
                         "avg_launch_speed": 93.733,
+                        "max_launch_speed": 99.999,
                         "avg_launch_angle": 20.667,
                         "avg_hit_distance": 224.444,
                         "bb_rate": 0.167,
@@ -4585,6 +4685,7 @@ YEARLY_PFX = {
         "metrics": {
             "2017": {
                 "mlb_id": 592662,
+                "bat_stand": "",
                 "avg": 0.216,
                 "obp": 0.26,
                 "slg": 0.362,
@@ -4599,6 +4700,7 @@ YEARLY_PFX = {
                 "soft_hit_rate": 0.06,
                 "barrel_rate": 0.045,
                 "avg_launch_speed": 74.643,
+                "max_launch_speed": 99.999,
                 "avg_launch_angle": 12.985,
                 "avg_hit_distance": 157.731,
                 "bb_rate": 0.049,
@@ -4658,6 +4760,7 @@ YEARLY_PFX = {
                 "pitch_type_metrics": {
                     "FF": {
                         "mlb_id": 592662,
+                        "bat_stand": "",
                         "avg": 0.19,
                         "obp": 0.25,
                         "slg": 0.381,
@@ -4672,6 +4775,7 @@ YEARLY_PFX = {
                         "soft_hit_rate": 0.086,
                         "barrel_rate": 0.086,
                         "avg_launch_speed": 76.951,
+                        "max_launch_speed": 99.999,
                         "avg_launch_angle": 14.171,
                         "avg_hit_distance": 166.771,
                         "bb_rate": 0.074,
@@ -4741,6 +4845,7 @@ YEARLY_PFX = {
                     },
                     "SL": {
                         "mlb_id": 592662,
+                        "bat_stand": "",
                         "avg": 0.273,
                         "obp": 0.294,
                         "slg": 0.424,
@@ -4755,6 +4860,7 @@ YEARLY_PFX = {
                         "soft_hit_rate": 0.05,
                         "barrel_rate": 0.0,
                         "avg_launch_speed": 68.75,
+                        "max_launch_speed": 99.999,
                         "avg_launch_angle": 14.2,
                         "avg_hit_distance": 163.8,
                         "bb_rate": 0.0,
@@ -4824,6 +4930,7 @@ YEARLY_PFX = {
                     },
                     "KC": {
                         "mlb_id": 592662,
+                        "bat_stand": "",
                         "avg": 0.176,
                         "obp": 0.222,
                         "slg": 0.176,
@@ -4838,6 +4945,7 @@ YEARLY_PFX = {
                         "soft_hit_rate": 0.0,
                         "barrel_rate": 0.0,
                         "avg_launch_speed": 78.71,
+                        "max_launch_speed": 99.999,
                         "avg_launch_angle": 15.9,
                         "avg_hit_distance": 144.6,
                         "bb_rate": 0.056,
@@ -4907,6 +5015,7 @@ YEARLY_PFX = {
                     },
                     "FT": {
                         "mlb_id": 592662,
+                        "bat_stand": "",
                         "avg": 0.333,
                         "obp": 0.333,
                         "slg": 0.333,
@@ -4921,6 +5030,7 @@ YEARLY_PFX = {
                         "soft_hit_rate": 0.0,
                         "barrel_rate": 0.0,
                         "avg_launch_speed": 72.85,
+                        "max_launch_speed": 99.999,
                         "avg_launch_angle": -34.5,
                         "avg_hit_distance": 4.5,
                         "bb_rate": 0.0,
@@ -4990,6 +5100,7 @@ YEARLY_PFX = {
                     },
                     "UN": {
                         "mlb_id": 592662,
+                        "bat_stand": "",
                         "avg": 0.0,
                         "obp": 0.0,
                         "slg": 0.0,
@@ -5004,6 +5115,7 @@ YEARLY_PFX = {
                         "soft_hit_rate": 0.0,
                         "barrel_rate": 0.0,
                         "avg_launch_speed": 0.0,
+                        "max_launch_speed": 99.999,
                         "avg_launch_angle": 0.0,
                         "avg_hit_distance": 0.0,
                         "bb_rate": 0.0,
@@ -5075,6 +5187,7 @@ YEARLY_PFX = {
             },
             "2018": {
                 "mlb_id": 592662,
+                "bat_stand": "",
                 "avg": 0.123,
                 "obp": 0.205,
                 "slg": 0.245,
@@ -5089,6 +5202,7 @@ YEARLY_PFX = {
                 "soft_hit_rate": 0.061,
                 "barrel_rate": 0.076,
                 "avg_launch_speed": 70.277,
+                "max_launch_speed": 99.999,
                 "avg_launch_angle": 3.076,
                 "avg_hit_distance": 114.485,
                 "bb_rate": 0.068,
@@ -5148,6 +5262,7 @@ YEARLY_PFX = {
                 "pitch_type_metrics": {
                     "FF": {
                         "mlb_id": 592662,
+                        "bat_stand": "",
                         "avg": 0.184,
                         "obp": 0.286,
                         "slg": 0.388,
@@ -5162,6 +5277,7 @@ YEARLY_PFX = {
                         "soft_hit_rate": 0.059,
                         "barrel_rate": 0.088,
                         "avg_launch_speed": 77.138,
+                        "max_launch_speed": 99.999,
                         "avg_launch_angle": 1.5,
                         "avg_hit_distance": 117.353,
                         "bb_rate": 0.088,
@@ -5231,6 +5347,7 @@ YEARLY_PFX = {
                     },
                     "SL": {
                         "mlb_id": 592662,
+                        "bat_stand": "",
                         "avg": 0.068,
                         "obp": 0.089,
                         "slg": 0.136,
@@ -5245,6 +5362,7 @@ YEARLY_PFX = {
                         "soft_hit_rate": 0.08,
                         "barrel_rate": 0.08,
                         "avg_launch_speed": 58.48,
+                        "max_launch_speed": 99.999,
                         "avg_launch_angle": 6.28,
                         "avg_hit_distance": 118.24,
                         "bb_rate": 0.0,
@@ -5314,6 +5432,7 @@ YEARLY_PFX = {
                     },
                     "KC": {
                         "mlb_id": 592662,
+                        "bat_stand": "",
                         "avg": 0.077,
                         "obp": 0.25,
                         "slg": 0.077,
@@ -5328,6 +5447,7 @@ YEARLY_PFX = {
                         "soft_hit_rate": 0.0,
                         "barrel_rate": 0.0,
                         "avg_launch_speed": 79.086,
+                        "max_launch_speed": 99.999,
                         "avg_launch_angle": -0.714,
                         "avg_hit_distance": 87.143,
                         "bb_rate": 0.188,
@@ -5399,6 +5519,7 @@ YEARLY_PFX = {
             },
             "2019": {
                 "mlb_id": 592662,
+                "bat_stand": "",
                 "avg": 0.211,
                 "obp": 0.268,
                 "slg": 0.375,
@@ -5413,6 +5534,7 @@ YEARLY_PFX = {
                 "soft_hit_rate": 0.058,
                 "barrel_rate": 0.087,
                 "avg_launch_speed": 76.511,
+                "max_launch_speed": 99.999,
                 "avg_launch_angle": 9.398,
                 "avg_hit_distance": 148.398,
                 "bb_rate": 0.06,
@@ -5472,6 +5594,7 @@ YEARLY_PFX = {
                 "pitch_type_metrics": {
                     "SL": {
                         "mlb_id": 592662,
+                        "bat_stand": "",
                         "avg": 0.158,
                         "obp": 0.19,
                         "slg": 0.276,
@@ -5486,6 +5609,7 @@ YEARLY_PFX = {
                         "soft_hit_rate": 0.062,
                         "barrel_rate": 0.083,
                         "avg_launch_speed": 76.283,
+                        "max_launch_speed": 99.999,
                         "avg_launch_angle": 8.458,
                         "avg_hit_distance": 142.625,
                         "bb_rate": 0.025,
@@ -5555,6 +5679,7 @@ YEARLY_PFX = {
                     },
                     "FF": {
                         "mlb_id": 592662,
+                        "bat_stand": "",
                         "avg": 0.25,
                         "obp": 0.304,
                         "slg": 0.438,
@@ -5569,6 +5694,7 @@ YEARLY_PFX = {
                         "soft_hit_rate": 0.067,
                         "barrel_rate": 0.089,
                         "avg_launch_speed": 78.287,
+                        "max_launch_speed": 99.999,
                         "avg_launch_angle": 10.978,
                         "avg_hit_distance": 155.8,
                         "bb_rate": 0.071,
@@ -5638,6 +5764,7 @@ YEARLY_PFX = {
                     },
                     "FT": {
                         "mlb_id": 592662,
+                        "bat_stand": "",
                         "avg": 0.4,
                         "obp": 0.5,
                         "slg": 0.8,
@@ -5652,6 +5779,7 @@ YEARLY_PFX = {
                         "soft_hit_rate": 0.0,
                         "barrel_rate": 0.0,
                         "avg_launch_speed": 70.0,
+                        "max_launch_speed": 99.999,
                         "avg_launch_angle": -1.25,
                         "avg_hit_distance": 122.25,
                         "bb_rate": 0.0,
@@ -5721,6 +5849,7 @@ YEARLY_PFX = {
                     },
                     "KC": {
                         "mlb_id": 592662,
+                        "bat_stand": "",
                         "avg": 0.333,
                         "obp": 0.556,
                         "slg": 0.667,
@@ -5735,6 +5864,7 @@ YEARLY_PFX = {
                         "soft_hit_rate": 0.0,
                         "barrel_rate": 0.2,
                         "avg_launch_speed": 83.22,
+                        "max_launch_speed": 99.999,
                         "avg_launch_angle": 14.6,
                         "avg_hit_distance": 187.8,
                         "bb_rate": 0.333,
@@ -5806,6 +5936,7 @@ YEARLY_PFX = {
             },
             "2020": {
                 "mlb_id": 592662,
+                "bat_stand": "",
                 "avg": 0.207,
                 "obp": 0.281,
                 "slg": 0.379,
@@ -5820,6 +5951,7 @@ YEARLY_PFX = {
                 "soft_hit_rate": 0.054,
                 "barrel_rate": 0.081,
                 "avg_launch_speed": 87.922,
+                "max_launch_speed": 99.999,
                 "avg_launch_angle": 22.703,
                 "avg_hit_distance": 200.676,
                 "bb_rate": 0.094,
@@ -5879,6 +6011,7 @@ YEARLY_PFX = {
                 "pitch_type_metrics": {
                     "FF": {
                         "mlb_id": 592662,
+                        "bat_stand": "",
                         "avg": 0.2,
                         "obp": 0.259,
                         "slg": 0.48,
@@ -5893,6 +6026,7 @@ YEARLY_PFX = {
                         "soft_hit_rate": 0.056,
                         "barrel_rate": 0.111,
                         "avg_launch_speed": 90.367,
+                        "max_launch_speed": 99.999,
                         "avg_launch_angle": 24.444,
                         "avg_hit_distance": 227.5,
                         "bb_rate": 0.074,
@@ -5962,6 +6096,7 @@ YEARLY_PFX = {
                     },
                     "SL": {
                         "mlb_id": 592662,
+                        "bat_stand": "",
                         "avg": 0.208,
                         "obp": 0.269,
                         "slg": 0.333,
@@ -5976,6 +6111,7 @@ YEARLY_PFX = {
                         "soft_hit_rate": 0.077,
                         "barrel_rate": 0.077,
                         "avg_launch_speed": 86.546,
+                        "max_launch_speed": 99.999,
                         "avg_launch_angle": 19.769,
                         "avg_hit_distance": 198.846,
                         "bb_rate": 0.077,
@@ -6045,6 +6181,7 @@ YEARLY_PFX = {
                     },
                     "CU": {
                         "mlb_id": 592662,
+                        "bat_stand": "",
                         "avg": 0.2,
                         "obp": 0.333,
                         "slg": 0.2,
@@ -6059,6 +6196,7 @@ YEARLY_PFX = {
                         "soft_hit_rate": 0.0,
                         "barrel_rate": 0.0,
                         "avg_launch_speed": 84.2,
+                        "max_launch_speed": 99.999,
                         "avg_launch_angle": 22.667,
                         "avg_hit_distance": 140.333,
                         "bb_rate": 0.167,
@@ -6128,6 +6266,7 @@ YEARLY_PFX = {
                     },
                     "SI": {
                         "mlb_id": 592662,
+                        "bat_stand": "",
                         "avg": 0.333,
                         "obp": 0.5,
                         "slg": 0.333,
@@ -6142,6 +6281,7 @@ YEARLY_PFX = {
                         "soft_hit_rate": 0.0,
                         "barrel_rate": 0.0,
                         "avg_launch_speed": 82.933,
+                        "max_launch_speed": 99.999,
                         "avg_launch_angle": 25.0,
                         "avg_hit_distance": 108.0,
                         "bb_rate": 0.25,
@@ -6211,6 +6351,7 @@ YEARLY_PFX = {
                     },
                     "CH": {
                         "mlb_id": 592662,
+                        "bat_stand": "",
                         "avg": 0.0,
                         "obp": 0.0,
                         "slg": 0.0,
@@ -6225,6 +6366,7 @@ YEARLY_PFX = {
                         "soft_hit_rate": 0.0,
                         "barrel_rate": 0.0,
                         "avg_launch_speed": 0.0,
+                        "max_launch_speed": 99.999,
                         "avg_launch_angle": 0.0,
                         "avg_hit_distance": 0.0,
                         "bb_rate": 0.0,
@@ -6296,6 +6438,7 @@ YEARLY_PFX = {
             },
             "2021": {
                 "mlb_id": 592662,
+                "bat_stand": "",
                 "avg": 0.2,
                 "obp": 0.241,
                 "slg": 0.373,
@@ -6310,6 +6453,7 @@ YEARLY_PFX = {
                 "soft_hit_rate": 0.0,
                 "barrel_rate": 0.082,
                 "avg_launch_speed": 90.173,
+                "max_launch_speed": 99.999,
                 "avg_launch_angle": 3.959,
                 "avg_hit_distance": 156.776,
                 "bb_rate": 0.037,
@@ -6369,6 +6513,7 @@ YEARLY_PFX = {
                 "pitch_type_metrics": {
                     "FF": {
                         "mlb_id": 592662,
+                        "bat_stand": "",
                         "avg": 0.211,
                         "obp": 0.268,
                         "slg": 0.421,
@@ -6383,6 +6528,7 @@ YEARLY_PFX = {
                         "soft_hit_rate": 0.0,
                         "barrel_rate": 0.111,
                         "avg_launch_speed": 93.704,
+                        "max_launch_speed": 99.999,
                         "avg_launch_angle": 2.296,
                         "avg_hit_distance": 157.37,
                         "bb_rate": 0.048,
@@ -6452,6 +6598,7 @@ YEARLY_PFX = {
                     },
                     "SL": {
                         "mlb_id": 592662,
+                        "bat_stand": "",
                         "avg": 0.188,
                         "obp": 0.212,
                         "slg": 0.344,
@@ -6466,6 +6613,7 @@ YEARLY_PFX = {
                         "soft_hit_rate": 0.0,
                         "barrel_rate": 0.059,
                         "avg_launch_speed": 83.241,
+                        "max_launch_speed": 99.999,
                         "avg_launch_angle": 5.176,
                         "avg_hit_distance": 159.588,
                         "bb_rate": 0.03,
@@ -6535,6 +6683,7 @@ YEARLY_PFX = {
                     },
                     "KC": {
                         "mlb_id": 592662,
+                        "bat_stand": "",
                         "avg": 0.25,
                         "obp": 0.25,
                         "slg": 0.25,
@@ -6549,6 +6698,7 @@ YEARLY_PFX = {
                         "soft_hit_rate": 0.0,
                         "barrel_rate": 0.0,
                         "avg_launch_speed": 92.725,
+                        "max_launch_speed": 99.999,
                         "avg_launch_angle": 14.25,
                         "avg_hit_distance": 177.25,
                         "bb_rate": 0.0,
@@ -6878,6 +7028,7 @@ CAREER_PFX = {
     "both": {
         "metrics": {
             "mlb_id": 592662,
+            "bat_stand": "",
             "avg": 0.223,
             "obp": 0.315,
             "slg": 0.414,
@@ -6892,6 +7043,7 @@ CAREER_PFX = {
             "soft_hit_rate": 0.034,
             "barrel_rate": 0.085,
             "avg_launch_speed": 82.852,
+            "max_launch_speed": 99.999,
             "avg_launch_angle": 13.133,
             "avg_hit_distance": 171.648,
             "bb_rate": 0.111,
@@ -6951,6 +7103,7 @@ CAREER_PFX = {
             "pitch_type_metrics": {
                 "FF": {
                     "mlb_id": 592662,
+                    "bat_stand": "",
                     "avg": 0.226,
                     "obp": 0.336,
                     "slg": 0.428,
@@ -6965,6 +7118,7 @@ CAREER_PFX = {
                     "soft_hit_rate": 0.027,
                     "barrel_rate": 0.085,
                     "avg_launch_speed": 82.77,
+                    "max_launch_speed": 99.999,
                     "avg_launch_angle": 15.811,
                     "avg_hit_distance": 177.944,
                     "bb_rate": 0.134,
@@ -7034,6 +7188,7 @@ CAREER_PFX = {
                 },
                 "SL": {
                     "mlb_id": 592662,
+                    "bat_stand": "",
                     "avg": 0.195,
                     "obp": 0.256,
                     "slg": 0.362,
@@ -7048,6 +7203,7 @@ CAREER_PFX = {
                     "soft_hit_rate": 0.041,
                     "barrel_rate": 0.09,
                     "avg_launch_speed": 81.673,
+                    "max_launch_speed": 99.999,
                     "avg_launch_angle": 11.299,
                     "avg_hit_distance": 165.781,
                     "bb_rate": 0.066,
@@ -7117,6 +7273,7 @@ CAREER_PFX = {
                 },
                 "KC": {
                     "mlb_id": 592662,
+                    "bat_stand": "",
                     "avg": 0.201,
                     "obp": 0.29,
                     "slg": 0.349,
@@ -7131,6 +7288,7 @@ CAREER_PFX = {
                     "soft_hit_rate": 0.057,
                     "barrel_rate": 0.08,
                     "avg_launch_speed": 83.285,
+                    "max_launch_speed": 99.999,
                     "avg_launch_angle": 7.466,
                     "avg_hit_distance": 157.591,
                     "bb_rate": 0.112,
@@ -7200,6 +7358,7 @@ CAREER_PFX = {
                 },
                 "FT": {
                     "mlb_id": 592662,
+                    "bat_stand": "",
                     "avg": 0.393,
                     "obp": 0.465,
                     "slg": 0.697,
@@ -7214,6 +7373,7 @@ CAREER_PFX = {
                     "soft_hit_rate": 0.026,
                     "barrel_rate": 0.053,
                     "avg_launch_speed": 84.479,
+                    "max_launch_speed": 99.999,
                     "avg_launch_angle": 5.697,
                     "avg_hit_distance": 152.171,
                     "bb_rate": 0.107,
@@ -7283,6 +7443,7 @@ CAREER_PFX = {
                 },
                 "CU": {
                     "mlb_id": 592662,
+                    "bat_stand": "",
                     "avg": 0.522,
                     "obp": 0.577,
                     "slg": 0.913,
@@ -7297,6 +7458,7 @@ CAREER_PFX = {
                     "soft_hit_rate": 0.0,
                     "barrel_rate": 0.176,
                     "avg_launch_speed": 96.771,
+                    "max_launch_speed": 99.999,
                     "avg_launch_angle": 16.118,
                     "avg_hit_distance": 231.588,
                     "bb_rate": 0.111,
@@ -7432,6 +7594,7 @@ CAREER_PFX = {
     "rhb": {
         "metrics": {
             "mlb_id": 592662,
+            "bat_stand": "",
             "avg": 0.232,
             "obp": 0.332,
             "slg": 0.435,
@@ -7446,6 +7609,7 @@ CAREER_PFX = {
             "soft_hit_rate": 0.029,
             "barrel_rate": 0.088,
             "avg_launch_speed": 84.163,
+            "max_launch_speed": 99.999,
             "avg_launch_angle": 14.151,
             "avg_hit_distance": 177.605,
             "bb_rate": 0.125,
@@ -7505,6 +7669,7 @@ CAREER_PFX = {
             "pitch_type_metrics": {
                 "FF": {
                     "mlb_id": 592662,
+                    "bat_stand": "",
                     "avg": 0.231,
                     "obp": 0.351,
                     "slg": 0.432,
@@ -7519,6 +7684,7 @@ CAREER_PFX = {
                     "soft_hit_rate": 0.02,
                     "barrel_rate": 0.082,
                     "avg_launch_speed": 83.026,
+                    "max_launch_speed": 99.999,
                     "avg_launch_angle": 17.318,
                     "avg_hit_distance": 182.775,
                     "bb_rate": 0.148,
@@ -7588,6 +7754,7 @@ CAREER_PFX = {
                 },
                 "SL": {
                     "mlb_id": 592662,
+                    "bat_stand": "",
                     "avg": 0.208,
                     "obp": 0.28,
                     "slg": 0.397,
@@ -7602,6 +7769,7 @@ CAREER_PFX = {
                     "soft_hit_rate": 0.033,
                     "barrel_rate": 0.103,
                     "avg_launch_speed": 85.834,
+                    "max_launch_speed": 99.999,
                     "avg_launch_angle": 12.116,
                     "avg_hit_distance": 174.107,
                     "bb_rate": 0.085,
@@ -7671,6 +7839,7 @@ CAREER_PFX = {
                 },
                 "KC": {
                     "mlb_id": 592662,
+                    "bat_stand": "",
                     "avg": 0.205,
                     "obp": 0.288,
                     "slg": 0.369,
@@ -7685,6 +7854,7 @@ CAREER_PFX = {
                     "soft_hit_rate": 0.067,
                     "barrel_rate": 0.087,
                     "avg_launch_speed": 83.536,
+                    "max_launch_speed": 99.999,
                     "avg_launch_angle": 6.867,
                     "avg_hit_distance": 160.213,
                     "bb_rate": 0.106,
@@ -7754,6 +7924,7 @@ CAREER_PFX = {
                 },
                 "FT": {
                     "mlb_id": 592662,
+                    "bat_stand": "",
                     "avg": 0.395,
                     "obp": 0.467,
                     "slg": 0.704,
@@ -7768,6 +7939,7 @@ CAREER_PFX = {
                     "soft_hit_rate": 0.029,
                     "barrel_rate": 0.057,
                     "avg_launch_speed": 85.639,
+                    "max_launch_speed": 99.999,
                     "avg_launch_angle": 7.243,
                     "avg_hit_distance": 158.1,
                     "bb_rate": 0.117,
@@ -7837,6 +8009,7 @@ CAREER_PFX = {
                 },
                 "CU": {
                     "mlb_id": 592662,
+                    "bat_stand": "",
                     "avg": 0.611,
                     "obp": 0.65,
                     "slg": 1.111,
@@ -7851,6 +8024,7 @@ CAREER_PFX = {
                     "soft_hit_rate": 0.0,
                     "barrel_rate": 0.214,
                     "avg_launch_speed": 99.464,
+                    "max_launch_speed": 99.999,
                     "avg_launch_angle": 14.714,
                     "avg_hit_distance": 251.143,
                     "bb_rate": 0.095,
@@ -7920,6 +8094,7 @@ CAREER_PFX = {
                 },
                 "CH": {
                     "mlb_id": 592662,
+                    "bat_stand": "",
                     "avg": 0.273,
                     "obp": 0.385,
                     "slg": 0.909,
@@ -7934,6 +8109,7 @@ CAREER_PFX = {
                     "soft_hit_rate": 0.0,
                     "barrel_rate": 0.2,
                     "avg_launch_speed": 94.9,
+                    "max_launch_speed": 99.999,
                     "avg_launch_angle": 21.4,
                     "avg_hit_distance": 245.3,
                     "bb_rate": 0.154,
@@ -8081,6 +8257,7 @@ CAREER_PFX = {
     "lhb": {
         "metrics": {
             "mlb_id": 592662,
+            "bat_stand": "",
             "avg": 0.191,
             "obp": 0.25,
             "slg": 0.345,
@@ -8095,6 +8272,7 @@ CAREER_PFX = {
             "soft_hit_rate": 0.05,
             "barrel_rate": 0.075,
             "avg_launch_speed": 78.235,
+            "max_launch_speed": 99.999,
             "avg_launch_angle": 9.55,
             "avg_hit_distance": 150.671,
             "bb_rate": 0.06,
@@ -8154,6 +8332,7 @@ CAREER_PFX = {
             "pitch_type_metrics": {
                 "FF": {
                     "mlb_id": 592662,
+                    "bat_stand": "",
                     "avg": 0.209,
                     "obp": 0.276,
                     "slg": 0.414,
@@ -8168,6 +8347,7 @@ CAREER_PFX = {
                     "soft_hit_rate": 0.057,
                     "barrel_rate": 0.094,
                     "avg_launch_speed": 81.733,
+                    "max_launch_speed": 99.999,
                     "avg_launch_angle": 9.704,
                     "avg_hit_distance": 158.377,
                     "bb_rate": 0.072,
@@ -8237,6 +8417,7 @@ CAREER_PFX = {
                 },
                 "SL": {
                     "mlb_id": 592662,
+                    "bat_stand": "",
                     "avg": 0.167,
                     "obp": 0.198,
                     "slg": 0.287,
@@ -8251,6 +8432,7 @@ CAREER_PFX = {
                     "soft_hit_rate": 0.057,
                     "barrel_rate": 0.065,
                     "avg_launch_speed": 73.486,
+                    "max_launch_speed": 99.999,
                     "avg_launch_angle": 9.691,
                     "avg_hit_distance": 149.398,
                     "bb_rate": 0.023,
@@ -8320,6 +8502,7 @@ CAREER_PFX = {
                 },
                 "KC": {
                     "mlb_id": 592662,
+                    "bat_stand": "",
                     "avg": 0.175,
                     "obp": 0.298,
                     "slg": 0.225,
@@ -8334,6 +8517,7 @@ CAREER_PFX = {
                     "soft_hit_rate": 0.0,
                     "barrel_rate": 0.038,
                     "avg_launch_speed": 81.835,
+                    "max_launch_speed": 99.999,
                     "avg_launch_angle": 10.923,
                     "avg_hit_distance": 142.462,
                     "bb_rate": 0.149,
@@ -8403,6 +8587,7 @@ CAREER_PFX = {
                 },
                 "FT": {
                     "mlb_id": 592662,
+                    "bat_stand": "",
                     "avg": 0.375,
                     "obp": 0.444,
                     "slg": 0.625,
@@ -8417,6 +8602,7 @@ CAREER_PFX = {
                     "soft_hit_rate": 0.0,
                     "barrel_rate": 0.0,
                     "avg_launch_speed": 70.95,
+                    "max_launch_speed": 99.999,
                     "avg_launch_angle": -12.333,
                     "avg_hit_distance": 83.0,
                     "bb_rate": 0.0,
@@ -8486,6 +8672,7 @@ CAREER_PFX = {
                 },
                 "CU": {
                     "mlb_id": 592662,
+                    "bat_stand": "",
                     "avg": 0.2,
                     "obp": 0.333,
                     "slg": 0.2,
@@ -8500,6 +8687,7 @@ CAREER_PFX = {
                     "soft_hit_rate": 0.0,
                     "barrel_rate": 0.0,
                     "avg_launch_speed": 84.2,
+                    "max_launch_speed": 99.999,
                     "avg_launch_angle": 22.667,
                     "avg_hit_distance": 140.333,
                     "bb_rate": 0.167,
