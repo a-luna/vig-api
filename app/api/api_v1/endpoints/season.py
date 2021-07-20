@@ -3,7 +3,7 @@ from http import HTTPStatus
 from typing import List
 
 from fastapi import APIRouter, Depends, HTTPException, Request, Response
-from fastapi_redis_cache import cache, cache_one_day
+from fastapi_redis_cache import cache, cache_one_day, cache_one_hour
 from vigorish.app import Vigorish
 from vigorish.database import Season, Team
 from vigorish.util.dt_format_strings import DATE_ONLY
@@ -46,6 +46,12 @@ def get_all_dates_in_season(
     if not all_dates:
         raise HTTPException(status_code=int(HTTPStatus.NOT_FOUND), detail="No results found")
     return [dt.strftime(DATE_ONLY) for dt in all_dates]
+
+
+@router.get("/most_recent_scraped_date")
+@cache_one_hour()
+def get_most_recent_scraped_date(request: Request, response: Response, app: Vigorish = Depends(get_vig_app)):
+    return app.get_most_recent_scraped_date().strftime(DATE_ONLY)
 
 
 @router.get("/standings", response_model=TeamLeagueStandings)
