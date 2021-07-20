@@ -5,7 +5,7 @@ from pydantic import BaseModel
 from vigorish.enums import PitchType
 
 
-class PfxPercentileSchema(BaseModel):
+class PitchTypePercentilesSchema(BaseModel):
     pitch_type: Union[str, PitchType]
     avg_speed: Tuple[float, float]
     ops: Tuple[float, float]
@@ -125,12 +125,12 @@ class PfxPitchingStatsCollectionSchema(PfxStatsSchema):
 
 class PfxPitchingStatsWithPercentiles(BaseModel):
     metrics: PfxPitchingStatsCollectionSchema
-    percentiles: List[PfxPercentileSchema]
+    percentiles: List[PitchTypePercentilesSchema]
 
 
 class YearlyPfxPitchingStatsWithPercentiles(BaseModel):
     metrics: Dict[int, PfxPitchingStatsCollectionSchema]
-    percentiles: Dict[int, List[PfxPercentileSchema]]
+    percentiles: Dict[int, List[PitchTypePercentilesSchema]]
 
 
 class AllPfxDataWithPercentiles(BaseModel):

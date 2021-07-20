@@ -13,7 +13,7 @@ from app.core.config import settings
 from app.core.database import get_vig_app
 from app.schemas import (
     AllPfxDataWithPercentiles,
-    PfxPercentileSchema,
+    PitchTypePercentilesSchema,
     PfxPitchingStatsCollectionSchema,
     PitchFxSchema,
     YearlyPfxDataWithPercentiles,
@@ -50,7 +50,7 @@ def get_career_pfx_metrics_for_pitcher(
     return prepare_pfx_response_model(pfx_stats)
 
 
-@router.get("/percentiles", response_model=List[PfxPercentileSchema])
+@router.get("/percentiles", response_model=List[PitchTypePercentilesSchema])
 @cache()
 def get_career_percentiles_for_pitch_types(
     request: Request, response: Response, mlb_id: str, app: Vigorish = Depends(get_vig_app)
@@ -70,7 +70,7 @@ def get_career_pfx_metrics_vs_rhb_for_pitcher(
     return prepare_pfx_response_model(pfx_stats)
 
 
-@router.get("/vs_RHB/percentiles", response_model=List[PfxPercentileSchema])
+@router.get("/vs_RHB/percentiles", response_model=List[PitchTypePercentilesSchema])
 @cache()
 def get_career_percentiles_vs_rhb_for_pitch_types(
     request: Request, response: Response, mlb_id: str, app: Vigorish = Depends(get_vig_app)
@@ -90,7 +90,7 @@ def get_career_pfx_metrics_vs_lhb_for_pitcher(
     return prepare_pfx_response_model(pfx_stats)
 
 
-@router.get("/vs_LHB/percentiles", response_model=List[PfxPercentileSchema])
+@router.get("/vs_LHB/percentiles", response_model=List[PitchTypePercentilesSchema])
 @cache()
 def get_career_percentiles_vs_lhb_for_pitch_types(
     request: Request, response: Response, mlb_id: str, app: Vigorish = Depends(get_vig_app)
@@ -127,7 +127,7 @@ def get_pfx_metrics_for_year_for_pitcher(
     return prepare_pfx_response_model(pfx_stats)
 
 
-@router.get("/by_year/percentiles", response_model=Dict[int, List[PfxPercentileSchema]])
+@router.get("/by_year/percentiles", response_model=Dict[int, List[PitchTypePercentilesSchema]])
 @cache()
 def get_percentiles_for_pitch_types_by_year(
     request: Request, response: Response, mlb_id: str, app: Vigorish = Depends(get_vig_app)
@@ -151,7 +151,7 @@ def get_pfx_metrics_vs_rhb_for_year_for_pitcher(
     return prepare_pfx_response_model(pfx_stats)
 
 
-@router.get("/vs_RHB/by_year/percentiles", response_model=Dict[int, List[PfxPercentileSchema]])
+@router.get("/vs_RHB/by_year/percentiles", response_model=Dict[int, List[PitchTypePercentilesSchema]])
 @cache()
 def get_percentiles_vs_rhb_for_pitch_types_by_year(
     request: Request, response: Response, mlb_id: str, app: Vigorish = Depends(get_vig_app)
@@ -175,7 +175,7 @@ def get_pfx_metrics_vs_lhb_for_year_for_pitcher(
     return prepare_pfx_response_model(pfx_stats)
 
 
-@router.get("/vs_LHB/by_year/percentiles", response_model=Dict[int, List[PfxPercentileSchema]])
+@router.get("/vs_LHB/by_year/percentiles", response_model=Dict[int, List[PitchTypePercentilesSchema]])
 @cache()
 def get_percentiles_vs_lhb_for_pitch_types_by_year(
     request: Request, response: Response, mlb_id: str, app: Vigorish = Depends(get_vig_app)
