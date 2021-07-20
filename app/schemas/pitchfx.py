@@ -63,6 +63,8 @@ class PitchFxSchema(BaseModel):
     coord_y: float
     game_start_time_utc: datetime
     time_pitch_thrown_utc: datetime
+    game_start_time_est: str
+    time_pitch_thrown_est: str
     seconds_since_game_start: int
     has_zone_location: int
     batter_did_swing: int

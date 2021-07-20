@@ -9,6 +9,7 @@ from vigorish.util.string_helpers import validate_at_bat_id
 from app.api.dependencies import get_pitch_app_params
 from app.core import crud
 from app.core.database import get_vig_app
+from app.schema_prep import convert_pfx_times_to_est
 from app.schemas import PitchFxSchema
 
 router = APIRouter()
@@ -30,7 +31,7 @@ def get_all_pfx_data_for_pitch_app(
     pfx = result.value
     if not pfx:
         raise HTTPException(status_code=int(HTTPStatus.NOT_FOUND), detail="No results found")
-    return pfx
+    return [convert_pfx_times_to_est(p) for p in pfx]
 
 
 @router.get("/at_bat", response_model=List[PitchFxSchema])
@@ -46,4 +47,4 @@ def get_all_pfx_data_for_at_bat(
     pfx = game_data.get_pfx_for_at_bat(at_bat_id)
     if not pfx:
         raise HTTPException(status_code=int(HTTPStatus.NOT_FOUND), detail="No results found")
-    return pfx
+    return [convert_pfx_times_to_est(p) for p in pfx]
