@@ -7,7 +7,7 @@ from fastapi_redis_cache import cache
 from vigorish.app import Vigorish
 from vigorish.enums import DefensePosition, TeamID
 
-from app.api.dependencies import BatOrder, MLBSeason, TeamParameters
+from app.api.dependencies import MLBSeason, TeamParameters
 from app.core.database import get_vig_app
 from app.schema_prep import convert_team_stats
 from app.schemas import BatStatsSchema
@@ -84,9 +84,13 @@ def get_bat_stats_by_year_for_team(
 @router.get("/bat_order/by_year", response_model=Dict[int, BatStatsSchema])
 @cache()
 def get_bat_stats_for_lineup_spot_by_year_for_team(
-    request: Request, response: Response, team_id: TeamID, app: Vigorish = Depends(get_vig_app)
+    request: Request,
+    response: Response,
+    team_id: TeamID,
+    bat_order: Optional[List[int]] = Query(..., ge=0, le=9),
+    app: Vigorish = Depends(get_vig_app),
 ):
-    bat_stats_dict = app.scraped_data.get_bat_stats_for_lineup_spot_by_year_for_team(team_id.name)
+    bat_stats_dict = app.scraped_data.get_bat_stats_for_lineup_spot_by_year_for_team(bat_order, team_id.name)
     if not bat_stats_dict:
         raise HTTPException(status_code=int(HTTPStatus.NOT_FOUND), detail="No results found")
     return {year: asdict(bat_stats) for year, bat_stats in bat_stats_dict.items()}
@@ -146,12 +150,12 @@ def get_bat_stats_by_player_for_team(
 def get_bat_stats_for_lineup_spot_by_player_for_team(
     request: Request,
     response: Response,
-    bat_order: BatOrder = Depends(),
+    bat_order: Optional[List[int]] = Query(..., ge=0, le=9),
     team_params: TeamParameters = Depends(),
     app: Vigorish = Depends(get_vig_app),
 ):
     bat_stats = app.scraped_data.get_bat_stats_for_lineup_spot_by_player_for_team(
-        bat_order.number, team_params.team_id, team_params.year
+        bat_order, team_params.team_id, team_params.year
     )
     if not bat_stats:
         raise HTTPException(status_code=int(HTTPStatus.NOT_FOUND), detail="No results found")
@@ -218,13 +222,11 @@ def get_bat_stats_for_season_for_all_teams(
 def get_bat_stats_for_lineup_spot_for_season_for_all_teams(
     request: Request,
     response: Response,
-    bat_order: BatOrder = Depends(),
+    bat_order: Optional[List[int]] = Query(..., ge=0, le=9),
     season: MLBSeason = Depends(),
     app: Vigorish = Depends(get_vig_app),
 ):
-    bat_stats_dict = app.scraped_data.get_bat_stats_for_lineup_spot_for_season_for_all_teams(
-        bat_order.number, season.year
-    )
+    bat_stats_dict = app.scraped_data.get_bat_stats_for_lineup_spot_for_season_for_all_teams(bat_order, season.year)
     if not bat_stats_dict:
         raise HTTPException(status_code=int(HTTPStatus.NOT_FOUND), detail="No results found")
     all_teams = {team_id: asdict(bat_stats) for team_id, bat_stats in bat_stats_dict.items()}
