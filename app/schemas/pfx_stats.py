@@ -1,8 +1,20 @@
 from dataclasses import asdict
-from typing import Dict, List, Tuple, Union
+from typing import Dict, List, Optional, Tuple, Union
 
 from pydantic import BaseModel
 from vigorish.enums import PitchType
+
+
+class BatterPercentiles(BaseModel):
+    bb_rate: Tuple[float, float]
+    k_rate: Tuple[float, float]
+    whiff_rate: Tuple[float, float]
+    o_swing_rate: Tuple[float, float]
+    contact_rate: Tuple[float, float]
+    soft_hit_rate: Tuple[float, float]
+    barrel_rate: Tuple[float, float]
+    avg_exit_velocity: Tuple[float, float]
+    max_exit_velocity: Tuple[float, float]
 
 
 class PitchTypePercentilesSchema(BaseModel):
