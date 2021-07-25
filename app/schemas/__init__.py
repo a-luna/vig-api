@@ -5,11 +5,11 @@ from app.schemas.game_data.boxscore import BoxscoreSchema, GameDataSchema
 from app.schemas.pfx_stats import (
     AllPfxDataWithPercentiles,
     BatterPercentiles,
-    PfxBattingStatsCollectionSchema,
+    PitchFxBattingMetricsSchema,
+    PitchFxPitchingMetricsSchema,
     PitchTypePercentilesSchema,
-    PfxPitchingStatsCollectionSchema,
-    PfxPitchingStatsSchema,
-    PfxStatsSchema,
+    PitchFxMetricsSchema,
+    PitchFxMetricsSetSchema,
     YearlyPfxDataWithPercentiles,
 )
 from app.schemas.pitch_stats import PitchStatsSchema

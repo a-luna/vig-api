@@ -6,19 +6,16 @@ from fastapi_redis_cache import cache
 from vigorish.app import Vigorish
 from vigorish.util.list_helpers import flatten_list2d
 
-from app.api.api_v1.endpoints.player.mock_data import CAREER_PFX, YEARLY_PFX
 from app.api.dependencies import get_date_range, get_pitch_app_params, MLBSeason
 from app.core import crud
-from app.core.config import settings
 from app.core.database import get_vig_app
 from app.schemas import (
     AllPfxDataWithPercentiles,
     PitchTypePercentilesSchema,
-    PfxPitchingStatsCollectionSchema,
+    PitchFxMetricsSetSchema,
     PitchFxSchema,
     YearlyPfxDataWithPercentiles,
 )
-from app.schemas.pfx_stats import prepare_pfx_response_model
 
 router = APIRouter()
 
@@ -39,15 +36,16 @@ def get_all_pfx_within_date_range_for_player(
     return flatten_list2d(all_pfx)
 
 
-@router.get("/", response_model=PfxPitchingStatsCollectionSchema)
+@router.get("/", response_model=PitchFxMetricsSetSchema)
 @cache()
 def get_career_pfx_metrics_for_pitcher(
     request: Request, response: Response, mlb_id: str, app: Vigorish = Depends(get_vig_app)
 ):
-    pfx_stats = app.scraped_data.get_career_pfx_metrics_for_pitcher(mlb_id)
+    player_data = crud.get_player_data(mlb_id, app)
+    pfx_stats = player_data.pfx_pitching_metrics_vs_all_by_year
     if not pfx_stats or not pfx_stats.total_pitches:
         raise HTTPException(status_code=int(HTTPStatus.NOT_FOUND), detail="No results found")
-    return prepare_pfx_response_model(pfx_stats)
+    return pfx_stats.as_dict()
 
 
 @router.get("/percentiles", response_model=List[PitchTypePercentilesSchema])
@@ -59,15 +57,16 @@ def get_career_percentiles_for_pitch_types(
     return player_data.percentiles_for_pitch_types_for_career
 
 
-@router.get("/vs_RHB", response_model=PfxPitchingStatsCollectionSchema)
+@router.get("/vs_RHB", response_model=PitchFxMetricsSetSchema)
 @cache()
 def get_career_pfx_metrics_vs_rhb_for_pitcher(
     request: Request, response: Response, mlb_id: str, app: Vigorish = Depends(get_vig_app)
 ):
-    pfx_stats = app.scraped_data.get_career_pfx_metrics_vs_rhb_for_pitcher(mlb_id)
+    player_data = crud.get_player_data(mlb_id, app)
+    pfx_stats = player_data.pfx_pitching_metrics_vs_rhb_for_career
     if not pfx_stats or not pfx_stats.total_pitches:
         raise HTTPException(status_code=int(HTTPStatus.NOT_FOUND), detail="No results found")
-    return prepare_pfx_response_model(pfx_stats)
+    return pfx_stats.as_dict()
 
 
 @router.get("/vs_RHB/percentiles", response_model=List[PitchTypePercentilesSchema])
@@ -79,15 +78,16 @@ def get_career_percentiles_vs_rhb_for_pitch_types(
     return player_data.percentiles_for_pitch_types_vs_rhb_for_career
 
 
-@router.get("/vs_LHB", response_model=PfxPitchingStatsCollectionSchema)
+@router.get("/vs_LHB", response_model=PitchFxMetricsSetSchema)
 @cache()
 def get_career_pfx_metrics_vs_lhb_for_pitcher(
     request: Request, response: Response, mlb_id: str, app: Vigorish = Depends(get_vig_app)
 ):
-    pfx_stats = app.scraped_data.get_career_pfx_metrics_vs_lhb_for_pitcher(mlb_id)
+    player_data = crud.get_player_data(mlb_id, app)
+    pfx_stats = player_data.pfx_pitching_metrics_vs_lhb_for_career
     if not pfx_stats or not pfx_stats.total_pitches:
         raise HTTPException(status_code=int(HTTPStatus.NOT_FOUND), detail="No results found")
-    return prepare_pfx_response_model(pfx_stats)
+    return pfx_stats.as_dict()
 
 
 @router.get("/vs_LHB/percentiles", response_model=List[PitchTypePercentilesSchema])
@@ -102,17 +102,15 @@ def get_career_percentiles_vs_lhb_for_pitch_types(
 @router.get("/career_pfx", response_model=AllPfxDataWithPercentiles)
 @cache()
 def get_all_pfx_career_data(request: Request, response: Response, mlb_id: str, app: Vigorish = Depends(get_vig_app)):
-    if settings.ENV == "DEV":
-        return CAREER_PFX
     player_data = crud.get_player_data(mlb_id, app)
     career_pfx = player_data.get_all_pfx_career_data()
-    career_pfx["both"]["metrics"] = prepare_pfx_response_model(career_pfx["both"]["metrics"])
-    career_pfx["rhb"]["metrics"] = prepare_pfx_response_model(career_pfx["rhb"]["metrics"])
-    career_pfx["lhb"]["metrics"] = prepare_pfx_response_model(career_pfx["lhb"]["metrics"])
+    career_pfx["all"]["metrics"] = career_pfx["all"]["metrics"].as_dict()
+    career_pfx["rhb"]["metrics"] = career_pfx["rhb"]["metrics"].as_dict()
+    career_pfx["lhb"]["metrics"] = career_pfx["lhb"]["metrics"].as_dict()
     return career_pfx
 
 
-@router.get("/for_year", response_model=PfxPitchingStatsCollectionSchema)
+@router.get("/for_year", response_model=PitchFxMetricsSetSchema)
 @cache()
 def get_pfx_metrics_for_year_for_pitcher(
     request: Request,
@@ -121,10 +119,11 @@ def get_pfx_metrics_for_year_for_pitcher(
     season: MLBSeason = Depends(),
     app: Vigorish = Depends(get_vig_app),
 ):
-    pfx_stats = app.scraped_data.get_pfx_metrics_for_year_for_pitcher(mlb_id, season.year)
+    player_data = crud.get_player_data(mlb_id, app)
+    pfx_stats = player_data.get_pfx_pitching_metrics_vs_all_for_season(season.year)
     if not pfx_stats or not pfx_stats.total_pitches:
         raise HTTPException(status_code=int(HTTPStatus.NOT_FOUND), detail="No results found")
-    return prepare_pfx_response_model(pfx_stats)
+    return pfx_stats.as_dict()
 
 
 @router.get("/by_year/percentiles", response_model=Dict[int, List[PitchTypePercentilesSchema]])
@@ -136,7 +135,7 @@ def get_percentiles_for_pitch_types_by_year(
     return player_data.percentiles_for_pitch_types_by_year
 
 
-@router.get("/vs_RHB/for_year", response_model=PfxPitchingStatsCollectionSchema)
+@router.get("/vs_RHB/for_year", response_model=PitchFxMetricsSetSchema)
 @cache()
 def get_pfx_metrics_vs_rhb_for_year_for_pitcher(
     request: Request,
@@ -145,10 +144,11 @@ def get_pfx_metrics_vs_rhb_for_year_for_pitcher(
     season: MLBSeason = Depends(),
     app: Vigorish = Depends(get_vig_app),
 ):
-    pfx_stats = app.scraped_data.get_pfx_metrics_for_year_vs_rhb_for_pitcher(mlb_id, season.year)
+    player_data = crud.get_player_data(mlb_id, app)
+    pfx_stats = player_data.get_pfx_pitching_metrics_vs_rhb_for_season(season.year)
     if not pfx_stats or not pfx_stats.total_pitches:
         raise HTTPException(status_code=int(HTTPStatus.NOT_FOUND), detail="No results found")
-    return prepare_pfx_response_model(pfx_stats)
+    return pfx_stats.as_dict()
 
 
 @router.get("/vs_RHB/by_year/percentiles", response_model=Dict[int, List[PitchTypePercentilesSchema]])
@@ -160,7 +160,7 @@ def get_percentiles_vs_rhb_for_pitch_types_by_year(
     return player_data.percentiles_for_pitch_types_vs_rhb_by_year
 
 
-@router.get("/vs_LHB/for_year", response_model=PfxPitchingStatsCollectionSchema)
+@router.get("/vs_LHB/for_year", response_model=PitchFxMetricsSetSchema)
 @cache()
 def get_pfx_metrics_vs_lhb_for_year_for_pitcher(
     request: Request,
@@ -169,10 +169,11 @@ def get_pfx_metrics_vs_lhb_for_year_for_pitcher(
     season: MLBSeason = Depends(),
     app: Vigorish = Depends(get_vig_app),
 ):
-    pfx_stats = app.scraped_data.get_pfx_metrics_for_year_vs_lhb_for_pitcher(mlb_id, season.year)
+    player_data = crud.get_player_data(mlb_id, app)
+    pfx_stats = player_data.get_pfx_pitching_metrics_vs_lhb_for_season(season.year)
     if not pfx_stats or not pfx_stats.total_pitches:
         raise HTTPException(status_code=int(HTTPStatus.NOT_FOUND), detail="No results found")
-    return prepare_pfx_response_model(pfx_stats)
+    return pfx_stats.as_dict()
 
 
 @router.get("/vs_LHB/by_year/percentiles", response_model=Dict[int, List[PitchTypePercentilesSchema]])
@@ -187,20 +188,18 @@ def get_percentiles_vs_lhb_for_pitch_types_by_year(
 @router.get("/yearly_pfx", response_model=YearlyPfxDataWithPercentiles)
 @cache()
 def get_all_pfx_yearly_data(request: Request, response: Response, mlb_id: str, app: Vigorish = Depends(get_vig_app)):
-    if settings.ENV == "DEV":
-        return YEARLY_PFX
     player_data = crud.get_player_data(mlb_id, app)
     pfx_yearly = player_data.get_all_pfx_yearly_data()
-    for year, pfx_stats_for_year in pfx_yearly["both"]["metrics"].items():
-        pfx_yearly["both"]["metrics"][year] = prepare_pfx_response_model(pfx_stats_for_year)
+    for year, pfx_stats_for_year in pfx_yearly["all"]["metrics"].items():
+        pfx_yearly["all"]["metrics"][year] = pfx_stats_for_year.as_dict()
     for year, pfx_stats_for_year in pfx_yearly["rhb"]["metrics"].items():
-        pfx_yearly["rhb"]["metrics"][year] = prepare_pfx_response_model(pfx_stats_for_year)
+        pfx_yearly["rhb"]["metrics"][year] = pfx_stats_for_year.as_dict()
     for year, pfx_stats_for_year in pfx_yearly["lhb"]["metrics"].items():
-        pfx_yearly["lhb"]["metrics"][year] = prepare_pfx_response_model(pfx_stats_for_year)
+        pfx_yearly["lhb"]["metrics"][year] = pfx_stats_for_year.as_dict()
     return pfx_yearly
 
 
-@router.get("/for_game", response_model=PfxPitchingStatsCollectionSchema)
+@router.get("/for_game", response_model=PitchFxMetricsSetSchema)
 @cache()
 def get_pfx_metrics_for_game_for_pitcher(
     request: Request,
@@ -209,13 +208,14 @@ def get_pfx_metrics_for_game_for_pitcher(
     app: Vigorish = Depends(get_vig_app),
 ):
     mlb_id, game_id = pitch_app_params
-    pfx_stats = app.scraped_data.get_pfx_metrics_for_game_for_pitcher(mlb_id, game_id)
+    player_data = crud.get_player_data(mlb_id, app)
+    pfx_stats = player_data.get_pfx_pitching_metrics_vs_all_for_game(game_id)
     if not pfx_stats or not pfx_stats.total_pitches:
         raise HTTPException(status_code=int(HTTPStatus.NOT_FOUND), detail="No results found")
-    return prepare_pfx_response_model(pfx_stats)
+    return pfx_stats.as_dict()
 
 
-@router.get("/for_game/vs_RHB", response_model=PfxPitchingStatsCollectionSchema)
+@router.get("/for_game/vs_RHB", response_model=PitchFxMetricsSetSchema)
 @cache()
 def get_pfx_metrics_for_game_vs_rhb_for_pitcher(
     request: Request,
@@ -227,10 +227,10 @@ def get_pfx_metrics_for_game_vs_rhb_for_pitcher(
     pfx_stats = app.scraped_data.get_pfx_metrics_for_game_vs_rhb_for_pitcher(mlb_id, game_id)
     if not pfx_stats or not pfx_stats.total_pitches:
         raise HTTPException(status_code=int(HTTPStatus.NOT_FOUND), detail="No results found")
-    return prepare_pfx_response_model(pfx_stats)
+    return pfx_stats.as_dict()
 
 
-@router.get("/for_game/vs_LHB", response_model=PfxPitchingStatsCollectionSchema)
+@router.get("/for_game/vs_LHB", response_model=PitchFxMetricsSetSchema)
 @cache()
 def get_pfx_metrics_for_game_vs_lhb_for_pitcher(
     request: Request,
@@ -242,4 +242,4 @@ def get_pfx_metrics_for_game_vs_lhb_for_pitcher(
     pfx_stats = app.scraped_data.get_pfx_metrics_for_game_vs_lhb_for_pitcher(mlb_id, game_id)
     if not pfx_stats or not pfx_stats.total_pitches:
         raise HTTPException(status_code=int(HTTPStatus.NOT_FOUND), detail="No results found")
-    return prepare_pfx_response_model(pfx_stats)
+    return pfx_stats.as_dict()
