@@ -1,4 +1,6 @@
+import json
 from http import HTTPStatus
+from pathlib import Path
 from typing import Dict, List, Tuple
 
 from fastapi import APIRouter, Depends, HTTPException, Request, Response
@@ -8,6 +10,7 @@ from vigorish.util.list_helpers import flatten_list2d
 
 from app.api.dependencies import get_date_range, get_pitch_app_params, MLBSeason
 from app.core import crud
+from app.core.config import settings
 from app.core.database import get_vig_app
 from app.schemas import (
     AllPfxDataWithPercentiles,
@@ -102,6 +105,9 @@ def get_career_percentiles_vs_lhb_for_pitch_types(
 @router.get("/career_pfx", response_model=AllPfxDataWithPercentiles)
 @cache()
 def get_all_pfx_career_data(request: Request, response: Response, mlb_id: str, app: Vigorish = Depends(get_vig_app)):
+    if settings.ENV == "DEV":
+        mock_data_file = Path(__file__).parent.joinpath("career_pfx.json")
+        return json.loads(mock_data_file.read_text())
     player_data = crud.get_player_data(mlb_id, app)
     career_pfx = player_data.get_all_pfx_career_data()
     career_pfx["all"]["metrics"] = career_pfx["all"]["metrics"].as_dict()
@@ -188,6 +194,9 @@ def get_percentiles_vs_lhb_for_pitch_types_by_year(
 @router.get("/yearly_pfx", response_model=YearlyPfxDataWithPercentiles)
 @cache()
 def get_all_pfx_yearly_data(request: Request, response: Response, mlb_id: str, app: Vigorish = Depends(get_vig_app)):
+    if settings.ENV == "DEV":
+        mock_data_file = Path(__file__).parent.joinpath("yearly_pfx.json")
+        return json.loads(mock_data_file.read_text())
     player_data = crud.get_player_data(mlb_id, app)
     pfx_yearly = player_data.get_all_pfx_yearly_data()
     for year, pfx_stats_for_year in pfx_yearly["all"]["metrics"].items():
