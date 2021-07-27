@@ -5,23 +5,28 @@ from fastapi_redis_cache import cache
 from vigorish.app import Vigorish
 
 from app.api.api_v1.endpoints.player import bat_stats, pfx_batter, pfx_pitcher, pitch_stats
-from app.core.crud import get_player
+from app.core import crud
 from app.core.database import get_vig_app
-from app.schemas import FuzzySearchResult, PlayerSchema
-from app.schema_prep import convert_player_to_dict
+from app.schemas import FuzzySearchResult, PlayerDetailsSchema
 
 router = APIRouter()
 
 
 @router.get("/search", response_model=List[FuzzySearchResult], tags=["player search"])
 def search_player_name(query: str, app: Vigorish = Depends(get_vig_app)):
-    return app.scraped_data.player_name_search(query)
+    results = app.scraped_data.player_name_search(query)
+    for player_match in results:
+        player_data = crud.get_player_data(player_match["result"], app)
+        if player_data:
+            player_match["details"] = player_data.player_details
+    return results
 
 
-@router.get("/details", response_model=PlayerSchema, tags=["player search"])
+@router.get("/details", response_model=PlayerDetailsSchema, tags=["player search"])
 @cache()
 def get_player_details(request: Request, response: Response, mlb_id: str, app: Vigorish = Depends(get_vig_app)):
-    return convert_player_to_dict(get_player(mlb_id, app))
+    player_data = crud.get_player_data(mlb_id, app)
+    return player_data.player_details
 
 
 router.include_router(bat_stats.router, prefix="/batting", tags=["player batting"])

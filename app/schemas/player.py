@@ -1,9 +1,16 @@
 from datetime import datetime
+from typing import List, Optional
 
 from pydantic import BaseModel
 
 
-class PlayerSchema(BaseModel):
+class PlayerTeamSchema(BaseModel):
+    team_id: Optional[str]
+    year: Optional[int]
+    pos: Optional[str]
+
+
+class PlayerDetailsSchema(BaseModel):
     name_first: str
     name_last: str
     name_given: str
@@ -15,17 +22,17 @@ class PlayerSchema(BaseModel):
     birth_year: int
     birth_month: int
     birth_day: int
-    birth_country: str
-    birth_state: str
-    birth_city: str
+    birth_country: Optional[str]
+    birth_state: Optional[str]
+    birth_city: Optional[str]
     bbref_id: str
     mlb_id: int
-
-    class Config:
-        orm_mode = True
+    current_team: PlayerTeamSchema
+    previous_teams: List[str]
 
 
 class FuzzySearchResult(BaseModel):
     match: str
     score: int
     result: int
+    details: Optional[PlayerDetailsSchema]
