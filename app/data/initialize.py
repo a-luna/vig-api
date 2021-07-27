@@ -15,6 +15,7 @@ DATABASE_URL = f"sqlite:///{DATA_FOLDER.joinpath(SQLITE_DB)}"
 
 
 def set_env_variables():
+    os.environ["ENV"] = "PROD"
     os.environ["DOTENV_FILE"] = str(DOTENV_FILE)
     os.environ["CONFIG_FILE"] = str(CONFIG_FILE)
     os.environ["DATABASE_URL"] = DATABASE_URL
