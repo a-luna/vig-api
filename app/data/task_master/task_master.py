@@ -21,7 +21,9 @@ from vigorish.util.sys_helpers import hash_all_files_in_folder, run_command
 
 os.environ["INTERACTIVE_MODE"] = "NO"
 
-S3_LOCAL_FOLDER = Path("/Users/aluna/Desktop/s3") if os.environ["ENV"] == "DEV" else Path.home().joinpath("s3")
+S3_LOCAL_FOLDER = (
+    Path("/Users/aluna/Desktop/s3") if os.environ["ENV"] == "DEV" else Path(__file__).parent.parent.joinpath("s3")
+)
 S3_BUCKET_NAME = "alunapublic"
 S3_DEST_FOLDER = "vig-api"
 S3_BUCKET_URL = f"s3://{S3_BUCKET_NAME}/{S3_DEST_FOLDER}"

@@ -12,7 +12,7 @@ MLB_JSON_FOLDER_NAME = "mlb_api_json_storage"
 MLB_JSON_FOLDER_PATH = (
     ROOT_FOLDER.joinpath(MLB_JSON_FOLDER_NAME)
     if os.environ["ENV"] == "DEV"
-    else Path.home().joinpath(MLB_JSON_FOLDER_NAME)
+    else Path(__file__).parent.parent.joinpath(MLB_JSON_FOLDER_NAME)
 )
 TZ_NAME = "America/New_York"
 TZ_NEW_YORK = tz.gettz(TZ_NAME)

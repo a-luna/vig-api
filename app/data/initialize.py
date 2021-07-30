@@ -93,11 +93,11 @@ def verify_file_download(get_file_result, get_hash_result, file_info, retry, err
 
 def extract_zip_files():
     for zip_file_path, hash_file_path in get_data_file_paths():
-        # print(f"Calculating MD5 hash for: {zip_file_path.name}...")
-        # result = validate_file(zip_file_path, hash_file_path)
-        # if result.failure:
-        #     raise ValueError(result.error)
-        # print(f"MD5 hash for {zip_file_path.name} successfully validated")
+        print(f"Calculating MD5 hash for: {zip_file_path.name}...")
+        result = validate_file(zip_file_path, hash_file_path)
+        if result.failure:
+            raise ValueError(result.error)
+        print(f"MD5 hash for {zip_file_path.name} successfully validated")
         print(f"Extracting contents of zip file: {zip_file_path.name}...")
         with ZipFile(zip_file_path, mode="r") as zip:
             zip.extractall(path=zip_file_path.parent)
