@@ -4,10 +4,31 @@ from typing import List, Optional
 from pydantic import BaseModel
 
 
+class PlayerDefPosMetricsSchema(BaseModel):
+    def_pos: str
+    percent: int
+
+
+class PlayerBatOrderMetricsSchema(BaseModel):
+    bat_order: int
+    percent: int
+
+
 class PlayerTeamSchema(BaseModel):
-    team_id: Optional[str]
-    year: Optional[int]
-    pos: Optional[str]
+    team_id: str
+    year: int
+    role: str
+    stint_number: int
+    starting_lineup: bool
+    percent_started: int
+    bench_player: bool
+    percent_bench: int
+    starting_pitcher: bool
+    percent_sp: int
+    relief_pitcher: bool
+    percent_rp: int
+    def_pos_list: List[PlayerDefPosMetricsSchema]
+    bat_order_list: List[PlayerBatOrderMetricsSchema]
 
 
 class PlayerDetailsSchema(BaseModel):
@@ -27,8 +48,7 @@ class PlayerDetailsSchema(BaseModel):
     birth_city: Optional[str]
     bbref_id: str
     mlb_id: int
-    current_team: PlayerTeamSchema
-    previous_teams: List[str]
+    all_teams: List[PlayerTeamSchema]
 
 
 class FuzzySearchResult(BaseModel):
