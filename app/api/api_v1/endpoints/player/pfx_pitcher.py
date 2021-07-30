@@ -214,7 +214,8 @@ def get_pfx_metrics_for_game_vs_rhb_for_pitcher(
     app: Vigorish = Depends(get_vig_app),
 ):
     mlb_id, game_id = pitch_app_params
-    pfx_stats = app.scraped_data.get_pfx_metrics_for_game_vs_rhb_for_pitcher(mlb_id, game_id)
+    player_data = crud.get_player_data(mlb_id, app)
+    pfx_stats = player_data.get_pfx_pitching_metrics_vs_rhb_for_game(game_id)
     if not pfx_stats or not pfx_stats.total_pitches:
         raise HTTPException(status_code=int(HTTPStatus.NOT_FOUND), detail="No results found")
     return pfx_stats.as_dict()
@@ -229,7 +230,8 @@ def get_pfx_metrics_for_game_vs_lhb_for_pitcher(
     app: Vigorish = Depends(get_vig_app),
 ):
     mlb_id, game_id = pitch_app_params
-    pfx_stats = app.scraped_data.get_pfx_metrics_for_game_vs_lhb_for_pitcher(mlb_id, game_id)
+    player_data = crud.get_player_data(mlb_id, app)
+    pfx_stats = player_data.get_pfx_pitching_metrics_vs_lhb_for_game(game_id)
     if not pfx_stats or not pfx_stats.total_pitches:
         raise HTTPException(status_code=int(HTTPStatus.NOT_FOUND), detail="No results found")
     return pfx_stats.as_dict()
