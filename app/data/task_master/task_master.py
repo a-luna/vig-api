@@ -161,7 +161,7 @@ def get_config():
     mlb_season = 2021
     reset_db_scrape_status = False
     remove_db_game_data = False
-    update_id_map = False
+    update_id_map = True
     update_player_team_roles = False
     rescrape_bbref_html = {
         DataSet.BBREF_GAMES_FOR_DATE: False,
@@ -180,7 +180,7 @@ def get_config():
         DataSet.BROOKS_PITCH_LOGS: False,
     }
     combine_game_data = ScrapeCondition.ONLY_MISSING_DATA
-    backup_db = False
+    backup_db = True
     backup_combined_data_json = True
     upload_backup_files_to_s3 = True
     restart_dokku_container = False
