@@ -3,7 +3,6 @@ from http import HTTPStatus
 from typing import Dict, List, Optional
 
 from fastapi import APIRouter, Depends, HTTPException, Query, Request, Response
-from fastapi_redis_cache import cache
 from vigorish.app import Vigorish
 from vigorish.enums import DefensePosition, TeamID
 
