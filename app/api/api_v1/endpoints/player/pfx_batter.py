@@ -2,7 +2,7 @@ from http import HTTPStatus
 from typing import List
 
 from fastapi import APIRouter, Depends, HTTPException, Request, Response
-from fastapi_redis_cache import cache_one_day
+from fastapi_redis_cache import cache, cache_one_day, cache_one_week
 from vigorish.app import Vigorish
 from vigorish.database import PitchFx
 
@@ -14,7 +14,6 @@ router = APIRouter()
 
 
 @router.get("/in_date_range", response_model=List[PitchFxSchema])
-@cache_one_day()
 def get_all_pfx_within_date_range_for_player(
     request: Request,
     response: Response,
@@ -28,7 +27,7 @@ def get_all_pfx_within_date_range_for_player(
 
 
 @router.get("/", response_model=PitchFxMetricsSchema)
-@cache_one_day()
+@cache_one_week()
 def get_pfx_metrics_for_career_for_batter(
     request: Request, response: Response, mlb_id: str, app: Vigorish = Depends(get_vig_app)
 ):
@@ -39,7 +38,7 @@ def get_pfx_metrics_for_career_for_batter(
 
 
 @router.get("/vs_rhp_as_rhb", response_model=PitchFxMetricsSchema)
-@cache_one_day()
+@cache_one_week()
 def get_pfx_metrics_vs_rhp_as_rhb_for_career_for_batter(
     request: Request, response: Response, mlb_id: str, app: Vigorish = Depends(get_vig_app)
 ):
@@ -50,7 +49,7 @@ def get_pfx_metrics_vs_rhp_as_rhb_for_career_for_batter(
 
 
 @router.get("/vs_rhp_as_lhb", response_model=PitchFxMetricsSchema)
-@cache_one_day()
+@cache_one_week()
 def get_pfx_metrics_vs_rhp_as_lhb_for_career_for_batter(
     request: Request, response: Response, mlb_id: str, app: Vigorish = Depends(get_vig_app)
 ):
@@ -61,7 +60,7 @@ def get_pfx_metrics_vs_rhp_as_lhb_for_career_for_batter(
 
 
 @router.get("/vs_lhp_as_lhb", response_model=PitchFxMetricsSchema)
-@cache_one_day()
+@cache_one_week()
 def get_pfx_metrics_vs_lhp_as_lhb_for_career_for_batter(
     request: Request, response: Response, mlb_id: str, app: Vigorish = Depends(get_vig_app)
 ):
@@ -72,7 +71,7 @@ def get_pfx_metrics_vs_lhp_as_lhb_for_career_for_batter(
 
 
 @router.get("/vs_lhp_as_rhb", response_model=PitchFxMetricsSchema)
-@cache_one_day()
+@cache_one_week()
 def get_pfx_metrics_vs_lhp_as_rhb_for_career_for_batter(
     request: Request, response: Response, mlb_id: str, app: Vigorish = Depends(get_vig_app)
 ):
@@ -98,7 +97,7 @@ def get_pfx_metrics_for_year_for_batter(
 
 
 @router.get("/for_game", response_model=PitchFxMetricsSchema)
-@cache_one_day()
+@cache()
 def get_pfx_metrics_for_game_for_batter(
     request: Request, response: Response, mlb_id: str, game_id: str, app: Vigorish = Depends(get_vig_app)
 ):
@@ -109,7 +108,7 @@ def get_pfx_metrics_for_game_for_batter(
 
 
 @router.get("/for_game/vs_rhp_as_rhb", response_model=PitchFxMetricsSchema)
-@cache_one_day()
+@cache()
 def get_pfx_metrics_vs_rhp_as_rhb_for_game_for_batter(
     request: Request, response: Response, mlb_id: str, game_id: str, app: Vigorish = Depends(get_vig_app)
 ):
@@ -120,7 +119,7 @@ def get_pfx_metrics_vs_rhp_as_rhb_for_game_for_batter(
 
 
 @router.get("/for_game/vs_rhp_as_lhb", response_model=PitchFxMetricsSchema)
-@cache_one_day()
+@cache()
 def get_pfx_metrics_vs_rhp_as_lhb_for_game_for_batter(
     request: Request, response: Response, mlb_id: str, game_id: str, app: Vigorish = Depends(get_vig_app)
 ):
@@ -131,7 +130,7 @@ def get_pfx_metrics_vs_rhp_as_lhb_for_game_for_batter(
 
 
 @router.get("/for_game/vs_lhp_as_lhb", response_model=PitchFxMetricsSchema)
-@cache_one_day()
+@cache()
 def get_pfx_metrics_vs_lhp_as_lhb_for_game_for_batter(
     request: Request, response: Response, mlb_id: str, game_id: str, app: Vigorish = Depends(get_vig_app)
 ):
@@ -142,7 +141,7 @@ def get_pfx_metrics_vs_lhp_as_lhb_for_game_for_batter(
 
 
 @router.get("/for_game/vs_lhp_as_rhb", response_model=PitchFxMetricsSchema)
-@cache_one_day()
+@cache()
 def get_pfx_metrics_vs_lhp_as_rhb_for_game_for_batter(
     request: Request, response: Response, mlb_id: str, game_id: str, app: Vigorish = Depends(get_vig_app)
 ):
