@@ -12,12 +12,12 @@ from app.api.dependencies import get_date_range, get_pitch_app_params, MLBSeason
 from app.core import crud
 from app.core.config import settings
 from app.core.database import get_vig_app
+from app.schema_prep import combine_career_and_yearly_pfx_metrics_sets
 from app.schemas import (
-    AllPfxDataWithPercentiles,
+    CareerPfxMetricsForPitcherSchema,
     PitchTypePercentilesSchema,
     PitchFxMetricsSetSchema,
     PitchFxSchema,
-    YearlyPfxDataWithPercentiles,
 )
 
 router = APIRouter()
@@ -102,18 +102,16 @@ def get_career_percentiles_vs_lhb_for_pitch_types(
     return player_data.percentiles_for_pitch_types_vs_lhb_for_career
 
 
-@router.get("/career_pfx", response_model=AllPfxDataWithPercentiles)
+@router.get("/career_pfx", response_model=CareerPfxMetricsForPitcherSchema)
 @cache()
 def get_all_pfx_career_data(request: Request, response: Response, mlb_id: str, app: Vigorish = Depends(get_vig_app)):
     if settings.ENV == "DEV":
-        mock_data_file = Path(__file__).parent.joinpath("career_pfx.json")
+        mock_data_file = Path(__file__).parent.joinpath("combined_pfx.json")
         return json.loads(mock_data_file.read_text())
     player_data = crud.get_player_data(mlb_id, app)
     career_pfx = player_data.get_all_pfx_career_data()
-    career_pfx["all"]["metrics"] = career_pfx["all"]["metrics"].as_dict()
-    career_pfx["rhb"]["metrics"] = career_pfx["rhb"]["metrics"].as_dict()
-    career_pfx["lhb"]["metrics"] = career_pfx["lhb"]["metrics"].as_dict()
-    return career_pfx
+    yearly_pfx = player_data.get_all_pfx_yearly_data()
+    return combine_career_and_yearly_pfx_metrics_sets(career_pfx, yearly_pfx)
 
 
 @router.get("/for_year", response_model=PitchFxMetricsSetSchema)
@@ -189,23 +187,6 @@ def get_percentiles_vs_lhb_for_pitch_types_by_year(
 ):
     player_data = crud.get_player_data(mlb_id, app)
     return player_data.percentiles_for_pitch_types_vs_lhb_by_year
-
-
-@router.get("/yearly_pfx", response_model=YearlyPfxDataWithPercentiles)
-@cache()
-def get_all_pfx_yearly_data(request: Request, response: Response, mlb_id: str, app: Vigorish = Depends(get_vig_app)):
-    if settings.ENV == "DEV":
-        mock_data_file = Path(__file__).parent.joinpath("yearly_pfx.json")
-        return json.loads(mock_data_file.read_text())
-    player_data = crud.get_player_data(mlb_id, app)
-    pfx_yearly = player_data.get_all_pfx_yearly_data()
-    for year, pfx_stats_for_year in pfx_yearly["all"]["metrics"].items():
-        pfx_yearly["all"]["metrics"][year] = pfx_stats_for_year.as_dict()
-    for year, pfx_stats_for_year in pfx_yearly["rhb"]["metrics"].items():
-        pfx_yearly["rhb"]["metrics"][year] = pfx_stats_for_year.as_dict()
-    for year, pfx_stats_for_year in pfx_yearly["lhb"]["metrics"].items():
-        pfx_yearly["lhb"]["metrics"][year] = pfx_stats_for_year.as_dict()
-    return pfx_yearly
 
 
 @router.get("/for_game", response_model=PitchFxMetricsSetSchema)

@@ -145,23 +145,20 @@ class PitchFxPitchingMetricsSchema(BaseModel):
     lhb: PitchFxMetricsSetSchema
 
 
-class PfxPitchingStatsWithPercentiles(BaseModel):
-    metrics: PitchFxMetricsSetSchema
-    percentiles: List[PitchTypePercentilesSchema]
+class PfxMetricsForPitchTypeSchema(BaseModel):
+    metrics: PitchFxMetricsSchema
+    percentiles: PitchTypePercentilesSchema
 
 
-class YearlyPfxPitchingStatsWithPercentiles(BaseModel):
-    metrics: Dict[int, PitchFxMetricsSetSchema]
-    percentiles: Dict[int, List[PitchTypePercentilesSchema]]
+class PfxMetricsByPitchTypeSchema(BaseModel):
+    __root__: Dict[str, PfxMetricsForPitchTypeSchema]
 
 
-class AllPfxDataWithPercentiles(BaseModel):
-    all: PfxPitchingStatsWithPercentiles
-    rhb: PfxPitchingStatsWithPercentiles
-    lhb: PfxPitchingStatsWithPercentiles
+class PfxMetricsBySeasonSchema(BaseModel):
+    __root__: Dict[int, PfxMetricsByPitchTypeSchema]
 
 
-class YearlyPfxDataWithPercentiles(BaseModel):
-    all: YearlyPfxPitchingStatsWithPercentiles
-    rhb: YearlyPfxPitchingStatsWithPercentiles
-    lhb: YearlyPfxPitchingStatsWithPercentiles
+class CareerPfxMetricsForPitcherSchema(BaseModel):
+    all: PfxMetricsBySeasonSchema
+    rhb: PfxMetricsBySeasonSchema
+    lhb: PfxMetricsBySeasonSchema
