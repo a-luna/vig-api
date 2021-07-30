@@ -4,7 +4,7 @@ from pathlib import Path
 from typing import Dict, List, Tuple
 
 from fastapi import APIRouter, Depends, HTTPException, Request, Response
-from fastapi_redis_cache import cache
+from fastapi_redis_cache import cache_one_day
 from vigorish.app import Vigorish
 from vigorish.util.list_helpers import flatten_list2d
 
@@ -40,7 +40,7 @@ def get_all_pfx_within_date_range_for_player(
 
 
 @router.get("/", response_model=PitchFxMetricsSetSchema)
-@cache()
+@cache_one_day()
 def get_career_pfx_metrics_for_pitcher(
     request: Request, response: Response, mlb_id: str, app: Vigorish = Depends(get_vig_app)
 ):
@@ -52,7 +52,7 @@ def get_career_pfx_metrics_for_pitcher(
 
 
 @router.get("/percentiles", response_model=List[PitchTypePercentilesSchema])
-@cache()
+@cache_one_day()
 def get_career_percentiles_for_pitch_types(
     request: Request, response: Response, mlb_id: str, app: Vigorish = Depends(get_vig_app)
 ):
@@ -61,7 +61,7 @@ def get_career_percentiles_for_pitch_types(
 
 
 @router.get("/vs_RHB", response_model=PitchFxMetricsSetSchema)
-@cache()
+@cache_one_day()
 def get_career_pfx_metrics_vs_rhb_for_pitcher(
     request: Request, response: Response, mlb_id: str, app: Vigorish = Depends(get_vig_app)
 ):
@@ -73,7 +73,7 @@ def get_career_pfx_metrics_vs_rhb_for_pitcher(
 
 
 @router.get("/vs_RHB/percentiles", response_model=List[PitchTypePercentilesSchema])
-@cache()
+@cache_one_day()
 def get_career_percentiles_vs_rhb_for_pitch_types(
     request: Request, response: Response, mlb_id: str, app: Vigorish = Depends(get_vig_app)
 ):
@@ -82,7 +82,7 @@ def get_career_percentiles_vs_rhb_for_pitch_types(
 
 
 @router.get("/vs_LHB", response_model=PitchFxMetricsSetSchema)
-@cache()
+@cache_one_day()
 def get_career_pfx_metrics_vs_lhb_for_pitcher(
     request: Request, response: Response, mlb_id: str, app: Vigorish = Depends(get_vig_app)
 ):
@@ -94,7 +94,7 @@ def get_career_pfx_metrics_vs_lhb_for_pitcher(
 
 
 @router.get("/vs_LHB/percentiles", response_model=List[PitchTypePercentilesSchema])
-@cache()
+@cache_one_day()
 def get_career_percentiles_vs_lhb_for_pitch_types(
     request: Request, response: Response, mlb_id: str, app: Vigorish = Depends(get_vig_app)
 ):
@@ -103,7 +103,7 @@ def get_career_percentiles_vs_lhb_for_pitch_types(
 
 
 @router.get("/career_pfx", response_model=CareerPfxMetricsForPitcherSchema)
-@cache()
+@cache_one_day()
 def get_all_pfx_career_data(request: Request, response: Response, mlb_id: str, app: Vigorish = Depends(get_vig_app)):
     if settings.ENV == "DEV":
         mock_data_file = Path(__file__).parent.joinpath("combined_pfx.json")
@@ -115,7 +115,7 @@ def get_all_pfx_career_data(request: Request, response: Response, mlb_id: str, a
 
 
 @router.get("/for_year", response_model=PitchFxMetricsSetSchema)
-@cache()
+@cache_one_day()
 def get_pfx_metrics_for_year_for_pitcher(
     request: Request,
     response: Response,
@@ -131,7 +131,7 @@ def get_pfx_metrics_for_year_for_pitcher(
 
 
 @router.get("/by_year/percentiles", response_model=Dict[int, List[PitchTypePercentilesSchema]])
-@cache()
+@cache_one_day()
 def get_percentiles_for_pitch_types_by_year(
     request: Request, response: Response, mlb_id: str, app: Vigorish = Depends(get_vig_app)
 ):
@@ -140,7 +140,7 @@ def get_percentiles_for_pitch_types_by_year(
 
 
 @router.get("/vs_RHB/for_year", response_model=PitchFxMetricsSetSchema)
-@cache()
+@cache_one_day()
 def get_pfx_metrics_vs_rhb_for_year_for_pitcher(
     request: Request,
     response: Response,
@@ -156,7 +156,7 @@ def get_pfx_metrics_vs_rhb_for_year_for_pitcher(
 
 
 @router.get("/vs_RHB/by_year/percentiles", response_model=Dict[int, List[PitchTypePercentilesSchema]])
-@cache()
+@cache_one_day()
 def get_percentiles_vs_rhb_for_pitch_types_by_year(
     request: Request, response: Response, mlb_id: str, app: Vigorish = Depends(get_vig_app)
 ):
@@ -165,7 +165,7 @@ def get_percentiles_vs_rhb_for_pitch_types_by_year(
 
 
 @router.get("/vs_LHB/for_year", response_model=PitchFxMetricsSetSchema)
-@cache()
+@cache_one_day()
 def get_pfx_metrics_vs_lhb_for_year_for_pitcher(
     request: Request,
     response: Response,
@@ -181,7 +181,7 @@ def get_pfx_metrics_vs_lhb_for_year_for_pitcher(
 
 
 @router.get("/vs_LHB/by_year/percentiles", response_model=Dict[int, List[PitchTypePercentilesSchema]])
-@cache()
+@cache_one_day()
 def get_percentiles_vs_lhb_for_pitch_types_by_year(
     request: Request, response: Response, mlb_id: str, app: Vigorish = Depends(get_vig_app)
 ):
@@ -190,7 +190,7 @@ def get_percentiles_vs_lhb_for_pitch_types_by_year(
 
 
 @router.get("/for_game", response_model=PitchFxMetricsSetSchema)
-@cache()
+@cache_one_day()
 def get_pfx_metrics_for_game_for_pitcher(
     request: Request,
     response: Response,
@@ -206,7 +206,7 @@ def get_pfx_metrics_for_game_for_pitcher(
 
 
 @router.get("/for_game/vs_RHB", response_model=PitchFxMetricsSetSchema)
-@cache()
+@cache_one_day()
 def get_pfx_metrics_for_game_vs_rhb_for_pitcher(
     request: Request,
     response: Response,
@@ -221,7 +221,7 @@ def get_pfx_metrics_for_game_vs_rhb_for_pitcher(
 
 
 @router.get("/for_game/vs_LHB", response_model=PitchFxMetricsSetSchema)
-@cache()
+@cache_one_day()
 def get_pfx_metrics_for_game_vs_lhb_for_pitcher(
     request: Request,
     response: Response,

@@ -16,7 +16,6 @@ router = APIRouter()
 
 
 @router.get("/", response_model=PitchStatsSchema)
-@cache()
 def get_pitch_stats_for_team(
     request: Request, response: Response, team_params: TeamParameters = Depends(), app: Vigorish = Depends(get_vig_app)
 ):
@@ -38,7 +37,6 @@ def get_pitch_stats_for_sp_for_team(
 
 
 @router.get("/rp", response_model=PitchStatsSchema)
-@cache()
 def get_pitch_stats_for_rp_for_team(
     request: Request, response: Response, team_params: TeamParameters = Depends(), app: Vigorish = Depends(get_vig_app)
 ):
@@ -49,7 +47,6 @@ def get_pitch_stats_for_rp_for_team(
 
 
 @router.get("/by_year", response_model=Dict[int, PitchStatsSchema])
-@cache()
 def get_pitch_stats_by_year_for_team(
     request: Request, response: Response, team_id: TeamID, app: Vigorish = Depends(get_vig_app)
 ):
@@ -60,7 +57,6 @@ def get_pitch_stats_by_year_for_team(
 
 
 @router.get("/sp/by_year", response_model=Dict[int, PitchStatsSchema])
-@cache()
 def get_pitch_stats_for_sp_by_year_for_team(
     request: Request, response: Response, team_id: TeamID, app: Vigorish = Depends(get_vig_app)
 ):
@@ -71,7 +67,6 @@ def get_pitch_stats_for_sp_by_year_for_team(
 
 
 @router.get("/rp/by_year", response_model=Dict[int, PitchStatsSchema])
-@cache()
 def get_pitch_stats_for_rp_by_year_for_team(
     request: Request, response: Response, team_id: TeamID, app: Vigorish = Depends(get_vig_app)
 ):
@@ -82,7 +77,6 @@ def get_pitch_stats_for_rp_by_year_for_team(
 
 
 @router.get("/by_player", response_model=List[PitchStatsSchema])
-@cache()
 def get_pitch_stats_by_player_for_team(
     request: Request, response: Response, team_params: TeamParameters = Depends(), app: Vigorish = Depends(get_vig_app)
 ):
@@ -94,7 +88,6 @@ def get_pitch_stats_by_player_for_team(
 
 
 @router.get("/sp/by_player", response_model=List[PitchStatsSchema])
-@cache()
 def get_pitch_stats_for_sp_by_player_for_team(
     request: Request, response: Response, team_params: TeamParameters = Depends(), app: Vigorish = Depends(get_vig_app)
 ):
@@ -106,7 +99,6 @@ def get_pitch_stats_for_sp_by_player_for_team(
 
 
 @router.get("/rp/by_player", response_model=List[PitchStatsSchema])
-@cache()
 def get_pitch_stats_for_rp_by_player_for_team(
     request: Request, response: Response, team_params: TeamParameters = Depends(), app: Vigorish = Depends(get_vig_app)
 ):
@@ -118,7 +110,6 @@ def get_pitch_stats_for_rp_by_player_for_team(
 
 
 @router.get("/all_teams", response_model=Dict[str, PitchStatsSchema])
-@cache()
 def get_pitch_stats_for_season_for_all_teams(
     request: Request, response: Response, season: MLBSeason = Depends(), app: Vigorish = Depends(get_vig_app)
 ):
@@ -130,7 +121,6 @@ def get_pitch_stats_for_season_for_all_teams(
 
 
 @router.get("/sp/all_teams", response_model=Dict[str, PitchStatsSchema])
-@cache()
 def get_pitch_stats_for_sp_for_season_for_all_teams(
     request: Request, response: Response, season: MLBSeason = Depends(), app: Vigorish = Depends(get_vig_app)
 ):
@@ -142,7 +132,6 @@ def get_pitch_stats_for_sp_for_season_for_all_teams(
 
 
 @router.get("/rp/all_teams", response_model=Dict[str, PitchStatsSchema])
-@cache()
 def get_pitch_stats_for_rp_for_season_for_all_teams(
     request: Request, response: Response, season: MLBSeason = Depends(), app: Vigorish = Depends(get_vig_app)
 ):

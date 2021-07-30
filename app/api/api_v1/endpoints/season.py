@@ -3,7 +3,7 @@ from http import HTTPStatus
 from typing import List
 
 from fastapi import APIRouter, Depends, HTTPException, Request, Response
-from fastapi_redis_cache import cache, cache_one_day, cache_one_hour
+from fastapi_redis_cache import cache, cache_one_day
 from vigorish.app import Vigorish
 from vigorish.database import Season, Team
 from vigorish.util.dt_format_strings import DATE_ONLY
@@ -49,7 +49,6 @@ def get_all_dates_in_season(
 
 
 @router.get("/most_recent_scraped_date")
-@cache_one_hour()
 def get_most_recent_scraped_date(request: Request, response: Response, app: Vigorish = Depends(get_vig_app)):
     return app.get_most_recent_scraped_date().strftime(DATE_ONLY)
 
@@ -90,7 +89,6 @@ def get_regular_season_standings(
 
 
 @router.get("/game_ids")
-@cache()
 def get_all_game_ids_for_date(
     request: Request, response: Response, game_date: MLBGameDate = Depends(), app: Vigorish = Depends(get_vig_app)
 ):
@@ -101,7 +99,6 @@ def get_all_game_ids_for_date(
 
 
 @router.get("/scoreboard", response_model=ScoreboardSchema)
-@cache()
 def get_scoreboard_for_date(
     request: Request, response: Response, game_date: MLBGameDate = Depends(), app: Vigorish = Depends(get_vig_app)
 ):

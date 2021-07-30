@@ -3,7 +3,6 @@ from http import HTTPStatus
 from typing import List
 
 from fastapi import APIRouter, Depends, HTTPException, Request, Response
-from fastapi_redis_cache import cache
 from vigorish.app import Vigorish
 
 from app.core.database import get_vig_app
@@ -14,7 +13,6 @@ router = APIRouter()
 
 
 @router.get("/", response_model=BatStatsSchema)
-@cache()
 def get_bat_stats_for_career_for_player(
     request: Request, response: Response, mlb_id: str, app: Vigorish = Depends(get_vig_app)
 ):
@@ -25,7 +23,6 @@ def get_bat_stats_for_career_for_player(
 
 
 @router.get("/by_year", response_model=List[BatStatsSchema])
-@cache()
 def get_bat_stats_by_year_for_player(
     request: Request, response: Response, mlb_id: str, app: Vigorish = Depends(get_vig_app)
 ):
@@ -37,7 +34,6 @@ def get_bat_stats_by_year_for_player(
 
 
 @router.get("/by_team", response_model=List[BatStatsSchema])
-@cache()
 def get_bat_stats_by_team_for_player(
     request: Request, response: Response, mlb_id: str, app: Vigorish = Depends(get_vig_app)
 ):
@@ -49,7 +45,6 @@ def get_bat_stats_by_team_for_player(
 
 
 @router.get("/by_team_by_year", response_model=List[BatStatsSchema])
-@cache()
 def get_bat_stats_by_team_by_year_for_player(
     request: Request, response: Response, mlb_id: str, app: Vigorish = Depends(get_vig_app)
 ):
@@ -61,7 +56,6 @@ def get_bat_stats_by_team_by_year_for_player(
 
 
 @router.get("/by_opp_team", response_model=List[BatStatsSchema])
-@cache()
 def get_bat_stats_by_opp_for_player(
     request: Request, response: Response, mlb_id: str, app: Vigorish = Depends(get_vig_app)
 ):
@@ -73,7 +67,6 @@ def get_bat_stats_by_opp_for_player(
 
 
 @router.get("/by_opp_team_by_year", response_model=List[BatStatsSchema])
-@cache()
 def get_bat_stats_by_opp_by_year_for_player(
     request: Request, response: Response, mlb_id: str, app: Vigorish = Depends(get_vig_app)
 ):

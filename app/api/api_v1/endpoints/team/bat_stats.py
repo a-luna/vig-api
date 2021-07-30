@@ -16,7 +16,6 @@ router = APIRouter()
 
 
 @router.get("/", response_model=BatStatsSchema)
-@cache()
 def get_bat_stats_for_team(
     request: Request, response: Response, team_params: TeamParameters = Depends(), app: Vigorish = Depends(get_vig_app)
 ):
@@ -27,7 +26,6 @@ def get_bat_stats_for_team(
 
 
 @router.get("/by_bat_order", response_model=List[BatStatsSchema])
-@cache()
 def get_bat_stats_by_bat_order_for_team(
     request: Request, response: Response, team_params: TeamParameters = Depends(), app: Vigorish = Depends(get_vig_app)
 ):
@@ -38,7 +36,6 @@ def get_bat_stats_by_bat_order_for_team(
 
 
 @router.get("/by_position", response_model=List[BatStatsSchema])
-@cache()
 def get_bat_stats_by_defpos_for_team(
     request: Request, response: Response, team_params: TeamParameters = Depends(), app: Vigorish = Depends(get_vig_app)
 ):
@@ -49,7 +46,6 @@ def get_bat_stats_by_defpos_for_team(
 
 
 @router.get("/starters", response_model=BatStatsSchema)
-@cache()
 def get_bat_stats_for_starters_for_team(
     request: Request, response: Response, team_params: TeamParameters = Depends(), app: Vigorish = Depends(get_vig_app)
 ):
@@ -60,7 +56,6 @@ def get_bat_stats_for_starters_for_team(
 
 
 @router.get("/subs", response_model=BatStatsSchema)
-@cache()
 def get_bat_stats_for_subs_for_team(
     request: Request, response: Response, team_params: TeamParameters = Depends(), app: Vigorish = Depends(get_vig_app)
 ):
@@ -71,7 +66,6 @@ def get_bat_stats_for_subs_for_team(
 
 
 @router.get("/by_year", response_model=Dict[int, BatStatsSchema])
-@cache()
 def get_bat_stats_by_year_for_team(
     request: Request, response: Response, team_id: TeamID, app: Vigorish = Depends(get_vig_app)
 ):
@@ -82,7 +76,6 @@ def get_bat_stats_by_year_for_team(
 
 
 @router.get("/bat_order/by_year", response_model=Dict[int, BatStatsSchema])
-@cache()
 def get_bat_stats_for_lineup_spot_by_year_for_team(
     request: Request,
     response: Response,
@@ -97,7 +90,6 @@ def get_bat_stats_for_lineup_spot_by_year_for_team(
 
 
 @router.get("/position/by_year", response_model=Dict[int, BatStatsSchema])
-@cache()
 def get_bat_stats_for_defpos_by_year_for_team(
     request: Request,
     response: Response,
@@ -112,7 +104,6 @@ def get_bat_stats_for_defpos_by_year_for_team(
 
 
 @router.get("/starters/by_year", response_model=Dict[int, BatStatsSchema])
-@cache()
 def get_bat_stats_for_starters_by_year_for_team(
     request: Request, response: Response, team_id: TeamID, app: Vigorish = Depends(get_vig_app)
 ):
@@ -123,7 +114,6 @@ def get_bat_stats_for_starters_by_year_for_team(
 
 
 @router.get("/subs/by_year", response_model=Dict[int, BatStatsSchema])
-@cache()
 def get_bat_stats_for_subs_by_year_for_team(
     request: Request, response: Response, team_id: TeamID, app: Vigorish = Depends(get_vig_app)
 ):
@@ -134,7 +124,6 @@ def get_bat_stats_for_subs_by_year_for_team(
 
 
 @router.get("/by_player", response_model=List[BatStatsSchema])
-@cache()
 def get_bat_stats_by_player_for_team(
     request: Request, response: Response, team_params: TeamParameters = Depends(), app: Vigorish = Depends(get_vig_app)
 ):
@@ -146,7 +135,6 @@ def get_bat_stats_by_player_for_team(
 
 
 @router.get("/bat_order/by_player", response_model=List[BatStatsSchema])
-@cache()
 def get_bat_stats_for_lineup_spot_by_player_for_team(
     request: Request,
     response: Response,
@@ -164,7 +152,6 @@ def get_bat_stats_for_lineup_spot_by_player_for_team(
 
 
 @router.get("/position/by_player", response_model=List[BatStatsSchema])
-@cache()
 def get_bat_stats_for_defensive_position_by_player_for_team(
     request: Request,
     response: Response,
@@ -182,7 +169,6 @@ def get_bat_stats_for_defensive_position_by_player_for_team(
 
 
 @router.get("/starters/by_player", response_model=List[BatStatsSchema])
-@cache()
 def get_bat_stats_for_starters_by_player_for_team(
     request: Request, response: Response, team_params: TeamParameters = Depends(), app: Vigorish = Depends(get_vig_app)
 ):
@@ -194,7 +180,6 @@ def get_bat_stats_for_starters_by_player_for_team(
 
 
 @router.get("/subs/by_player", response_model=List[BatStatsSchema])
-@cache()
 def get_bat_stats_for_subs_by_player_for_team(
     request: Request, response: Response, team_params: TeamParameters = Depends(), app: Vigorish = Depends(get_vig_app)
 ):
@@ -206,7 +191,6 @@ def get_bat_stats_for_subs_by_player_for_team(
 
 
 @router.get("/all_teams", response_model=Dict[str, BatStatsSchema])
-@cache()
 def get_bat_stats_for_season_for_all_teams(
     request: Request, response: Response, season: MLBSeason = Depends(), app: Vigorish = Depends(get_vig_app)
 ):
@@ -218,7 +202,6 @@ def get_bat_stats_for_season_for_all_teams(
 
 
 @router.get("/bat_order/all_teams", response_model=Dict[str, BatStatsSchema])
-@cache()
 def get_bat_stats_for_lineup_spot_for_season_for_all_teams(
     request: Request,
     response: Response,
@@ -234,7 +217,6 @@ def get_bat_stats_for_lineup_spot_for_season_for_all_teams(
 
 
 @router.get("/position/all_teams", response_model=Dict[str, BatStatsSchema])
-@cache()
 def get_bat_stats_for_defpos_for_season_for_all_teams(
     request: Request,
     response: Response,
@@ -250,7 +232,6 @@ def get_bat_stats_for_defpos_for_season_for_all_teams(
 
 
 @router.get("/starters/all_teams", response_model=Dict[str, BatStatsSchema])
-@cache()
 def get_bat_stats_for_starters_for_season_for_all_teams(
     request: Request, response: Response, season: MLBSeason = Depends(), app: Vigorish = Depends(get_vig_app)
 ):
@@ -262,7 +243,6 @@ def get_bat_stats_for_starters_for_season_for_all_teams(
 
 
 @router.get("/subs/all_teams", response_model=Dict[str, BatStatsSchema])
-@cache()
 def get_bat_stats_for_subs_for_season_for_all_teams(
     request: Request, response: Response, season: MLBSeason = Depends(), app: Vigorish = Depends(get_vig_app)
 ):
