@@ -19,6 +19,7 @@ class BatterPercentiles(BaseModel):
 
 class PitchTypePercentilesSchema(BaseModel):
     pitch_type: Union[str, PitchType]
+    percent: float
     avg_speed: Tuple[float, float]
     ops: Tuple[float, float]
     zone_rate: Tuple[float, float]

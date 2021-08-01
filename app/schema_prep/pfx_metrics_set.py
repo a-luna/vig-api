@@ -18,6 +18,9 @@ def combine_career_and_yearly_pfx_metrics_sets(career_pfx, yearly_pfx):
                     "metrics": career_metrics_by_pitch_type.get(pitch_type, {}),
                     "percentiles": career_pitch_type_percentiles.get(pitch_type, {}),
                 }
+                combined_pfx_metrics[stance][0][pitch_type]["percentiles"]["percent"] = career_metrics_by_pitch_type[
+                    pitch_type
+                ]["percent"]
         all_seasons_played = yearly_pfx["all"]["metrics"].keys()
         for year in list(all_seasons_played):
             combined_pfx_metrics[stance][year] = {}
@@ -29,6 +32,9 @@ def combine_career_and_yearly_pfx_metrics_sets(career_pfx, yearly_pfx):
                         "metrics": season_metrics_by_pitch_type.get(pitch_type),
                         "percentiles": season_pitch_type_percentiles.get(pitch_type),
                     }
+                    combined_pfx_metrics[stance][year][pitch_type]["percentiles"][
+                        "percent"
+                    ] = season_metrics_by_pitch_type[pitch_type]["percent"]
     return combined_pfx_metrics
 
 
