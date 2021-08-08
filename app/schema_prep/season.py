@@ -11,3 +11,36 @@ def convert_season_to_dict(season: Season) -> Dict[str, Union[int, str]]:
         "end_date": season.end_date.strftime(DATE_ONLY),
         "asg_date": season.asg_date.strftime(DATE_ONLY),
     }
+
+
+def create_divisional_standings(team_season_data):
+    return {
+        "al": {
+            "w": sorted(
+                filter(lambda x: x["league"] == "AL" and x["division"] == "W", team_season_data),
+                key=lambda x: x["losses"],
+            ),
+            "c": sorted(
+                filter(lambda x: x["league"] == "AL" and x["division"] == "C", team_season_data),
+                key=lambda x: x["losses"],
+            ),
+            "e": sorted(
+                filter(lambda x: x["league"] == "AL" and x["division"] == "E", team_season_data),
+                key=lambda x: x["losses"],
+            ),
+        },
+        "nl": {
+            "w": sorted(
+                filter(lambda x: x["league"] == "NL" and x["division"] == "W", team_season_data),
+                key=lambda x: x["losses"],
+            ),
+            "c": sorted(
+                filter(lambda x: x["league"] == "NL" and x["division"] == "C", team_season_data),
+                key=lambda x: x["losses"],
+            ),
+            "e": sorted(
+                filter(lambda x: x["league"] == "NL" and x["division"] == "E", team_season_data),
+                key=lambda x: x["losses"],
+            ),
+        },
+    }

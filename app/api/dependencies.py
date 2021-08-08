@@ -1,11 +1,11 @@
 from http import HTTPStatus
 from typing import Optional
 
+import vigorish.database as db
 from fastapi import Depends, HTTPException, Query
 from vigorish.app import Vigorish
-from vigorish.database import Season
 from vigorish.enums import TeamID
-from vigorish.util.dt_format_strings import DATE_ONLY
+from vigorish.util.dt_format_strings import DATE_ONLY, DATE_ONLY_TABLE_ID
 from vigorish.util.string_helpers import parse_date, validate_pitch_app_id
 
 from app.core.database import get_vig_app
@@ -45,7 +45,7 @@ def get_pitch_app_params(
 
 class MLBSeason:
     def __init__(self, year: int = Query(..., ge=2017, le=2021), app: Vigorish = Depends(get_vig_app)):
-        season = Season.find_by_year(app.db_session, year)
+        season = db.Season.find_by_year(app.db_session, year)
         if not season:
             raise HTTPException(status_code=int(HTTPStatus.NOT_FOUND), detail="No results found")
         self.year = season.year
@@ -67,10 +67,11 @@ class MLBGameDate:
             parsed_date = parse_date(game_date)
         except ValueError as ex:
             raise HTTPException(status_code=int(HTTPStatus.BAD_REQUEST), detail=ex.message)
-        result = Season.is_date_in_season(app.db_session, parsed_date)
+        result = db.Season.is_date_in_season(app.db_session, parsed_date)
         if result.failure:
             raise HTTPException(status_code=int(HTTPStatus.BAD_REQUEST), detail=result.error)
         self.date = parsed_date
+        self.date_id = parsed_date.strftime(DATE_ONLY_TABLE_ID)
         self.season = convert_season_to_dict(result.value)
 
     def __str__(self):
