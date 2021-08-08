@@ -11,13 +11,13 @@ backcall==0.2.0
 bcrypt==3.2.0
 black==21.5b1
 blessed==1.18.1
-boto3==1.18.10
-botocore==1.21.10
+boto3==1.18.16
+botocore==1.21.16
 bullet==2.2.0
 certifi==2021.5.30
 cffi==1.14.6
 chardet==4.0.0
-cheap-repr==0.4.5
+cheap-repr==0.4.6
 click==7.1.2
 colorama==0.4.4
 colorclass==2.2.0
@@ -43,7 +43,7 @@ h11==0.12.0
 halo==0.0.31
 httptools==0.2.0
 idna==2.10
-ipython==7.25.0
+ipython==7.26.0
 ipython-genutils==0.2.0
 isort==5.9.3
 itsdangerous==1.1.0
@@ -59,7 +59,7 @@ mccabe==0.6.1
 mypy-extensions==0.4.3
 Naked==0.1.31
 numpy==1.21.1
-orjson==3.6.0
+orjson==3.6.1
 packaging==21.0
 parso==0.8.2
 passlib==1.7.4
@@ -87,12 +87,12 @@ python-multipart==0.0.5
 PyYAML==5.4.1
 rapidfuzz==1.4.1
 redis==3.5.3
-regex==2021.7.6
+regex==2021.8.3
 requests==2.26.0
 rsa==4.7.2
 Rx==1.6.1
 s3transfer==0.5.0
-scipy==1.7.0
+scipy==1.7.1
 six==1.16.0
 snoop==0.4.0
 sortedcontainers==2.4.0
@@ -104,7 +104,7 @@ tabulate==0.8.9
 termcolor==1.1.0
 terminaltables==3.1.0
 toml==0.10.2
-tqdm==4.61.2
+tqdm==4.62.0
 traitlets==5.0.5
 typed-ast==1.4.3
 typing-extensions==3.10.0.0
@@ -112,7 +112,7 @@ ujson==4.0.2
 urllib3==1.26.6
 uvicorn==0.14.0
 uvloop==0.15.3
-vigorish==0.5.3
+vigorish==0.5.4
 w3lib==1.22.0
 watchgod==0.7
 wcwidth==0.2.5
