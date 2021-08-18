@@ -39,6 +39,15 @@ def parse_full_pitch_app_stats(pitch_stats):
 
 
 def parse_summary_pitch_app_stats(pitch_stats):
+    w_l_sv = (
+        " (WP)"
+        if pitch_stats["is_wp"] == 1
+        else " (LP)"
+        if pitch_stats["is_lp"] == 1
+        else " (SV)"
+        if pitch_stats["is_sv"] == 1
+        else ""
+    )
     ip = pitch_stats["innings_pitched"]
     r = pitch_stats["runs"]
     er = pitch_stats["earned_runs"]
@@ -54,4 +63,4 @@ def parse_summary_pitch_app_stats(pitch_stats):
         bb = pitch_stats["bases_on_balls"] if pitch_stats["bases_on_balls"] > 1 else ""
         stat_list.append(f"{bb}BB")
     details = f", {', '.join(stat_list)}" if stat_list else ""
-    return f"{ip} IP, {runs}{details}"
+    return f"{ip} IP, {runs}{details}{w_l_sv}"
