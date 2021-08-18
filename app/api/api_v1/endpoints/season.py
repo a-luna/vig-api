@@ -12,12 +12,13 @@ from app.api.dependencies import MLBGameDate, MLBSeason
 from app.core import crud
 from app.core.database import get_vig_app
 from app.schema_prep import (
+    convert_bat_stats,
     convert_scoreboard_data,
     convert_season_to_dict,
     convert_pitch_stats,
     create_divisional_standings,
 )
-from app.schemas import ScoreboardSchema, SeasonSchema, TeamLeagueStandings, GamePitchStatsSchema
+from app.schemas import ScoreboardSchema, SeasonSchema, TeamLeagueStandings, GamePitchStatsSchema, GameBatStatsSchema
 
 router = APIRouter()
 
@@ -116,3 +117,11 @@ def get_daily_pitching_stats(
 ):
     pitch_stats = app.db_session.query(db.PitchStats).filter_by(date_id=game_date.date_id).all()
     return [convert_pitch_stats(p, app, game_date.date) for p in pitch_stats]
+
+
+@router.get("/bat_stats_for_date", response_model=List[GameBatStatsSchema])
+def get_daily_batting_stats(
+    request: Request, response: Response, game_date: MLBGameDate = Depends(), app: Vigorish = Depends(get_vig_app)
+):
+    bat_stats = app.db_session.query(db.BatStats).filter_by(date_id=game_date.date_id).all()
+    return [convert_bat_stats(b) for b in bat_stats]
