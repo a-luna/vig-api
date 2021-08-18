@@ -3,7 +3,53 @@ from pydantic import BaseModel
 from vigorish.enums import DefensePosition
 
 
-class BatStatsSchema(BaseModel):
+class GameBatStatsSchema(BaseModel):
+    bbref_game_id: str
+    player_id_mlb: int
+    player_id_bbref: str
+    player_team_id_bbref: str
+    opponent_team_id_bbref: str
+    is_starter: int
+    bat_order: int
+    def_position: str
+    plate_appearances: int
+    at_bats: int
+    hits: int
+    runs_scored: int
+    rbis: int
+    bases_on_balls: int
+    strikeouts: int
+    doubles: int
+    triples: int
+    homeruns: int
+    stolen_bases: int
+    caught_stealing: int
+    hit_by_pitch: int
+    intentional_bb: int
+    gdp: int
+    sac_fly: int
+    sac_hit: int
+    avg_to_date: float
+    obp_to_date: float
+    slg_to_date: float
+    ops_to_date: float
+    total_pitches: int
+    total_strikes: int
+    wpa_bat: float
+    avg_lvg_index: float
+    wpa_bat_pos: float
+    wpa_bat_neg: float
+    re24_bat: float
+    extra_base_hits: Optional[int] = 0
+    total_bases: Optional[int] = 0
+    player_name: Optional[str] = ""
+    stat_line: Optional[str] = ""
+
+    class Config:
+        orm_mode = True
+
+
+class CombinedBatStatsSchema(BaseModel):
     year: int
     team_id_bbref: str
     opponent_team_id_bbref: str
