@@ -2,7 +2,9 @@ from dataclasses import asdict
 from http import HTTPStatus
 from typing import List
 
+import vigorish.database as db
 from fastapi import APIRouter, Depends, HTTPException, Request, Response
+from fastapi_redis_cache import cache
 from vigorish.app import Vigorish
 
 from app.core.database import get_vig_app
@@ -95,3 +97,15 @@ def get_pitch_stats_by_opp_team_by_year_for_player(
         raise HTTPException(status_code=int(HTTPStatus.NOT_FOUND), detail="No results found")
     player_pitch_stats = [asdict(stats) for stats in pitch_stats]
     return convert_team_stats(app.db_session, player_pitch_stats)
+
+
+@router.get("/pitch_app_ids", response_model=List[str])
+@cache()
+def get_pitch_app_ids_for_game(request: Request, response: Response, mlb_id: str, app: Vigorish = Depends(get_vig_app)):
+    player_id = db.PlayerId.find_by_mlb_id(app.db_session, mlb_id)
+    if not player_id:
+        raise HTTPException(status_code=int(HTTPStatus.NOT_FOUND), detail="No results found")
+    pitch_app_status_list = (
+        app.db_session.query(db.PitchAppScrapeStatus).filter_by(pitcher_id=player_id.db_player_id).all()
+    )
+    return [p.pitch_app_id for p in pitch_app_status_list]
