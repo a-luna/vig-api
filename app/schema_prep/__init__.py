@@ -1,4 +1,5 @@
 # flake8: noqa
+from app.schema_prep.bat_stats import convert_bat_stats
 from app.schema_prep.routines import convert_boxscore_data, convert_scoreboard_data
 from app.schema_prep.season import convert_season_to_dict, create_divisional_standings
 from app.schema_prep.pfx_metrics_set import combine_career_and_yearly_pfx_metrics_sets
