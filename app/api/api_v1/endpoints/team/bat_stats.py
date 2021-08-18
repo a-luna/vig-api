@@ -9,12 +9,12 @@ from vigorish.enums import DefensePosition, TeamID
 from app.api.dependencies import MLBSeason, TeamParameters
 from app.core.database import get_vig_app
 from app.schema_prep import convert_team_stats
-from app.schemas import BatStatsSchema
+from app.schemas import CombinedBatStatsSchema
 
 router = APIRouter()
 
 
-@router.get("/", response_model=BatStatsSchema)
+@router.get("/", response_model=CombinedBatStatsSchema)
 def get_bat_stats_for_team(
     request: Request, response: Response, team_params: TeamParameters = Depends(), app: Vigorish = Depends(get_vig_app)
 ):
@@ -24,7 +24,7 @@ def get_bat_stats_for_team(
     return asdict(bat_stats)
 
 
-@router.get("/by_bat_order", response_model=List[BatStatsSchema])
+@router.get("/by_bat_order", response_model=List[CombinedBatStatsSchema])
 def get_bat_stats_by_bat_order_for_team(
     request: Request, response: Response, team_params: TeamParameters = Depends(), app: Vigorish = Depends(get_vig_app)
 ):
@@ -34,7 +34,7 @@ def get_bat_stats_by_bat_order_for_team(
     return [asdict(s) for s in bat_stats]
 
 
-@router.get("/by_position", response_model=List[BatStatsSchema])
+@router.get("/by_position", response_model=List[CombinedBatStatsSchema])
 def get_bat_stats_by_defpos_for_team(
     request: Request, response: Response, team_params: TeamParameters = Depends(), app: Vigorish = Depends(get_vig_app)
 ):
@@ -44,7 +44,7 @@ def get_bat_stats_by_defpos_for_team(
     return [asdict(s) for s in bat_stats]
 
 
-@router.get("/starters", response_model=BatStatsSchema)
+@router.get("/starters", response_model=CombinedBatStatsSchema)
 def get_bat_stats_for_starters_for_team(
     request: Request, response: Response, team_params: TeamParameters = Depends(), app: Vigorish = Depends(get_vig_app)
 ):
@@ -54,7 +54,7 @@ def get_bat_stats_for_starters_for_team(
     return asdict(bat_stats)
 
 
-@router.get("/subs", response_model=BatStatsSchema)
+@router.get("/subs", response_model=CombinedBatStatsSchema)
 def get_bat_stats_for_subs_for_team(
     request: Request, response: Response, team_params: TeamParameters = Depends(), app: Vigorish = Depends(get_vig_app)
 ):
@@ -64,7 +64,7 @@ def get_bat_stats_for_subs_for_team(
     return asdict(bat_stats)
 
 
-@router.get("/by_year", response_model=Dict[int, BatStatsSchema])
+@router.get("/by_year", response_model=Dict[int, CombinedBatStatsSchema])
 def get_bat_stats_by_year_for_team(
     request: Request, response: Response, team_id: TeamID, app: Vigorish = Depends(get_vig_app)
 ):
@@ -74,7 +74,7 @@ def get_bat_stats_by_year_for_team(
     return {year: asdict(bat_stats) for year, bat_stats in bat_stats_dict.items()}
 
 
-@router.get("/bat_order/by_year", response_model=Dict[int, BatStatsSchema])
+@router.get("/bat_order/by_year", response_model=Dict[int, CombinedBatStatsSchema])
 def get_bat_stats_for_lineup_spot_by_year_for_team(
     request: Request,
     response: Response,
@@ -88,7 +88,7 @@ def get_bat_stats_for_lineup_spot_by_year_for_team(
     return {year: asdict(bat_stats) for year, bat_stats in bat_stats_dict.items()}
 
 
-@router.get("/position/by_year", response_model=Dict[int, BatStatsSchema])
+@router.get("/position/by_year", response_model=Dict[int, CombinedBatStatsSchema])
 def get_bat_stats_for_defpos_by_year_for_team(
     request: Request,
     response: Response,
@@ -102,7 +102,7 @@ def get_bat_stats_for_defpos_by_year_for_team(
     return {year: asdict(bat_stats) for year, bat_stats in bat_stats_dict.items()}
 
 
-@router.get("/starters/by_year", response_model=Dict[int, BatStatsSchema])
+@router.get("/starters/by_year", response_model=Dict[int, CombinedBatStatsSchema])
 def get_bat_stats_for_starters_by_year_for_team(
     request: Request, response: Response, team_id: TeamID, app: Vigorish = Depends(get_vig_app)
 ):
@@ -112,7 +112,7 @@ def get_bat_stats_for_starters_by_year_for_team(
     return {year: asdict(bat_stats) for year, bat_stats in bat_stats_dict.items()}
 
 
-@router.get("/subs/by_year", response_model=Dict[int, BatStatsSchema])
+@router.get("/subs/by_year", response_model=Dict[int, CombinedBatStatsSchema])
 def get_bat_stats_for_subs_by_year_for_team(
     request: Request, response: Response, team_id: TeamID, app: Vigorish = Depends(get_vig_app)
 ):
@@ -122,7 +122,7 @@ def get_bat_stats_for_subs_by_year_for_team(
     return {year: asdict(bat_stats) for year, bat_stats in bat_stats_dict.items()}
 
 
-@router.get("/by_player", response_model=List[BatStatsSchema])
+@router.get("/by_player", response_model=List[CombinedBatStatsSchema])
 def get_bat_stats_by_player_for_team(
     request: Request, response: Response, team_params: TeamParameters = Depends(), app: Vigorish = Depends(get_vig_app)
 ):
@@ -133,7 +133,7 @@ def get_bat_stats_by_player_for_team(
     return convert_team_stats(app.db_session, player_bat_stats)
 
 
-@router.get("/bat_order/by_player", response_model=List[BatStatsSchema])
+@router.get("/bat_order/by_player", response_model=List[CombinedBatStatsSchema])
 def get_bat_stats_for_lineup_spot_by_player_for_team(
     request: Request,
     response: Response,
@@ -150,7 +150,7 @@ def get_bat_stats_for_lineup_spot_by_player_for_team(
     return convert_team_stats(app.db_session, player_bat_stats)
 
 
-@router.get("/position/by_player", response_model=List[BatStatsSchema])
+@router.get("/position/by_player", response_model=List[CombinedBatStatsSchema])
 def get_bat_stats_for_defensive_position_by_player_for_team(
     request: Request,
     response: Response,
@@ -167,7 +167,7 @@ def get_bat_stats_for_defensive_position_by_player_for_team(
     return convert_team_stats(app.db_session, player_bat_stats)
 
 
-@router.get("/starters/by_player", response_model=List[BatStatsSchema])
+@router.get("/starters/by_player", response_model=List[CombinedBatStatsSchema])
 def get_bat_stats_for_starters_by_player_for_team(
     request: Request, response: Response, team_params: TeamParameters = Depends(), app: Vigorish = Depends(get_vig_app)
 ):
@@ -178,7 +178,7 @@ def get_bat_stats_for_starters_by_player_for_team(
     return convert_team_stats(app.db_session, player_bat_stats)
 
 
-@router.get("/subs/by_player", response_model=List[BatStatsSchema])
+@router.get("/subs/by_player", response_model=List[CombinedBatStatsSchema])
 def get_bat_stats_for_subs_by_player_for_team(
     request: Request, response: Response, team_params: TeamParameters = Depends(), app: Vigorish = Depends(get_vig_app)
 ):
@@ -189,7 +189,7 @@ def get_bat_stats_for_subs_by_player_for_team(
     return convert_team_stats(app.db_session, player_bat_stats)
 
 
-@router.get("/all_teams", response_model=Dict[str, BatStatsSchema])
+@router.get("/all_teams", response_model=Dict[str, CombinedBatStatsSchema])
 def get_bat_stats_for_season_for_all_teams(
     request: Request, response: Response, season: MLBSeason = Depends(), app: Vigorish = Depends(get_vig_app)
 ):
@@ -200,7 +200,7 @@ def get_bat_stats_for_season_for_all_teams(
     return convert_team_stats(app.db_session, all_teams)
 
 
-@router.get("/bat_order/all_teams", response_model=Dict[str, BatStatsSchema])
+@router.get("/bat_order/all_teams", response_model=Dict[str, CombinedBatStatsSchema])
 def get_bat_stats_for_lineup_spot_for_season_for_all_teams(
     request: Request,
     response: Response,
@@ -215,7 +215,7 @@ def get_bat_stats_for_lineup_spot_for_season_for_all_teams(
     return convert_team_stats(app.db_session, all_teams)
 
 
-@router.get("/position/all_teams", response_model=Dict[str, BatStatsSchema])
+@router.get("/position/all_teams", response_model=Dict[str, CombinedBatStatsSchema])
 def get_bat_stats_for_defpos_for_season_for_all_teams(
     request: Request,
     response: Response,
@@ -230,7 +230,7 @@ def get_bat_stats_for_defpos_for_season_for_all_teams(
     return convert_team_stats(app.db_session, all_teams)
 
 
-@router.get("/starters/all_teams", response_model=Dict[str, BatStatsSchema])
+@router.get("/starters/all_teams", response_model=Dict[str, CombinedBatStatsSchema])
 def get_bat_stats_for_starters_for_season_for_all_teams(
     request: Request, response: Response, season: MLBSeason = Depends(), app: Vigorish = Depends(get_vig_app)
 ):
@@ -241,7 +241,7 @@ def get_bat_stats_for_starters_for_season_for_all_teams(
     return convert_team_stats(app.db_session, all_teams)
 
 
-@router.get("/subs/all_teams", response_model=Dict[str, BatStatsSchema])
+@router.get("/subs/all_teams", response_model=Dict[str, CombinedBatStatsSchema])
 def get_bat_stats_for_subs_for_season_for_all_teams(
     request: Request, response: Response, season: MLBSeason = Depends(), app: Vigorish = Depends(get_vig_app)
 ):
