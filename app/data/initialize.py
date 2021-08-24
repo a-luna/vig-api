@@ -5,7 +5,7 @@ from zipfile import ZipFile
 from app.data.util import download_file, get_file_name_from_url, validate_file
 
 MLB_SEASONS = [2017, 2018, 2019, 2020, 2021]
-S3_BUCKET = "https://alunapublic.s3.us-west-1.amazonaws.com/vig-api"
+S3_BUCKET = "https://vig-api.us-southeast-1.linodeobjects.com"
 SQLITE_DB = "vig.db"
 
 DATA_FOLDER = Path(__file__).parent
