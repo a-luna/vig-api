@@ -105,9 +105,6 @@ def get_career_percentiles_vs_lhb_for_pitch_types(
 @router.get("/career_pfx", response_model=CareerPfxMetricsForPitcherSchema)
 @cache_one_week()
 def get_all_pfx_career_data(request: Request, response: Response, mlb_id: str, app: Vigorish = Depends(get_vig_app)):
-    if settings.ENV == "DEV":
-        mock_data_file = Path(__file__).parent.joinpath("combined_pfx.json")
-        return json.loads(mock_data_file.read_text())
     player_data = crud.get_player_data(mlb_id, app)
     career_pfx = player_data.get_all_pfx_career_data()
     yearly_pfx = player_data.get_all_pfx_yearly_data()

@@ -16,9 +16,17 @@ from app.schema_prep import (
     convert_scoreboard_data,
     convert_season_to_dict,
     convert_pitch_stats,
+    convert_pfx_times_to_est,
     create_divisional_standings,
 )
-from app.schemas import ScoreboardSchema, SeasonSchema, TeamLeagueStandings, GamePitchStatsSchema, GameBatStatsSchema
+from app.schemas import (
+    ScoreboardSchema,
+    SeasonSchema,
+    TeamLeagueStandings,
+    GamePitchStatsSchema,
+    GameBatStatsSchema,
+    PitchFxSchema,
+)
 
 router = APIRouter()
 
@@ -125,3 +133,11 @@ def get_daily_batting_stats(
 ):
     bat_stats = app.db_session.query(db.BatStats).filter_by(date_id=game_date.date_id).all()
     return [convert_bat_stats(b) for b in bat_stats]
+
+
+@router.get("/barrels_for_date", response_model=List[PitchFxSchema])
+def get_barrels_for_date(
+    request: Request, response: Response, game_date: MLBGameDate = Depends(), app: Vigorish = Depends(get_vig_app)
+):
+    pfx = app.scraped_data.get_all_barrels_for_game_date(game_date.date)
+    return [convert_pfx_times_to_est(p.as_dict()) for p in pfx]
