@@ -1,4 +1,4 @@
-from typing import Optional
+from typing import List, Optional
 from pydantic import BaseModel
 
 
@@ -50,13 +50,14 @@ class GamePitchStatsSchema(BaseModel):
 
 
 class CombinedPitchStatsSchema(BaseModel):
-    year: int
-    team_id_bbref: str
-    opponent_team_id_bbref: str
-    player_name: str
-    mlb_id: int
-    bbref_id: str
-    stint_number: int
+    year: Optional[int]
+    team_id_bbref: Optional[str]
+    player_team_id_bbref: Optional[str]
+    opponent_team_id_bbref: Optional[str]
+    player_name: Optional[str]
+    mlb_id: Optional[int]
+    bbref_id: Optional[str]
+    stint_number: Optional[int]
     total_games: int
     games_as_sp: int
     games_as_rp: int
@@ -95,5 +96,18 @@ class CombinedPitchStatsSchema(BaseModel):
     inherited_scored: int
     wpa_pitch: float
     re24_pitch: float
+    age: Optional[int]
     league: Optional[str]
     division: Optional[str]
+    changed_teams_midseason: Optional[bool] = False
+    all_stats_for_season: Optional[bool] = False
+    all_stats_for_stint: Optional[bool] = False
+    career_stats_all_teams: Optional[bool] = False
+    career_stats_for_team: Optional[bool] = False
+    total_seasons: Optional[int]
+
+
+class CareerPitchStatsSchema(BaseModel):
+    career: CombinedPitchStatsSchema
+    by_team: List[CombinedPitchStatsSchema]
+    by_team_by_year: List[CombinedPitchStatsSchema]

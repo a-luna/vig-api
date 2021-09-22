@@ -1,4 +1,4 @@
-from typing import Optional
+from typing import List, Optional
 from pydantic import BaseModel
 from vigorish.enums import DefensePosition
 
@@ -50,16 +50,18 @@ class GameBatStatsSchema(BaseModel):
 
 
 class CombinedBatStatsSchema(BaseModel):
-    year: int
-    team_id_bbref: str
-    opponent_team_id_bbref: str
-    player_name: str
+    year: Optional[int]
+    player_team_id_bbref: Optional[str]
+    opponent_team_id_bbref: Optional[str]
+    player_name: Optional[str]
     is_starter: bool
-    bat_order: int
-    def_position: DefensePosition
-    mlb_id: int
-    bbref_id: str
-    stint_number: int
+    bat_order: Optional[str]
+    bat_order_list: Optional[List[int]]
+    def_position: Optional[str]
+    def_position_list: Optional[List[DefensePosition]]
+    mlb_id: Optional[int]
+    bbref_id: Optional[str]
+    stint_number: Optional[int]
     total_games: int
     avg: float
     obp: float
@@ -92,5 +94,25 @@ class CombinedBatStatsSchema(BaseModel):
     wpa_bat_pos: float
     wpa_bat_neg: float
     re24_bat: float
+    age: Optional[int]
     league: Optional[str]
     division: Optional[str]
+    changed_teams_midseason: Optional[bool] = False
+    all_stats_for_season: Optional[bool] = False
+    all_stats_for_stint: Optional[bool] = False
+    career_stats_all_teams: Optional[bool] = False
+    career_stats_for_team: Optional[bool] = False
+    all_team_stats_for_def_pos: Optional[bool] = False
+    all_player_stats_for_def_pos: Optional[bool] = False
+    separate_player_stats_for_def_pos: Optional[bool] = False
+    all_team_stats_for_bat_order: Optional[bool] = False
+    all_player_stats_for_bat_order: Optional[bool] = False
+    separate_player_stats_for_bat_order: Optional[bool] = False
+    total_seasons: Optional[int]
+    row_id: Optional[str]
+
+
+class CareerBatStatsSchema(BaseModel):
+    career: CombinedBatStatsSchema
+    by_team: List[CombinedBatStatsSchema]
+    by_team_by_year: List[CombinedBatStatsSchema]

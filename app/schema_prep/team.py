@@ -1,37 +1,6 @@
 import vigorish.database as db
 
-TEAM_ID_MAP = {
-    "ARI": {"league": "NL", "division": "W"},
-    "ATL": {"league": "NL", "division": "E"},
-    "BAL": {"league": "AL", "division": "E"},
-    "BOS": {"league": "AL", "division": "E"},
-    "CHW": {"league": "AL", "division": "C"},
-    "CHC": {"league": "NL", "division": "C"},
-    "CIN": {"league": "NL", "division": "C"},
-    "CLE": {"league": "AL", "division": "C"},
-    "COL": {"league": "NL", "division": "W"},
-    "DET": {"league": "AL", "division": "C"},
-    "HOU": {"league": "AL", "division": "W"},
-    "KCR": {"league": "AL", "division": "C"},
-    "LAA": {"league": "AL", "division": "W"},
-    "LAD": {"league": "NL", "division": "W"},
-    "MIA": {"league": "NL", "division": "E"},
-    "MIL": {"league": "NL", "division": "C"},
-    "MIN": {"league": "AL", "division": "C"},
-    "NYY": {"league": "AL", "division": "E"},
-    "NYM": {"league": "NL", "division": "E"},
-    "OAK": {"league": "AL", "division": "W"},
-    "PHI": {"league": "NL", "division": "E"},
-    "PIT": {"league": "NL", "division": "C"},
-    "SDP": {"league": "NL", "division": "W"},
-    "SEA": {"league": "AL", "division": "W"},
-    "SFG": {"league": "NL", "division": "W"},
-    "STL": {"league": "NL", "division": "C"},
-    "TBR": {"league": "AL", "division": "E"},
-    "TEX": {"league": "AL", "division": "W"},
-    "TOR": {"league": "AL", "division": "E"},
-    "WSN": {"league": "NL", "division": "E"},
-}
+from app.schema_prep.constants import TEAM_ID_MAP
 
 
 def convert_team_stats_by_year(stats_by_year):
@@ -57,11 +26,13 @@ def convert_for_api_response(db_session, stats):
 
 
 def assign_league_and_division_to_team_stats(team_stats):
-    team_stats["league"] = TEAM_ID_MAP[team_stats["team_id_bbref"]]["league"]
-    team_stats["division"] = TEAM_ID_MAP[team_stats["team_id_bbref"]]["division"]
+    team_stats["league"] = TEAM_ID_MAP[team_stats["player_team_id_bbref"]]["league"]
+    team_stats["division"] = TEAM_ID_MAP[team_stats["player_team_id_bbref"]]["division"]
 
 
 def add_player_names_to_team_pitching_stats(db_session, pitch_stats):
-    player_id = db.PlayerId.find_by_mlb_id(db_session, pitch_stats["mlb_id"])
-    pitch_stats["player_name"] = player_id.mlb_name if player_id else ""
+    pitch_stats["player_name"] = ""
+    if pitch_stats.get("mlb_id"):
+        player_id = db.PlayerId.find_by_mlb_id(db_session, pitch_stats["mlb_id"])
+        pitch_stats["player_name"] = player_id.mlb_name if player_id else ""
     return pitch_stats
