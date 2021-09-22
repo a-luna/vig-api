@@ -15,7 +15,7 @@ app = FastAPI(
     title=settings.PROJECT_NAME,
     version=settings.API_VERSION,
     openapi_url=f"{settings.API_VERSION}/openapi.json",
-    docs_url=None,
+    docs_url=f"{settings.API_VERSION}/docs" if settings.ENV == "DEV" else None,
     redoc_url=None,
 )
 app.add_middleware(
@@ -45,7 +45,7 @@ async def swagger_ui_html():
         openapi_url=app.openapi_url,
         swagger_js_url="/static/swagger-ui-bundle.js",
         swagger_css_url="/static/swagger-ui.css",
-        swagger_favicon_url="/static/favicon.png",
+        swagger_favicon_url="/static/favicon.ico",
     )
 
 
