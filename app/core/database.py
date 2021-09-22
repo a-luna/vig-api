@@ -1,3 +1,5 @@
+from functools import lru_cache
+
 from fastapi import Depends
 from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
@@ -19,5 +21,6 @@ def get_db_session():
         db.close()
 
 
+@lru_cache
 def get_vig_app(session: Session = Depends(get_db_session)):
     return Vigorish(dotenv_file=settings.DOTENV_FILE, db_engine=engine, db_session=session)
