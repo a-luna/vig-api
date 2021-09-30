@@ -4,7 +4,7 @@ from typing import List
 
 import vigorish.database as db
 from fastapi import APIRouter, Depends, HTTPException, Request, Response
-from fastapi_redis_cache import cache, cache_one_day
+from fastapi_redis_cache import cache, cache_one_day, cache_one_hour
 from vigorish.app import Vigorish
 from vigorish.util.dt_format_strings import DATE_ONLY
 
@@ -101,6 +101,7 @@ def get_standings_on_date(
 
 
 @router.get("/game_ids")
+@cache()
 def get_all_game_ids_for_date(
     request: Request, response: Response, game_date: MLBGameDate = Depends(), app: Vigorish = Depends(get_vig_app)
 ):
@@ -111,6 +112,7 @@ def get_all_game_ids_for_date(
 
 
 @router.get("/scoreboard", response_model=ScoreboardSchema)
+@cache()
 def get_scoreboard_for_date(
     request: Request, response: Response, game_date: MLBGameDate = Depends(), app: Vigorish = Depends(get_vig_app)
 ):
@@ -120,6 +122,7 @@ def get_scoreboard_for_date(
 
 
 @router.get("/pitch_stats_for_date", response_model=List[GamePitchStatsSchema])
+@cache_one_hour()
 def get_daily_pitching_stats(
     request: Request, response: Response, game_date: MLBGameDate = Depends(), app: Vigorish = Depends(get_vig_app)
 ):
@@ -128,6 +131,7 @@ def get_daily_pitching_stats(
 
 
 @router.get("/bat_stats_for_date", response_model=List[GameBatStatsSchema])
+@cache_one_hour()
 def get_daily_batting_stats(
     request: Request, response: Response, game_date: MLBGameDate = Depends(), app: Vigorish = Depends(get_vig_app)
 ):
@@ -136,6 +140,7 @@ def get_daily_batting_stats(
 
 
 @router.get("/barrels_for_date", response_model=List[PitchFxSchema])
+@cache_one_hour()
 def get_barrels_for_date(
     request: Request, response: Response, game_date: MLBGameDate = Depends(), app: Vigorish = Depends(get_vig_app)
 ):
