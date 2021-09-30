@@ -105,6 +105,7 @@ def get_pitch_stats_by_opp_team_by_year_for_player(
 
 
 @router.get("/career_stats", response_model=CareerPitchStatsSchema)
+@cache()
 def get_career_pitch_stats_for_player(
     request: Request, response: Response, mlb_id: str, app: Vigorish = Depends(get_vig_app)
 ):

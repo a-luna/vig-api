@@ -3,6 +3,7 @@ from http import HTTPStatus
 from typing import List
 
 from fastapi import APIRouter, Depends, HTTPException, Request, Response
+from fastapi_redis_cache import cache
 from vigorish.app import Vigorish
 
 from app.core.database import get_vig_app
@@ -58,6 +59,7 @@ def get_bat_stats_by_team_by_year_for_player(
 
 
 @router.get("/career_stats", response_model=CareerBatStatsSchema)
+@cache()
 def get_career_bat_stats_for_player(
     request: Request, response: Response, mlb_id: str, app: Vigorish = Depends(get_vig_app)
 ):
