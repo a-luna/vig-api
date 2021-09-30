@@ -112,7 +112,7 @@ ujson==4.2.0
 urllib3==1.26.7
 uvicorn==0.14.0
 uvloop==0.16.0
-vigorish==0.6.2
+vigorish==0.6.4
 w3lib==1.22.0
 watchgod==0.7
 wcwidth==0.2.5
