@@ -105,6 +105,7 @@ class CombinedPitchStatsSchema(BaseModel):
     career_stats_all_teams: Optional[bool] = False
     career_stats_for_team: Optional[bool] = False
     total_seasons: Optional[int]
+    row_id: Optional[str]
 
 
 class CareerPitchStatsSchema(BaseModel):

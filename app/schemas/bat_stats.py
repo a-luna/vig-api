@@ -49,6 +49,19 @@ class GameBatStatsSchema(BaseModel):
         orm_mode = True
 
 
+class DefPosMetricsSchema(BaseModel):
+    def_pos: DefensePosition
+    is_starter: bool
+    total_games: int
+    percent: float
+
+
+class BatOrderMetricsSchema(BaseModel):
+    bat_order: int
+    total_games: int
+    percent: float
+
+
 class CombinedBatStatsSchema(BaseModel):
     year: Optional[int]
     player_team_id_bbref: Optional[str]
@@ -57,12 +70,18 @@ class CombinedBatStatsSchema(BaseModel):
     is_starter: bool
     bat_order: Optional[str]
     bat_order_list: Optional[List[int]]
+    bat_order_metrics: Optional[List[BatOrderMetricsSchema]]
     def_position: Optional[str]
     def_position_list: Optional[List[DefensePosition]]
+    def_position_metrics: Optional[List[DefPosMetricsSchema]]
     mlb_id: Optional[int]
     bbref_id: Optional[str]
     stint_number: Optional[int]
     total_games: int
+    total_games_started: int
+    total_games_subbed: int
+    percent_started: float
+    percent_subbed: float
     avg: float
     obp: float
     slg: float

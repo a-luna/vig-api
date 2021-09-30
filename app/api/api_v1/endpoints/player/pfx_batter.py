@@ -9,6 +9,7 @@ from vigorish.database import PitchFx
 from app.api.dependencies import get_date_range, MLBSeason
 from app.core import crud
 from app.core.database import get_vig_app
+from app.schema_prep import combine_career_and_yearly_pfx_batting_metrics_sets
 from app.schemas import PitchFxMetricsSetSchema, PitchFxSchema
 
 router = APIRouter()
@@ -115,6 +116,15 @@ def get_pfx_metrics_vs_lhp_as_rhb_for_career_for_batter(
     if not pfx_stats:
         raise HTTPException(status_code=int(HTTPStatus.NOT_FOUND), detail="No results found")
     return pfx_stats.as_dict()
+
+
+@router.get("/career_pfx")
+@cache_one_week()
+def get_all_pfx_career_data(request: Request, response: Response, mlb_id: str, app: Vigorish = Depends(get_vig_app)):
+    player_data = crud.get_player_data(mlb_id, app)
+    career_pfx = player_data.get_all_pfx_batting_career_data()
+    yearly_pfx = player_data.get_all_pfx_batting_yearly_data()
+    return combine_career_and_yearly_pfx_batting_metrics_sets(career_pfx, yearly_pfx)
 
 
 @router.get("/for_year", response_model=PitchFxMetricsSetSchema)

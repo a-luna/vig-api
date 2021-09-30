@@ -2,11 +2,11 @@ import math
 from collections import defaultdict
 from datetime import date
 from typing import List
+from uuid import uuid4
 
 from vigorish.app import Vigorish
 from vigorish.data.metrics.bat_stats import BatStatsMetrics
 from vigorish.data.player_data import PlayerData
-from vigorish.util.numeric_helpers import getRandomHexString
 
 from app.schema_prep.constants import TEAM_ID_MAP
 
@@ -138,4 +138,4 @@ def get_player_age_for_season(player_data: PlayerData, year: int):
 
 
 def assign_row_id(stats_dict):
-    stats_dict["row_id"] = getRandomHexString(ROW_ID_LENGTH)
+    stats_dict["row_id"] = str(uuid4())[-ROW_ID_LENGTH:]

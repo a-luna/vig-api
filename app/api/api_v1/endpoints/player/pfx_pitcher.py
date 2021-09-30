@@ -1,6 +1,4 @@
-import json
 from http import HTTPStatus
-from pathlib import Path
 from typing import Dict, List, Tuple
 
 from fastapi import APIRouter, Depends, HTTPException, Request, Response
@@ -10,9 +8,8 @@ from vigorish.util.list_helpers import flatten_list2d
 
 from app.api.dependencies import get_date_range, get_pitch_app_params, MLBSeason
 from app.core import crud
-from app.core.config import settings
 from app.core.database import get_vig_app
-from app.schema_prep import combine_career_and_yearly_pfx_metrics_sets
+from app.schema_prep import combine_career_and_yearly_pfx_pitching_metrics_sets
 from app.schemas import (
     CareerPfxMetricsForPitcherSchema,
     PitchTypePercentilesSchema,
@@ -108,7 +105,7 @@ def get_all_pfx_career_data(request: Request, response: Response, mlb_id: str, a
     player_data = crud.get_player_data(mlb_id, app)
     career_pfx = player_data.get_all_pfx_career_data()
     yearly_pfx = player_data.get_all_pfx_yearly_data()
-    return combine_career_and_yearly_pfx_metrics_sets(career_pfx, yearly_pfx)
+    return combine_career_and_yearly_pfx_pitching_metrics_sets(career_pfx, yearly_pfx)
 
 
 @router.get("/for_year", response_model=PitchFxMetricsSetSchema)

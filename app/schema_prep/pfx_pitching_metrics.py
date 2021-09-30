@@ -3,7 +3,7 @@ from vigorish.enums import PitchType
 BATTER_STANCE_SPLITS = ["all", "rhb", "lhb"]
 
 
-def combine_career_and_yearly_pfx_metrics_sets(career_pfx, yearly_pfx):
+def combine_career_and_yearly_pfx_pitching_metrics_sets(career_pfx, yearly_pfx):
     combined_pfx_metrics = {}
     career_pfx = _convert_cateer_pfx_to_dict(career_pfx)
     yearly_pfx = _convert_yearly_pfx_to_dict(yearly_pfx)

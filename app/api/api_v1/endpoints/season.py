@@ -16,7 +16,7 @@ from app.schema_prep import (
     convert_scoreboard_data,
     convert_season_to_dict,
     convert_pitch_stats,
-    convert_pfx_times_to_est,
+    convert_pfx_list,
     create_divisional_standings,
 )
 from app.schemas import (
@@ -140,4 +140,4 @@ def get_barrels_for_date(
     request: Request, response: Response, game_date: MLBGameDate = Depends(), app: Vigorish = Depends(get_vig_app)
 ):
     pfx = app.scraped_data.get_all_barrels_for_game_date(game_date.date)
-    return [convert_pfx_times_to_est(p.as_dict()) for p in pfx]
+    return convert_pfx_list(pfx)
