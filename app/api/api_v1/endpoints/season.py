@@ -88,12 +88,13 @@ def get_standings_on_date(
     app: Vigorish = Depends(get_vig_app),
 ):
     season = game_date.season
+    season_end_date = datetime.strptime(season["end_date"], DATE_ONLY)
     if season["year"] == datetime.today().year and db.Season.regular_season_is_in_progress(app.db_session):
         most_recent = db.Season.get_most_recent_scraped_date(app.db_session, season["year"])
         game_date = min(game_date.date, most_recent)
     else:
-        game_date = min(game_date.date, season["end_date"])
-    if season["year"] != datetime.today().year and game_date == season["end_date"]:
+        game_date = min(game_date.date, season_end_date)
+    if season["year"] != datetime.today().year and game_date == season_end_date:
         all_teams = [team.as_dict() for team in db.Team.get_all_teams_for_season(app.db_session, season["year"])]
         return create_divisional_standings(all_teams)
     all_teams = app.scraped_data.get_season_standings(season["year"], game_date)
