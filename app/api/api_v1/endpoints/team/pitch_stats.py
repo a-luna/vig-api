@@ -2,7 +2,7 @@ from http import HTTPStatus
 from typing import Dict, List
 
 from fastapi import APIRouter, Depends, HTTPException, Request, Response
-from fastapi_redis_cache import cache
+from fastapi_redis_cache import cache_one_week
 from vigorish.app import Vigorish
 from vigorish.enums import TeamID
 
@@ -15,6 +15,7 @@ router = APIRouter()
 
 
 @router.get("/", response_model=CombinedPitchStatsSchema)
+@cache_one_week()
 def get_pitch_stats_for_team(
     request: Request, response: Response, team_params: TeamParameters = Depends(), app: Vigorish = Depends(get_vig_app)
 ):
@@ -25,7 +26,7 @@ def get_pitch_stats_for_team(
 
 
 @router.get("/sp", response_model=CombinedPitchStatsSchema)
-@cache()
+@cache_one_week()
 def get_pitch_stats_for_sp_for_team(
     request: Request, response: Response, team_params: TeamParameters = Depends(), app: Vigorish = Depends(get_vig_app)
 ):
@@ -36,6 +37,7 @@ def get_pitch_stats_for_sp_for_team(
 
 
 @router.get("/rp", response_model=CombinedPitchStatsSchema)
+@cache_one_week()
 def get_pitch_stats_for_rp_for_team(
     request: Request, response: Response, team_params: TeamParameters = Depends(), app: Vigorish = Depends(get_vig_app)
 ):
@@ -46,6 +48,7 @@ def get_pitch_stats_for_rp_for_team(
 
 
 @router.get("/by_year", response_model=Dict[int, CombinedPitchStatsSchema])
+@cache_one_week()
 def get_pitch_stats_by_year_for_team(
     request: Request, response: Response, team_id: TeamID, app: Vigorish = Depends(get_vig_app)
 ):
@@ -56,6 +59,7 @@ def get_pitch_stats_by_year_for_team(
 
 
 @router.get("/sp/by_year", response_model=Dict[int, CombinedPitchStatsSchema])
+@cache_one_week()
 def get_pitch_stats_for_sp_by_year_for_team(
     request: Request, response: Response, team_id: TeamID, app: Vigorish = Depends(get_vig_app)
 ):
@@ -66,6 +70,7 @@ def get_pitch_stats_for_sp_by_year_for_team(
 
 
 @router.get("/rp/by_year", response_model=Dict[int, CombinedPitchStatsSchema])
+@cache_one_week()
 def get_pitch_stats_for_rp_by_year_for_team(
     request: Request, response: Response, team_id: TeamID, app: Vigorish = Depends(get_vig_app)
 ):
@@ -76,6 +81,7 @@ def get_pitch_stats_for_rp_by_year_for_team(
 
 
 @router.get("/by_player", response_model=List[CombinedPitchStatsSchema])
+@cache_one_week()
 def get_pitch_stats_by_player_for_team(
     request: Request, response: Response, team_params: TeamParameters = Depends(), app: Vigorish = Depends(get_vig_app)
 ):
@@ -87,6 +93,7 @@ def get_pitch_stats_by_player_for_team(
 
 
 @router.get("/sp/by_player", response_model=List[CombinedPitchStatsSchema])
+@cache_one_week()
 def get_pitch_stats_for_sp_by_player_for_team(
     request: Request, response: Response, team_params: TeamParameters = Depends(), app: Vigorish = Depends(get_vig_app)
 ):
@@ -98,6 +105,7 @@ def get_pitch_stats_for_sp_by_player_for_team(
 
 
 @router.get("/rp/by_player", response_model=List[CombinedPitchStatsSchema])
+@cache_one_week()
 def get_pitch_stats_for_rp_by_player_for_team(
     request: Request, response: Response, team_params: TeamParameters = Depends(), app: Vigorish = Depends(get_vig_app)
 ):
@@ -109,6 +117,7 @@ def get_pitch_stats_for_rp_by_player_for_team(
 
 
 @router.get("/all_teams", response_model=Dict[str, CombinedPitchStatsSchema])
+@cache_one_week()
 def get_pitch_stats_for_season_for_all_teams(
     request: Request, response: Response, season: MLBSeason = Depends(), app: Vigorish = Depends(get_vig_app)
 ):
@@ -120,6 +129,7 @@ def get_pitch_stats_for_season_for_all_teams(
 
 
 @router.get("/sp/all_teams", response_model=Dict[str, CombinedPitchStatsSchema])
+@cache_one_week()
 def get_pitch_stats_for_sp_for_season_for_all_teams(
     request: Request, response: Response, season: MLBSeason = Depends(), app: Vigorish = Depends(get_vig_app)
 ):
@@ -131,6 +141,7 @@ def get_pitch_stats_for_sp_for_season_for_all_teams(
 
 
 @router.get("/rp/all_teams", response_model=Dict[str, CombinedPitchStatsSchema])
+@cache_one_week()
 def get_pitch_stats_for_rp_for_season_for_all_teams(
     request: Request, response: Response, season: MLBSeason = Depends(), app: Vigorish = Depends(get_vig_app)
 ):

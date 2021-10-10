@@ -77,6 +77,7 @@ def get_career_bat_stats_for_player(
 
 
 @router.get("/by_opp_team", response_model=List[CombinedBatStatsSchema])
+@cache()
 def get_bat_stats_by_opp_for_player(
     request: Request, response: Response, mlb_id: str, app: Vigorish = Depends(get_vig_app)
 ):
@@ -87,6 +88,7 @@ def get_bat_stats_by_opp_for_player(
 
 
 @router.get("/by_opp_team_by_year", response_model=List[CombinedBatStatsSchema])
+@cache()
 def get_bat_stats_by_opp_by_year_for_player(
     request: Request, response: Response, mlb_id: str, app: Vigorish = Depends(get_vig_app)
 ):

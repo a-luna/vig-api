@@ -21,6 +21,7 @@ router = APIRouter()
 
 
 @router.get("/in_date_range", response_model=List[PitchFxSchema])
+@cache()
 def get_all_pfx_within_date_range_for_player(
     request: Request,
     response: Response,
@@ -109,7 +110,7 @@ def get_all_pfx_career_data(request: Request, response: Response, mlb_id: str, a
 
 
 @router.get("/for_year", response_model=PitchFxMetricsSetSchema)
-@cache_one_day()
+@cache_one_week()
 def get_pfx_metrics_for_year_for_pitcher(
     request: Request,
     response: Response,
@@ -125,7 +126,7 @@ def get_pfx_metrics_for_year_for_pitcher(
 
 
 @router.get("/by_year/percentiles", response_model=Dict[int, List[PitchTypePercentilesSchema]])
-@cache_one_day()
+@cache_one_week()
 def get_percentiles_for_pitch_types_by_year(
     request: Request, response: Response, mlb_id: str, app: Vigorish = Depends(get_vig_app)
 ):
@@ -134,7 +135,7 @@ def get_percentiles_for_pitch_types_by_year(
 
 
 @router.get("/vs_RHB/for_year", response_model=PitchFxMetricsSetSchema)
-@cache_one_day()
+@cache_one_week()
 def get_pfx_metrics_vs_rhb_for_year_for_pitcher(
     request: Request,
     response: Response,
@@ -150,7 +151,7 @@ def get_pfx_metrics_vs_rhb_for_year_for_pitcher(
 
 
 @router.get("/vs_RHB/by_year/percentiles", response_model=Dict[int, List[PitchTypePercentilesSchema]])
-@cache_one_day()
+@cache_one_week()
 def get_percentiles_vs_rhb_for_pitch_types_by_year(
     request: Request, response: Response, mlb_id: str, app: Vigorish = Depends(get_vig_app)
 ):
@@ -159,7 +160,7 @@ def get_percentiles_vs_rhb_for_pitch_types_by_year(
 
 
 @router.get("/vs_LHB/for_year", response_model=PitchFxMetricsSetSchema)
-@cache_one_day()
+@cache_one_week()
 def get_pfx_metrics_vs_lhb_for_year_for_pitcher(
     request: Request,
     response: Response,
@@ -175,7 +176,7 @@ def get_pfx_metrics_vs_lhb_for_year_for_pitcher(
 
 
 @router.get("/vs_LHB/by_year/percentiles", response_model=Dict[int, List[PitchTypePercentilesSchema]])
-@cache_one_day()
+@cache_one_week()
 def get_percentiles_vs_lhb_for_pitch_types_by_year(
     request: Request, response: Response, mlb_id: str, app: Vigorish = Depends(get_vig_app)
 ):
