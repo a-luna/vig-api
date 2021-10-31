@@ -29,7 +29,7 @@ class Settings(BaseSettings):
     SERVER_NAME: Optional[str] = os.environ.get("SERVER_NAME")
     SERVER_HOST: Optional[AnyHttpUrl] = os.environ.get("SERVER_HOST")
     PROJECT_NAME: Optional[str] = os.environ.get("PROJECT_NAME")
-    CORS_ALLOW_ORIGINS: List[str] = json.loads(os.environ.get("CORS_ALLOW_ORIGINS"))
+    CORS_ALLOW_ORIGINS: List[str] = json.loads(["http://localhost:3000", "https://vig-data.aaronluna.dev"])
     REDIS_URL: RedisDsn = os.environ.get("REDIS_URL")
     CACHE_HEADER: str = os.environ.get("CACHE_HEADER")
 
