@@ -1,7 +1,6 @@
-import json
 import os
 from pathlib import Path
-from typing import List, Optional
+from typing import Optional
 
 from dotenv import load_dotenv
 from pydantic import AnyHttpUrl, BaseSettings, RedisDsn
@@ -29,7 +28,6 @@ class Settings(BaseSettings):
     SERVER_NAME: Optional[str] = os.environ.get("SERVER_NAME")
     SERVER_HOST: Optional[AnyHttpUrl] = os.environ.get("SERVER_HOST")
     PROJECT_NAME: Optional[str] = os.environ.get("PROJECT_NAME")
-    CORS_ALLOW_ORIGINS: List[str] = ["http://localhost:3000", "https://vig-data.aaronluna.dev"]
     REDIS_URL: RedisDsn = os.environ.get("REDIS_URL")
     CACHE_HEADER: str = os.environ.get("CACHE_HEADER")
 
