@@ -69,7 +69,8 @@ def validate_file(local_file_path: Path, hash_file_path: Path) -> Result:
     with open(local_file_path, "rb") as f:
         while chunk := f.read(CHUNK_SIZE):
             md5.update(chunk)
-    if md5.hexdigest() == hash_file_path.read_text():
-        return Result.Ok()
-    else:
-        return Result.Fail(f"MD5 hash for {local_file_path.name} is incorrect!")
+    return (
+        Result.Ok()
+        if md5.hexdigest() == hash_file_path.read_text()
+        else Result.Fail(f"MD5 hash for {local_file_path.name} is incorrect!")
+    )
