@@ -1,4 +1,5 @@
 from datetime import datetime
+from typing import Optional
 
 from pydantic import BaseModel
 
@@ -109,6 +110,15 @@ class PitchFxSchema(BaseModel):
     is_patched: int
     is_invalid_ibb: int
     is_out_of_sequence: int
+    pitcher_name: Optional[str]
+    batter_name: Optional[str]
+    runs_outs_result: Optional[str]
+    runs_scored: Optional[int]
+    count: Optional[str]
+    two_strike_count: Optional[bool]
+    pitch_sequence: Optional[str]
+    outs_before_play: Optional[int]
+    ab_outcome: Optional[str]
 
     class Config:
         orm_mode = True

@@ -146,4 +146,4 @@ def get_barrels_for_date(
     request: Request, response: Response, game_date: MLBGameDate = Depends(), app: Vigorish = Depends(get_vig_app)
 ):
     pfx = app.scraped_data.get_all_barrels_for_game_date(game_date.date)
-    return convert_pfx_list(pfx)
+    return convert_pfx_list(app, pfx)
