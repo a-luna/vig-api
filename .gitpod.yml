@@ -2,10 +2,12 @@ image:
   file: .gitpod.Dockerfile
 
 tasks:
-  - before: printf "\n[settings]\napi_key = $WAKA_TIME_API_KEY\n" > ~/.wakatime.cfg
-  - init: |
-      pip install -r requirements.txt
-      pip install -e .
+  - name: Redis
+    before: printf "\n[settings]\napi_key = $WAKA_TIME_API_KEY\n" > ~/.wakatime.cfg
+    command: redis-server
+    openMode: split-right
+  - name: FastAPI
+    init: pip install -r requirements.txt
     command: uvicorn app.main:app --reload
 
 vscode:

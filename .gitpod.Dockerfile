@@ -34,9 +34,9 @@ ENV PYTHONUSERBASE=/workspace/.pip-modules \
   PIP_USER=yes
 ENV PATH=$PYTHONUSERBASE/bin:$PATH
 
-# SQLite
+### SQLite & Redis ###
 
-RUN sudo apt-get update && sudo apt-get install -y build-essential uuid-dev sqlite3
+RUN sudo apt-get update && sudo apt-get install -y build-essential uuid-dev sqlite3 redis-server && sudo rm -rf /var/lib/apt/lists/*
 
 # Add aliases
 
