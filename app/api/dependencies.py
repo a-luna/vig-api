@@ -44,7 +44,7 @@ def get_pitch_app_params(
 
 
 class MLBSeason:
-    def __init__(self, year: int = Query(..., ge=2017, le=2021), app: Vigorish = Depends(get_vig_app)):
+    def __init__(self, year: int = Query(..., ge=2017, le=2022), app: Vigorish = Depends(get_vig_app)):
         season = db.Season.find_by_year(app.db_session, year)
         if not season:
             raise HTTPException(status_code=int(HTTPStatus.NOT_FOUND), detail="No results found")

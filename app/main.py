@@ -1,4 +1,5 @@
 from http import HTTPStatus
+from pathlib import Path
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
@@ -11,6 +12,10 @@ from vigorish.app import Vigorish
 from app.api.api_v1.api import api_router
 from app.core.config import settings
 
+
+APP_FOLDER = Path(__file__).parent
+STATIC_FOLDER = APP_FOLDER.joinpath("static")
+
 app = FastAPI(
     title=settings.PROJECT_NAME,
     version=settings.API_VERSION,
@@ -20,12 +25,12 @@ app = FastAPI(
 )
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000", "https://vig-data.aaronluna.dev"],
+    allow_origins=["http://localhost:3506", "https://vig-data.aaronluna.dev"],
     allow_credentials=True,
     allow_methods=["GET"],
     allow_headers=["*"],
 )
-app.mount("/static", StaticFiles(directory="app/static"), name="static")
+app.mount("/static", StaticFiles(directory=str(STATIC_FOLDER)), name="static")
 
 
 @app.on_event("startup")
