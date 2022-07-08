@@ -15,6 +15,8 @@ class PlayerBatOrderMetricsSchema(BaseModel):
 
 
 class PlayerTeamSchema(BaseModel):
+    mlb_id: int
+    bbref_id: str
     team_id: str
     year: int
     role: str
