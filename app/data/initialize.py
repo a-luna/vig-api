@@ -3,23 +3,34 @@ from pathlib import Path
 
 from app.data.download_manager import DownloadManager, RemoteFileInfo
 
-MLB_SEASONS = [2017, 2018, 2019, 2020, 2021]
+MLB_SEASONS = [2017, 2018, 2019, 2020, 2021, 2022]
 S3_BUCKET = "https://vig-api.us-southeast-1.linodeobjects.com"
 SQLITE_DB = "vig.db"
 DATA_FOLDER = Path(__file__).parent
+DOTENV_FILE = DATA_FOLDER.joinpath(".env")
 
 
 def initialize():
+    delete_dotenv_file()
     set_env_variables()
-    remote_files = get_remote_file_info()
-    manager = DownloadManager(remote_files)
-    manager.run()
+    create_dotenv_file()
+    if os.environ.get("ENV") == "PROD":
+        DownloadManager(get_remote_file_info()).run()
+
+
+def delete_dotenv_file():
+    dotenv_file = Path(os.environ.get("DOTENV_FILE", str(DOTENV_FILE)))
+    if dotenv_file.exists():
+        dotenv_file.unlink()
 
 
 def set_env_variables():
+    os.environ["DOTENV_FILE"] = str(DATA_FOLDER.joinpath(".env"))
     if str(Path(__file__).resolve()).startswith("/app"):
         os.environ["ENV"] = "PROD"
-    elif str(Path(__file__).resolve()).startswith("/workspace"):
+        os.environ["CONFIG_FILE"] = str(DATA_FOLDER.joinpath("vig.config.json"))
+        os.environ["DATABASE_URL"] = f"sqlite:///{DATA_FOLDER.joinpath(SQLITE_DB)}"
+    else:
         os.environ["ENV"] = "DEV"
         os.environ["PROJECT_NAME"] = "Vigorish API - MLB Data"
         os.environ["API_VERSION"] = "/api/v1"
@@ -27,9 +38,14 @@ def set_env_variables():
         os.environ["SERVER_NAME"] = "vig-api.aaronluna.dev"
         os.environ["SERVER_HOST"] = "https://vig-api.aaronluna.dev"
         os.environ["CACHE_HEADER"] = "X-Vigorish-Cache"
-    os.environ["DOTENV_FILE"] = str(DATA_FOLDER.joinpath(".env"))
-    os.environ["CONFIG_FILE"] = str(DATA_FOLDER.joinpath("vig.config.json"))
-    os.environ["DATABASE_URL"] = f"sqlite:///{DATA_FOLDER.joinpath(SQLITE_DB)}"
+        os.environ["CONFIG_FILE"] = "/Users/aaronluna/Projects/custom_scripts/python/src/custom_scripts/mlb/scrape/vig.config.json"
+        os.environ["DATABASE_URL"] = "sqlite:////Users/aaronluna/Projects/custom_scripts/python/src/custom_scripts/mlb/scrape/vig.db"
+
+
+def create_dotenv_file():
+    dotenv_dict = {"CONFIG_FILE": os.environ.get("CONFIG_FILE"), "DATABASE_URL": os.environ.get("DATABASE_URL")}
+    env_var_strings = [f"{name}={value}" for name, value in dotenv_dict.items()]
+    DOTENV_FILE.write_text("\n".join(env_var_strings))
 
 
 def get_remote_file_info():
