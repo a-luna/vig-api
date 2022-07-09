@@ -26,7 +26,7 @@ def delete_dotenv_file():
 
 def set_env_variables():
     os.environ["DOTENV_FILE"] = str(DATA_FOLDER.joinpath(".env"))
-    if str(Path(__file__).resolve()).startswith("/app"):
+    if str(Path(__file__).resolve()).startswith("/code"):
         os.environ["ENV"] = "PROD"
         os.environ["CONFIG_FILE"] = str(DATA_FOLDER.joinpath("vig.config.json"))
         os.environ["DATABASE_URL"] = f"sqlite:///{DATA_FOLDER.joinpath(SQLITE_DB)}"
