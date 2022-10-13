@@ -36,15 +36,13 @@ def get_pitch_app_params(
         )
     result = validate_pitch_app_id(pitch_app_id)
     if result.failure:
-        raise HTTPException(
-            status_code=int(HTTPStatus.BAD_REQUEST), detail=f"{pitch_app_id} is not a valid pitch app ID"
-        )
+        raise HTTPException(status_code=int(HTTPStatus.BAD_REQUEST), detail=f"{pitch_app_id} is not a valid pitch app ID")
     pitch_app_dict = result.value
     return (pitch_app_dict["pitcher_id"], pitch_app_dict["game_id"])
 
 
 class MLBSeason:
-    def __init__(self, year: int = Query(..., ge=2017, le=2022), app: Vigorish = Depends(get_vig_app)):
+    def __init__(self, year: int = Query(..., ge=0, le=2022), app: Vigorish = Depends(get_vig_app)):
         season = db.Season.find_by_year(app.db_session, year)
         if not season:
             raise HTTPException(status_code=int(HTTPStatus.NOT_FOUND), detail="No results found")

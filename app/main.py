@@ -25,7 +25,13 @@ app = FastAPI(
 )
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3506", "https://vig-data.aaronluna.dev"],
+    allow_origins=[
+        "http://localhost:3506",
+        "http://10.0.1.52:3506",
+        "http://localhost:3000",
+        "http://10.0.1.52:3000",
+        "https://vig-data.aaronluna.dev",
+    ],
     allow_credentials=True,
     allow_methods=["GET"],
     allow_headers=["*"],
