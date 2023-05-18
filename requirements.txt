@@ -99,7 +99,7 @@ sortedcontainers==2.4.0
 spinners==0.0.24
 SQLAlchemy==1.4.39
 SQLAlchemy-Utils==0.38.2
-starlette==0.19.1
+starlette==0.27.0
 tabulate==0.8.10
 termcolor==1.1.0
 terminaltables==3.1.10
