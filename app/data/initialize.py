@@ -3,11 +3,11 @@ from pathlib import Path
 
 from app.data.download_manager import DownloadManager, RemoteFileInfo
 
-MLB_SEASONS = [2017, 2018, 2019, 2020, 2021, 2022]
+MLB_SEASONS = [2017, 2018, 2019, 2020, 2021, 2022, 2023]
 S3_BUCKET = "https://vig-api.us-southeast-1.linodeobjects.com"
 SQLITE_DB = "vig.db"
 DATA_FOLDER = Path(__file__).parent
-DOTENV_FILE = DATA_FOLDER.joinpath(".env")
+DOTENV_FILE_DEFAULT = DATA_FOLDER.joinpath(".env")
 
 
 def initialize():
@@ -19,13 +19,13 @@ def initialize():
 
 
 def delete_dotenv_file():
-    dotenv_file = Path(os.environ.get("DOTENV_FILE", str(DOTENV_FILE)))
+    dotenv_file = Path(os.environ.get("DOTENV_FILE", str(DOTENV_FILE_DEFAULT)))
     if dotenv_file.exists():
         dotenv_file.unlink()
 
 
 def set_env_variables():
-    os.environ["DOTENV_FILE"] = str(DATA_FOLDER.joinpath(".env"))
+    os.environ["DOTENV_FILE"] = str(DOTENV_FILE_DEFAULT)
     if str(Path(__file__).resolve()).startswith("/code"):
         os.environ["ENV"] = "PROD"
         os.environ["CONFIG_FILE"] = str(DATA_FOLDER.joinpath("vig.config.json"))
@@ -45,7 +45,7 @@ def set_env_variables():
 def create_dotenv_file():
     dotenv_dict = {"CONFIG_FILE": os.environ.get("CONFIG_FILE"), "DATABASE_URL": os.environ.get("DATABASE_URL")}
     env_var_strings = [f"{name}={value}" for name, value in dotenv_dict.items()]
-    DOTENV_FILE.write_text("\n".join(env_var_strings))
+    DOTENV_FILE_DEFAULT.write_text("\n".join(env_var_strings))
 
 
 def get_remote_file_info():

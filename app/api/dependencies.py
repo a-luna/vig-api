@@ -21,7 +21,7 @@ def get_date_range(
         end = parse_date(end_date)
         return (start, end)
     except ValueError as ex:
-        raise HTTPException(status_code=int(HTTPStatus.BAD_REQUEST), detail=ex.message)
+        raise HTTPException(status_code=int(HTTPStatus.BAD_REQUEST), detail=repr(ex))
 
 
 def get_pitch_app_params(
@@ -36,13 +36,15 @@ def get_pitch_app_params(
         )
     result = validate_pitch_app_id(pitch_app_id)
     if result.failure:
-        raise HTTPException(status_code=int(HTTPStatus.BAD_REQUEST), detail=f"{pitch_app_id} is not a valid pitch app ID")
+        raise HTTPException(
+            status_code=int(HTTPStatus.BAD_REQUEST), detail=f"{pitch_app_id} is not a valid pitch app ID"
+        )
     pitch_app_dict = result.value
     return (pitch_app_dict["pitcher_id"], pitch_app_dict["game_id"])
 
 
 class MLBSeason:
-    def __init__(self, year: int = Query(..., ge=0, le=2022), app: Vigorish = Depends(get_vig_app)):
+    def __init__(self, year: int = Query(..., ge=0, le=2023), app: Vigorish = Depends(get_vig_app)):
         season = db.Season.find_by_year(app.db_session, year)
         if not season:
             raise HTTPException(status_code=int(HTTPStatus.NOT_FOUND), detail="No results found")
@@ -64,7 +66,7 @@ class MLBGameDate:
         try:
             parsed_date = parse_date(game_date)
         except ValueError as ex:
-            raise HTTPException(status_code=int(HTTPStatus.BAD_REQUEST), detail=ex.message)
+            raise HTTPException(status_code=int(HTTPStatus.BAD_REQUEST), detail=repr(ex))
         result = db.Season.is_date_in_season(app.db_session, parsed_date)
         if result.failure:
             raise HTTPException(status_code=int(HTTPStatus.BAD_REQUEST), detail=result.error)
